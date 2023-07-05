@@ -1,0 +1,22 @@
+{
+	"Aalborg": {
+		"lat": 57.04,
+		"lon": 9.93
+	},
+	"Aarhus": {
+		"lat": 56.16,
+		"lon": 10.20
+	},
+	"Copenhagen": {
+		"lat": 55.67,
+		"lon": 12.56
+	},
+	"New York City": {
+		"lat": 40.73,
+		"lon": -73.93
+	},
+	"Randers": {
+		"lat": 56.46,
+		"lon": 10.03
+	}
+}
