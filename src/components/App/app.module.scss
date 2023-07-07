@@ -1,24 +1,28 @@
 .appContainer {
 	height: 100vh;
 	display: grid;
+	grid-template-columns: 5vw auto auto;
+	grid-template-rows: 20vh 10vh auto auto;
 	grid-template-areas:
-		"title title title"
-		"search search search"
-		"favorites col-1 col-2"
-		"favorites col-3 col-4";
+		"favorites title title"
+		"favorites search search"
+		"favorites box-1 box-2"
+		"favorites box-3 box-4";
 	background-color: red;
 }
 
 .title {
 	grid-area: title;
 	color: yellow;
-	font-size: 80px;
+	font-size: 2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.errorMessage, .search {
+.errorMessage,
+.search {
+	padding: 1rem;
 	grid-area: search;
 	background-color: blue;
 	display: flex;
@@ -27,11 +31,81 @@
 }
 
 .favorites {
+	padding: .5rem;
 	grid-area: favorites;
 	background-color: green;
 }
 
-.box {
-	background-color: purple;
+.favoritesStar {
+	display: none;
 }
 
+.box {
+	padding: 1rem;
+	background-color: purple;
+
+	@for $i from 1 to 4 {
+		&:nth-of-type(#{$i}) {
+			grid-area: box-#{$i};
+		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+
+	.appContainer {
+		background-color: red;
+		position: absolute;
+		width: 100vw;
+		height: auto;
+		display: grid;
+		right: 0;
+		transition: 0.5s ease-in;
+		grid-template-columns: 1fr;
+		grid-template-rows: 10vh 20vh repeat(4, auto);
+		grid-template-areas:
+			"title"
+			"search"
+			"box-1"
+			"box-2"
+			"box-3"
+			"box-4";
+
+		&ShowFavMobile {
+			transform: translateX(10vw)
+		}
+
+		&HideFavMobile {
+			transform: translateX(0vw)
+		}
+	}
+
+	.favoritesStar {
+		display: block;
+		position: fixed;
+		z-index: 3;
+		bottom: 0;
+		left: 0;
+		width: 5vw;
+		height: 5vh;
+		background-color: pink;
+	}
+
+	.favorites {
+		position: fixed;
+		z-index: 2;
+		bottom: 0;
+		left: 0;
+		width: 5vw;
+		height: 100vh;
+		transition: 0.5s ease-in;
+
+		&ShowFavMobile {
+			transform: translateX(-5vw)
+		}
+
+		&HideFavMobile {
+			transform: translateX(-10vw);
+		}
+	}
+}

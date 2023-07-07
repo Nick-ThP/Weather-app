@@ -1,22 +1,32 @@
+import { useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import styles from './app.module.scss'
+import classNames from 'classnames'
 
 function App() {
+	const [isFavMobileActive, setIsFavMobileActive] = useState(false)
 	const contextData = useWeatherContext()
 
 	return (
-		<div className={styles.appContainer}>
+		<div className={classNames(styles.appContainer, isFavMobileActive
+			? styles.appContainerShowFavMobile
+			: styles.appContainerHideFavMobile
+		)}>
 			<div className={styles.title}>Weather App</div>
 			{contextData.error ? (
 				<div className={styles.errorMessage}>{contextData.error}</div>
 			) : (
 				<>
 					<div className={styles.search}></div>
-					<div className={styles.favorites}></div>
-					<div key="1" className={styles.col1}></div>
-					<div key="2" className={styles.col2}></div>
-					<div key="3" className={styles.col3}></div>
-					<div key="4" className={styles.col4}></div>
+					<div className={classNames(styles.favorites, isFavMobileActive
+						? styles.favoritesShowFavMobile
+						: styles.favoritesHideFavMobile
+					)}></div>
+					<div className={styles.favoritesStar} onClick={() => setIsFavMobileActive(!isFavMobileActive)}></div>
+					<div className={styles.box}></div>
+					<div className={styles.box}></div>
+					<div className={styles.box}></div>
+					<div className={styles.box}></div>
 				</>
 			)}
 		</div>
