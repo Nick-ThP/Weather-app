@@ -1,5 +1,6 @@
-.appContainer {
+.container {
 	height: 100vh;
+	width: 100vw;
 	display: grid;
 	grid-template-columns: 5vw auto auto;
 	grid-template-rows: 20vh 10vh auto auto;
@@ -8,42 +9,45 @@
 		"favorites search search"
 		"favorites box-1 box-2"
 		"favorites box-3 box-4";
-	background-color: red;
+}
+
+.errorOccured {
+	grid-template-columns: auto;
+	grid-template-rows: 20vh auto;
+	grid-template-areas:
+		"title"
+		"error";
+}
+
+.errorMessage {
+	grid-area: error;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 2rem;
+	background-color: lightcoral;
 }
 
 .title {
 	grid-area: title;
-	color: yellow;
+	display: block;
+	color: goldenrod;
 	font-size: 2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.errorMessage,
 .search {
-	padding: 1rem;
 	grid-area: search;
-	background-color: blue;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .favorites {
-	padding: .5rem;
 	grid-area: favorites;
-	background-color: green;
-}
-
-.favoritesStar {
-	display: none;
 }
 
 .box {
-	padding: 1rem;
-	background-color: purple;
-
 	@for $i from 1 to 4 {
 		&:nth-of-type(#{$i}) {
 			grid-area: box-#{$i};
@@ -53,14 +57,10 @@
 
 @media only screen and (max-width: 768px) {
 
-	.appContainer {
-		background-color: red;
+	.container {
 		position: absolute;
-		width: 100vw;
 		height: auto;
 		display: grid;
-		right: 0;
-		transition: 0.5s ease-in;
 		grid-template-columns: 1fr;
 		grid-template-rows: 10vh 20vh repeat(4, auto);
 		grid-template-areas:
@@ -70,25 +70,15 @@
 			"box-2"
 			"box-3"
 			"box-4";
-
-		&ShowFavMobile {
-			transform: translateX(10vw)
-		}
-
-		&HideFavMobile {
-			transform: translateX(0vw)
-		}
 	}
 
-	.favoritesStar {
-		display: block;
-		position: fixed;
-		z-index: 3;
-		bottom: 0;
-		left: 0;
-		width: 5vw;
-		height: 5vh;
-		background-color: pink;
+	.errorOccured {
+		height: 100vh;
+		grid-template-columns: auto;
+		grid-template-rows: 20vh auto;
+		grid-template-areas:
+			"title"
+			"error";
 	}
 
 	.favorites {
@@ -96,16 +86,18 @@
 		z-index: 2;
 		bottom: 0;
 		left: 0;
-		width: 5vw;
+		width: 10vw;
 		height: 100vh;
-		transition: 0.5s ease-in;
+		transition: 0.2s;
 
-		&ShowFavMobile {
-			transform: translateX(-5vw)
+		&ShowOnMobile {
+			display: block;
+			transform: translateX(0%)
 		}
 
-		&HideFavMobile {
-			transform: translateX(-10vw);
+		&HideOnMobile {
+			display: hidden;
+			transform: translateX(-100%);
 		}
 	}
 }
