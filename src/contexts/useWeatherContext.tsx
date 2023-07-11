@@ -1,17 +1,18 @@
-import { ReactNode, createContext, useContext, useLayoutEffect, useState } from "react"
+import { ReactNode, createContext, useContext, useLayoutEffect, useCallback, useState } from "react"
 import useLocalStorage from "../hooks/useLocalStorage"
 import axios from "axios"
 import cityData from '../data/cityData.json'
 import { IWeatherContext, IWeatherData, IconSizeEnum } from "./weather-data-type"
+import { City } from "../data/city-types"
 
 const WeatherContext = createContext<IWeatherContext>({
 	weatherData: null,
 	weatherIcon: null,
-	setIconSize() {},
+	city: '',
 	loading: false,
 	error: null,
-	city: '',
-	setCity() {}
+	setCity() { },
+	setIconSize() { }
 })
 
 export function useWeatherContext() {
@@ -32,24 +33,30 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
 
-	function createBulkDataURL() {
-		const lat = cityData[city as keyof typeof cityData].lat
-		const lon = cityData[city as keyof typeof cityData].lon
-		const apiKey = process.env.REACT_APP_API_KEY
+	const executeApiRequest = useCallback(async () => {
+		function createBulkDataURL() {
+			const cities = cityData as City[]
+			const cityObject = cities.find((cityObj) => city === cityObj.city)
 
-		return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
-	}
+			if (cityObject) {
+				const lat = Number(cityObject.lat)
+				const lon = Number(cityObject.lon)
+				const apiKey = process.env.REACT_APP_API_KEY
 
-	function createIconUrl(bulkData: IWeatherData) {
-		const icon = bulkData?.weather[0].icon
+				return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+			}
 
-		return `https://openweathermap.org/img/wn/${icon}${iconSize}.png`
-	}
+			return ''
+		}
 
-	async function executeApiRequest() {
+		function createIconUrl(bulkData: IWeatherData) {
+			const icon = bulkData?.weather[0].icon
+
+			return `https://openweathermap.org/img/wn/${icon}${iconSize}.png`
+		}
+
 		setError(null)
 		setLoading(true)
-		console.log('running')
 
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
@@ -65,20 +72,20 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		finally {
 			setLoading(false)
 		}
-	}
+	}, [city, iconSize])
 
 	useLayoutEffect(() => {
 		executeApiRequest()
-	}, [city])
+	}, [executeApiRequest])
 
 	const contextData: IWeatherContext = {
 		weatherData,
 		weatherIcon,
-		setIconSize,
 		city,
-		setCity,
 		loading,
-		error
+		error,
+		setCity,
+		setIconSize
 	}
 
 	return (

@@ -12,11 +12,12 @@
 }
 
 .errorOccured {
-	grid-template-columns: auto;
-	grid-template-rows: 20vh auto;
+	grid-template-columns: 5vw auto;
+	grid-template-rows: 20vh 10vh auto;
 	grid-template-areas:
-		"title"
-		"error";
+		"favorites title"
+		"favorites search"
+		"favorites error";
 }
 
 .errorMessage {
@@ -31,7 +32,6 @@
 
 .title {
 	grid-area: title;
-	display: block;
 	color: goldenrod;
 	font-size: 2rem;
 	display: flex;
@@ -75,9 +75,10 @@
 	.errorOccured {
 		height: 100vh;
 		grid-template-columns: auto;
-		grid-template-rows: 20vh auto;
+		grid-template-rows: 10vh 20vh auto;
 		grid-template-areas:
 			"title"
+			"search"
 			"error";
 	}
 

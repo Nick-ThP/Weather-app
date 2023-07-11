@@ -10,33 +10,30 @@ import MainInformation from '../MainInformation/MainInformation'
 function App() {
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState(false)
 	const contextData = useWeatherContext()
+	console.log(contextData)
 
 	return (
 		<div className={classNames(styles.container, contextData.error && styles.errorOccured)}>
 			<h1 className={styles.title}>Weather App</h1>
+			<div className={styles.search}>
+				<SearchBar />
+			</div>
+			<div className={classNames(styles.favorites, isFavMobileOpen
+				? styles.favoritesShowOnMobile
+				: styles.favoritesHideOnMobile
+			)}>
+				<FavoritesBar />
+			</div>
+			<FavoritesStar
+				show={isFavMobileOpen}
+				toggleShow={setIsFavMobileOpen}
+			/>
 			{contextData.error ? (
-				<div className={styles.errorMessage}>{contextData.error}</div>
+				<div className={styles.errorMessage}>
+					{contextData.error}
+				</div>
 			) : (
 				<>
-					{/* Search section */}
-					<div className={styles.search}>
-						<SearchBar />
-					</div>
-
-					{/* Favorites section */}
-					<div className={classNames(styles.favorites, isFavMobileOpen
-						? styles.favoritesShowOnMobile
-						: styles.favoritesHideOnMobile
-					)}>
-						<FavoritesBar />
-					</div>
-
-					<FavoritesStar
-						show={isFavMobileOpen}
-						toggleShow={setIsFavMobileOpen}
-					/>
-
-					{/* Weather section */}
 					<div className={styles.box}>
 						<MainInformation />
 					</div>
