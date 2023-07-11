@@ -9,6 +9,7 @@
 		"favorites search search"
 		"favorites box-1 box-2"
 		"favorites box-3 box-4";
+	background-color: beige;
 }
 
 .errorOccured {
@@ -31,6 +32,7 @@
 }
 
 .title {
+	background-color: aqua;
 	grid-area: title;
 	color: goldenrod;
 	font-size: 2rem;
@@ -40,10 +42,12 @@
 }
 
 .search {
+	background-color: tomato;
 	grid-area: search;
 }
 
 .favorites {
+	background-color: aquamarine;
 	grid-area: favorites;
 }
 

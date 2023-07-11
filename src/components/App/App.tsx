@@ -10,11 +10,12 @@ import MainInformation from '../MainInformation/MainInformation'
 function App() {
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState(false)
 	const contextData = useWeatherContext()
-	console.log(contextData)
 
 	return (
 		<div className={classNames(styles.container, contextData.error && styles.errorOccured)}>
-			<h1 className={styles.title}>Weather App</h1>
+			<div className={styles.title}>
+				<h1>Weather App</h1>
+			</div>
 			<div className={styles.search}>
 				<SearchBar />
 			</div>

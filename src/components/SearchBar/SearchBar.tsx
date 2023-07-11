@@ -24,6 +24,11 @@ export default function SearchBar() {
 		return fuse.search(fuseQuery).map((city) => city.item)
 	}, [fuseQuery])
 
+	function clickHandler(city: string) {
+		setCity(city)
+		setInput('')
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.input}>
@@ -32,7 +37,7 @@ export default function SearchBar() {
 			{results && (
 				<ul className={styles.searchResults}>
 					{results.map((cityObj: City) => (
-						<li key={cityObj.id} onClick={() => setCity(cityObj.city)}>
+						<li key={cityObj.id} onClick={() => clickHandler(cityObj.city)}>
 							{cityObj.city}
 						</li>
 					))}
