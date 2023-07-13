@@ -1,9 +1,13 @@
+@import '../../utils/variables.scss';
+
 .container {
 	height: 100vh;
 	width: 100vw;
 	display: grid;
-	grid-template-columns: 5vw auto auto;
-	grid-template-rows: 20vh 10vh auto auto;
+	grid-template-columns:
+		$favorites-width auto auto;
+	grid-template-rows:
+		$title-height $search-height auto auto;
 	grid-template-areas:
 		"favorites title title"
 		"favorites search search"
@@ -13,8 +17,10 @@
 }
 
 .errorOccured {
-	grid-template-columns: 5vw auto;
-	grid-template-rows: 20vh 10vh auto;
+	grid-template-columns:
+		$favorites-width auto;
+	grid-template-rows:
+		$title-height $search-height auto;
 	grid-template-areas:
 		"favorites title"
 		"favorites search"
@@ -44,6 +50,9 @@
 .search {
 	background-color: tomato;
 	grid-area: search;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .favorites {
@@ -65,8 +74,10 @@
 		position: absolute;
 		height: auto;
 		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 10vh 20vh repeat(4, auto);
+		grid-template-columns:
+			1fr;
+		grid-template-rows:
+			$title-height $search-height repeat(4, auto);
 		grid-template-areas:
 			"title"
 			"search"
@@ -78,8 +89,10 @@
 
 	.errorOccured {
 		height: 100vh;
-		grid-template-columns: auto;
-		grid-template-rows: 10vh 20vh auto;
+		grid-template-columns:
+			auto;
+		grid-template-rows:
+			$title-height $search-height auto;
 		grid-template-areas:
 			"title"
 			"search"
@@ -88,10 +101,10 @@
 
 	.favorites {
 		position: fixed;
-		z-index: 2;
+		z-index: 1;
 		bottom: 0;
 		left: 0;
-		width: 10vw;
+		width: $favorites-width-mobile;
 		height: 100vh;
 		transition: 0.2s;
 

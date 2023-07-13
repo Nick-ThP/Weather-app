@@ -1,5 +1,4 @@
 .container {
-	padding: 1rem;
 	background-color: blue;
 	display: flex;
 	justify-content: center;
@@ -7,9 +6,8 @@
 	position: absolute;
 }
 
-.searchResults {
-	position: fixed;
-	z-index: 2;
-	bottom: 0;
-	right: 0;
+input {
+	padding: .5rem;
+	font-size: 1.2rem;
+	background-color: gold;
 }
