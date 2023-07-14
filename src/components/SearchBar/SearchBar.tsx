@@ -62,7 +62,7 @@ export default function SearchBar() {
 				/>
 				<datalist id="fuzzyList" className={styles.list}>
 					{results.map((cityObj: City, idx) => (
-						<option key={idx} value={cityObj.city} style={{ backgroundColor: 'blue' }} />
+						<option key={idx} value={cityObj.city} />
 					))}
 				</datalist>
 			</div>
