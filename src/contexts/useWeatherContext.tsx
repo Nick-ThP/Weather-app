@@ -2,17 +2,16 @@ import { ReactNode, createContext, useContext, useLayoutEffect, useCallback, use
 import useLocalStorage from "../hooks/useLocalStorage"
 import axios from "axios"
 import cityData from '../data/cityData.json'
-import { IWeatherContext, IWeatherData, IconSizeEnum } from "./weather-data-type"
+import { IWeatherContext, IWeatherData, IconPack } from "./weather-data-types"
 import { City } from "../data/city-types"
 
 const WeatherContext = createContext<IWeatherContext>({
 	weatherData: null,
-	weatherIcon: null,
+	weatherIcons: null,
 	city: '',
 	loading: false,
 	error: null,
 	setCity() { },
-	setIconSize() { }
 })
 
 export function useWeatherContext() {
@@ -28,8 +27,7 @@ export function useWeatherContext() {
 export function WeatherContextProvider({ children }: { children: ReactNode }) {
 	const [city, setCity] = useLocalStorage('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
-	const [weatherIcon, setWeatherIcon] = useState<string | null>(null)
-	const [iconSize, setIconSize] = useState(IconSizeEnum.Normal)
+	const [weatherIcons, setWeatherIcons] = useState<IconPack | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState(false)
 
@@ -52,7 +50,10 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		function createIconUrl(bulkData: IWeatherData) {
 			const icon = bulkData?.weather[0].icon
 
-			return `https://openweathermap.org/img/wn/${icon}${iconSize}.png`
+			return {
+				normal: `https://openweathermap.org/img/wn/${icon}.png`,
+				zoomed: `https://openweathermap.org/img/wn/${icon}@2x.png`,
+			}
 		}
 
 		setError(null)
@@ -61,18 +62,18 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
 			setWeatherData(bulkRes.data)
-			setWeatherIcon(createIconUrl(bulkRes.data))
+			setWeatherIcons(createIconUrl(bulkRes.data))
 		}
 
 		catch {
-			setError('Something went wrong. Check your internet connection and/or refresh the page.')
 			console.error('API request failed')
+			setError('Something went wrong. Check your internet connection and/or refresh the page.')
 		}
 
 		finally {
 			setLoading(false)
 		}
-	}, [city, iconSize])
+	}, [city])
 
 	useLayoutEffect(() => {
 		executeApiRequest()
@@ -80,12 +81,11 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 
 	const contextData: IWeatherContext = {
 		weatherData,
-		weatherIcon,
+		weatherIcons,
 		city,
 		loading,
 		error,
 		setCity,
-		setIconSize
 	}
 
 	return (

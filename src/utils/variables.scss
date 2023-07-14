@@ -9,6 +9,23 @@ $accent-color: #ff8400;
 $background-color: linear-gradient(135deg, rgba(149, 137, 118, 1) 0%, rgba(106, 106, 97, 1) 50%, rgba(29, 35, 38, 1) 100%);
 
 $favorites-width: 5vw;
-$favorites-width-mobile: 20vw;
 $title-height: 20vh;
 $search-height: 10vh;
+
+@mixin flex-centering {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin frosted-glass($error: false) {
+	@if $error {
+		background: lightcoral
+	} @else {
+		background: rgba(255, 255, 255, 0.2);
+	}
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}

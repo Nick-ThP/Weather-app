@@ -53,17 +53,16 @@ export interface Wind {
 	gust: number
 }
 
-export enum IconSizeEnum {
-	Normal = '',
-	Zoomed = '@2x'
+export interface IconPack {
+	normal: string
+	zoomed: string
 }
 
 export interface IWeatherContext {
 	weatherData: IWeatherData | null
-	weatherIcon: string | null
+	weatherIcons: IconPack | null
 	city: string
 	loading: boolean
 	error: string | null
 	setCity: (value: string) => void
-	setIconSize: (icon: IconSizeEnum) => void
 }

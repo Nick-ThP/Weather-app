@@ -1,0 +1,9 @@
+@import '../../../utils/variables.scss';
+
+.container {
+	@include flex-centering;
+	@include frosted-glass(true);
+	height: 100%;
+	font-size: 2rem;
+	text-align: center;
+}

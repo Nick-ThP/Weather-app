@@ -5,7 +5,8 @@ import FavoritesStar from '../FavoritesStar/FavoritesStar'
 import FavoritesBar from '../FavoritesBar/FavoritesBar'
 import classNames from 'classnames'
 import SearchBar from '../SearchBar/SearchBar'
-import MainInformation from '../MainInformation/MainInformation'
+import MainInfo from '../Boxes/MainInfo/MainInfo'
+import Error from '../Boxes/Error/Error'
 
 function App() {
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState(false)
@@ -30,22 +31,19 @@ function App() {
 				toggleShow={setIsFavMobileOpen}
 			/>
 			{contextData.error ? (
-				<div className={styles.errorMessage}>
-					{contextData.error}
+				<div className={styles.error}>
+					<Error />
 				</div>
 			) : (
 				<>
-					<div className={styles.box}>
-						<MainInformation />
+					<div className={styles.mainInfo}>
+						<MainInfo />
 					</div>
-					<div className={styles.box}>
-						<MainInformation />
+					<div className={styles.secondaryInfo}>
+						<MainInfo />
 					</div>
-					<div className={styles.box}>
-						<MainInformation />
-					</div>
-					<div className={styles.box}>
-						<MainInformation />
+					<div className={styles.forecast}>
+						<MainInfo />
 					</div>
 				</>
 			)}

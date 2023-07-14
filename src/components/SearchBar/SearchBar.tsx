@@ -31,9 +31,13 @@ export default function SearchBar() {
 
 	function handleChooseCity(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key === 'Enter' && inputRef.current) {
-			setCity(results[0].city)
-			setInput(results[0].city)
-			inputRef.current.blur()
+			if (results.length > 0) {
+				setCity(results[0].city)
+				setInput(results[0].city)
+				inputRef.current.blur()
+			} else {
+				alert('Sorry, this city does not exist in the data. Please adjust your search term to include a larger Danish city.')
+			}
 		}
 
 		if (!e.keyCode && inputRef.current) {

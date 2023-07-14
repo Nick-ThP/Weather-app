@@ -12,8 +12,8 @@
 		"favorites title title"
 		"favorites search search"
 		"favorites box-1 box-2"
-		"favorites box-3 box-4";
-	background-color: beige;
+		"favorites box-3 box-3";
+	background-color: darkslategrey;
 }
 
 .errorOccured {
@@ -27,45 +27,41 @@
 		"favorites error";
 }
 
-.errorMessage {
+.error {
 	grid-area: error;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	font-size: 2rem;
-	background-color: lightcoral;
+	padding: 3rem;
 }
 
 .title {
-	background-color: aqua;
+	@include flex-centering;
 	grid-area: title;
-	color: goldenrod;
-	font-size: 2rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	font-size: 1.5rem;
+	background-color: aqua;
 }
 
 .search {
-	background-color: tomato;
+	@include flex-centering;
 	grid-area: search;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	background-color: tomato;
 }
 
 .favorites {
-	background-color: aquamarine;
 	grid-area: favorites;
 }
 
-.box {
-	@for $i from 1 to 4 {
-		&:nth-of-type(#{$i}) {
-			grid-area: box-#{$i};
-		}
-	}
+.mainInfo {
+	grid-area: box-1;
+	padding: 3rem;
+}
+
+.secondaryInfo {
+	grid-area: box-2;
+	padding: 3rem 3rem 3rem 0;
+}
+
+.forecast {
+	grid-area: box-3;
+	padding: 0 3rem 3rem 3rem;
 }
 
 @media only screen and (max-width: 768px) {
@@ -75,16 +71,15 @@
 		height: auto;
 		display: grid;
 		grid-template-columns:
-			1fr;
+			auto;
 		grid-template-rows:
-			$title-height $search-height repeat(4, auto);
+			$title-height $search-height repeat(3, auto);
 		grid-template-areas:
 			"title"
 			"search"
 			"box-1"
 			"box-2"
-			"box-3"
-			"box-4";
+			"box-3";
 	}
 
 	.errorOccured {
@@ -104,7 +99,7 @@
 		z-index: 1;
 		bottom: 0;
 		left: 0;
-		width: $favorites-width-mobile;
+		width: 20vw;
 		height: 100vh;
 		transition: 0.2s;
 
@@ -117,5 +112,15 @@
 			display: hidden;
 			transform: translateX(-100%);
 		}
+	}
+
+	.error,
+	.mainInfo,
+	.forecast {
+		padding: 1.5rem;
+	}
+
+	.secondaryInfo {
+		padding: 0 1.5rem;
 	}
 }
