@@ -25,11 +25,11 @@ export function useWeatherContext() {
 }
 
 export function WeatherContextProvider({ children }: { children: ReactNode }) {
-	const [city, setCity] = useLocalStorage('city', 'Aalborg')
+	const [city, setCity] = useLocalStorage<string>('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
 	const [weatherIcons, setWeatherIcons] = useState<IconPack | null>(null)
 	const [error, setError] = useState<string | null>(null)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const executeApiRequest = useCallback(async () => {
 		function createBulkDataURL() {

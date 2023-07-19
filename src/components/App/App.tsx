@@ -5,15 +5,25 @@ import FavoritesStar from '../FavoritesStar/FavoritesStar'
 import FavoritesBar from '../FavoritesBar/FavoritesBar'
 import classNames from 'classnames'
 import SearchBar from '../SearchBar/SearchBar'
-import MainInfo from '../Boxes/MainInfo/MainInfo'
-import Error from '../Boxes/Error/Error'
+import MainInfo from '../boxes/MainInfo/MainInfo'
+import Error from '../boxes/Error/Error'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 function App() {
-	const [isFavMobileOpen, setIsFavMobileOpen] = useState(false)
-	const contextData = useWeatherContext()
+	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
+	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
+	const { error } = useWeatherContext()
+
+	function favoriteClickHandler(city: string) {
+		if (favoriteCities.find(favCity => favCity === city)) {
+			setFavoriteCities(favoriteCities.filter(favCity => favCity !== city))
+		} else {
+			setFavoriteCities([city, ...favoriteCities].sort())
+		}
+	}
 
 	return (
-		<div className={classNames(styles.container, contextData.error && styles.errorOccured)}>
+		<div className={classNames(styles.container, error && styles.errorOccured)}>
 			<div className={styles.title}>
 				<h1>Weather App</h1>
 			</div>
@@ -24,26 +34,40 @@ function App() {
 				? styles.favoritesShowOnMobile
 				: styles.favoritesHideOnMobile
 			)}>
-				<FavoritesBar />
+				<FavoritesBar
+					favoriteCities={favoriteCities}
+				/>
 			</div>
 			<FavoritesStar
 				show={isFavMobileOpen}
 				toggleShow={setIsFavMobileOpen}
 			/>
-			{contextData.error ? (
+			{error ? (
 				<div className={styles.error}>
 					<Error />
 				</div>
 			) : (
 				<>
 					<div className={styles.mainInfo}>
-						<MainInfo />
+						<MainInfo
+							favoriteCities={favoriteCities}
+							setFavoriteCities={setFavoriteCities}
+							favoriteClickHandler={favoriteClickHandler}
+						/>
 					</div>
 					<div className={styles.secondaryInfo}>
-						<MainInfo />
+						<MainInfo
+							favoriteCities={favoriteCities}
+							setFavoriteCities={setFavoriteCities}
+							favoriteClickHandler={favoriteClickHandler}
+						/>
 					</div>
 					<div className={styles.forecast}>
-						<MainInfo />
+						<MainInfo
+							favoriteCities={favoriteCities}
+							setFavoriteCities={setFavoriteCities}
+							favoriteClickHandler={favoriteClickHandler}
+						/>
 					</div>
 				</>
 			)}

@@ -1,11 +1,36 @@
 @import '../../../utils/variables.scss';
 
 .container {
-	@include flex-centering;
+	display: flex;
+	flex-direction: column;
+	gap: 1vh;
 	@include frosted-glass;
 	height: 100%;
 }
 
+.row {
+	@include flex-centering;
+	justify-content: space-between;
+	padding: 0 5vw;
+	gap: 5vw;
+}
+
 h2 {
 	font-size: 2rem;
+}
+
+.star {
+	margin-right: 27.5px;
+	height: 5vh;
+	transition: 0.3s;
+
+	&Favorite {
+		fill: goldenrod;
+		transform: rotate(0deg)
+	}
+
+	&NotFavorite {
+		opacity: 0.3;
+		transform: rotate(360deg)
+	}
 }
