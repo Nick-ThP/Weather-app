@@ -1,13 +1,19 @@
+@import '../../utils/variables.scss';
+
 .container {
-	background-color: blue;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
+	height: 100%;
+	@include frosted-glass;
+	@include flex-centering;
 }
 
 input {
 	padding: .5rem;
-	font-size: 1.2rem;
-	background-color: gold;
+	font-size: 1.5rem;
+	border: none;
+	outline: none;
+	border-bottom: 3px solid $dark-color;
+	background: none;
+	&::placeholder {
+		color: black;
+	}
 }

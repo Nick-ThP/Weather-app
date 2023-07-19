@@ -12,7 +12,7 @@ interface Props {
 
 export default function MainInfo(props: Props) {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false)
-	const { city, weatherData, weatherIcons } = useWeatherContext()
+	const { city, weatherIcons } = useWeatherContext()
 
 	useLayoutEffect(() => {
 		if (props.favoriteCities.find(favCity => favCity === city)) {

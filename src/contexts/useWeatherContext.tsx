@@ -66,8 +66,8 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		}
 
 		catch {
-			console.error('API request failed')
 			setError('Something went wrong. Check your internet connection and/or refresh the page.')
+			console.error('API request failed')
 		}
 
 		finally {

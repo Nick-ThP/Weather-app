@@ -49,23 +49,21 @@ export default function SearchBar() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.input}>
-				<input
-					ref={inputRef}
-					id="inputField"
-					type="text"
-					value={input}
-					placeholder="Search for a city..."
-					list="fuzzyList"
-					onChange={(e) => setInput(e.target.value)}
-					onKeyUp={(e) => handleChooseCity(e)}
-				/>
-				<datalist id="fuzzyList" className={styles.list}>
-					{results.map((cityObj: City, idx) => (
-						<option key={idx} value={cityObj.city} />
-					))}
-				</datalist>
-			</div>
+			<input
+				ref={inputRef}
+				id="inputField"
+				type="text"
+				value={input}
+				placeholder="Search for a city..."
+				list="fuzzyList"
+				onChange={(e) => setInput(e.target.value)}
+				onKeyUp={(e) => handleChooseCity(e)}
+			/>
+			<datalist id="fuzzyList">
+				{results.map((cityObj: City, idx) => (
+					<option key={idx} value={cityObj.city} />
+				))}
+			</datalist>
 		</div>
 	)
 }

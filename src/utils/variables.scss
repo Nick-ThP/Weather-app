@@ -6,10 +6,9 @@ $sans-serif-font: 'Raleway', sans-serif;
 $primary-color: #e7e7e7;
 $dark-color: #611427;
 $accent-color: #ff8400;
-$background-color: linear-gradient(135deg, rgba(149, 137, 118, 1) 0%, rgba(106, 106, 97, 1) 50%, rgba(29, 35, 38, 1) 100%);
 
 $favorites-width: 5vw;
-$title-height: 20vh;
+$title-height: 30vh;
 $search-height: 10vh;
 
 @mixin flex-centering {
@@ -20,12 +19,10 @@ $search-height: 10vh;
 
 @mixin frosted-glass($error: false) {
 	@if $error {
-		background: lightcoral
+		background: rgba(255, 0, 0, 0.2)
 	} @else {
 		background: rgba(255, 255, 255, 0.2);
 	}
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(5px);
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(10px);
 }

@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import styles from './favorites-bar.module.scss'
 
@@ -6,7 +7,7 @@ type Props = {
 }
 
 export default function FavoritesBar(props: Props) {
-	const { setCity } = useWeatherContext()
+	const { city, setCity } = useWeatherContext()
 
 	function createAbb(city: string) {
 		if (city.split(' ').length === 1) {
@@ -20,10 +21,10 @@ export default function FavoritesBar(props: Props) {
 
 	return (
 		<ul>
-			{props.favoriteCities.length > 0 && props.favoriteCities.map(favCity => (
+			{props.favoriteCities.length > 0 && props.favoriteCities.map((favCity, idx) => (
 				<li
-					key={favCity}
-					className={styles.city}
+					key={idx}
+					className={classNames(favCity === city && styles.chosen)}
 					onClick={() => setCity(favCity)}
 				>
 					{createAbb(favCity)}

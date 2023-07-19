@@ -1,6 +1,7 @@
 @import '../../utils/variables.scss';
 
 ul {
+	@include frosted-glass;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -9,7 +10,6 @@ ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	background-color: green;
 }
 
 li {
@@ -22,4 +22,9 @@ li {
 	color: white;
 	border-radius: 50%;
 	border: 3px solid white;
+}
+
+.chosen {
+	color: $accent-color;
+	border: 3px solid $accent-color;
 }
