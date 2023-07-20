@@ -1,12 +1,12 @@
 @import '../../utils/variables.scss';
 
-.main {
+.star {
 	display: none;
 }
 
 @media only screen and (max-width: 768px) {
 
-	.main {
+	.star {
 		display: block;
 		position: fixed;
 		z-index: 2;
@@ -18,16 +18,16 @@
 		border-radius: 40%;
 		padding: 5px;
 		background-color: $dark-color;
-	}
 
-	.show {
-		fill: $accent-color;
-		transform: rotate(0deg)
-	}
+		&Show {
+			fill: $accent-color;
+			transform: rotate(0deg)
+		}
 
-	.hide {
-		opacity: 0.3;
-		transform: rotate(360deg)
+		&Hide {
+			opacity: 0.3;
+			transform: rotate(360deg)
+		}
 	}
 
 }

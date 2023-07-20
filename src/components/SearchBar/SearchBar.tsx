@@ -52,7 +52,7 @@ export default function SearchBar() {
 			<input
 				ref={inputRef}
 				id="inputField"
-				type="text"
+				type="search"
 				value={input}
 				placeholder="Search for a city..."
 				list="fuzzyList"

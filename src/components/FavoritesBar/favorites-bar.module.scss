@@ -16,16 +16,24 @@ li {
 	@include flex-centering;
 	aspect-ratio: 1 / 1;
 	width: 70%;
-	margin-top: 12px;
-	font-size: 1.8rem;
+	margin-top: 1rem;
+	font-size: 1.5rem;
 	background-color: black;
 	color: white;
 	border-radius: 50%;
 	border: 3px solid white;
 	cursor: pointer;
+
+	&:hover {
+		opacity: 0.85;
+	}
 }
 
 .chosen {
 	color: $accent-color;
 	border: 3px solid $accent-color;
+
+	&:hover {
+		opacity: 1;
+	}
 }
