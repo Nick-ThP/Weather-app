@@ -7,14 +7,14 @@
 }
 
 input {
-	padding: .5rem;
-	font-size: 1.75rem;
+	padding: .5rem 1rem;
+	border-radius: 16px;
+	font-size: 1.5rem;
 	border: none;
 	outline: none;
-	border-bottom: 3px solid $dark-color;
+	border: 3px solid $dark-color;
 	background: none;
 	caret-color: $accent-color;
-	text-align: center;
 
 	&::placeholder {
 		color: black;
@@ -26,14 +26,11 @@ input {
 	}
 
 	&::-webkit-search-cancel-button {
-		position: relative;
-		margin-left: -20px;
-		background-color: black;
 		cursor: pointer;
 	}
 
 	&:focus {
-		border-bottom: 3px solid $accent-color;
+		border: 3px solid $accent-color;
 	}
 
 	&:focus::placeholder {

@@ -1,12 +1,12 @@
 import { useWeatherContext } from "../../contexts/useWeatherContext"
-import styles from './error.module.scss'
+import Box from "../reuseables/Box/Box"
 
 export default function Error() {
 	const { error } = useWeatherContext()
 
 	return (
-		<div className={styles.container}>
+		<Box error={true}>
 			{error}
-		</div>
+		</Box>
 	)
 }

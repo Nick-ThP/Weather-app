@@ -2,11 +2,7 @@ import classNames from 'classnames'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import styles from './favorites-bar.module.scss'
 
-type Props = {
-	favoriteCities: string[]
-}
-
-export default function FavoritesBar(props: Props) {
+export default function FavoritesBar(props: { favoriteCities: string[] }) {
 	const { city, setCity } = useWeatherContext()
 
 	function createAbb(city: string) {

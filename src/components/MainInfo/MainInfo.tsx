@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from "react"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import styles from './main-info.module.scss'
 import classNames from "classnames"
+import Box from "../reuseables/Box/Box"
 
 
 interface Props {
@@ -23,7 +24,7 @@ export default function MainInfo(props: Props) {
 	}, [props.favoriteCities, city])
 
 	return (
-		<div className={styles.container}>
+		<Box>
 			<div className={styles.row}>
 				<h2>{city}</h2>
 				<svg
@@ -41,6 +42,6 @@ export default function MainInfo(props: Props) {
 				<h3>Current weather:</h3>
 				<img src={weatherIcons?.zoomed} alt="current weather depiction" />
 			</div>
-		</div>
+		</Box>
 	)
 }

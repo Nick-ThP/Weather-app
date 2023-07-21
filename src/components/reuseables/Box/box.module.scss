@@ -1,0 +1,17 @@
+@import '../../../utils/variables.scss';
+
+.box {
+	@include frosted-glass;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border-radius: 16px;
+}
+
+.error {
+	@include frosted-glass(true);
+	@include flex-centering;
+	font-size: 2rem;
+	text-align: center;
+	white-space: pre-line;
+}

@@ -4,7 +4,7 @@
 	background-image: url(../../images/background.jpg);
 	height: 100vh;
 	width: 100vw;
-	overflow: none;
+	overflow: hidden;
 	display: grid;
 	grid-template-columns:
 		$favorites-width auto auto;
@@ -31,14 +31,14 @@
 
 .error {
 	grid-area: error;
-	padding: 3rem;
+	padding: 2rem;
 }
 
 .title {
 	@include flex-centering;
 	grid-area: title;
 	font-family: $serif-font;
-	font-size: 2rem;
+	font-size: 2.5rem;
 }
 
 .search {

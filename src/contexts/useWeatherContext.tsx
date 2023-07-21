@@ -11,6 +11,7 @@ const WeatherContext = createContext<IWeatherContext>({
 	city: '',
 	loading: false,
 	error: null,
+	setError() { },
 	setCity() { },
 })
 
@@ -24,7 +25,7 @@ export function useWeatherContext() {
 	return context
 }
 
-export function WeatherContextProvider({ children }: { children: ReactNode }) {
+export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [city, setCity] = useLocalStorage<string>('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
 	const [weatherIcons, setWeatherIcons] = useState<IconPack | null>(null)
@@ -41,14 +42,14 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 				const lon = Number(cityObject.lon)
 				const apiKey = process.env.REACT_APP_API_KEY
 
-				return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+				return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
 			}
 
 			return ''
 		}
 
 		function createIconUrl(bulkData: IWeatherData) {
-			const icon = bulkData?.weather[0].icon
+			const icon = bulkData?.list[0].weather[0].icon
 
 			return {
 				normal: `https://openweathermap.org/img/wn/${icon}.png`,
@@ -66,7 +67,7 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		}
 
 		catch {
-			setError('Something went wrong. Check your internet connection and/or refresh the page.')
+			setError('Something went wrong. \n Check your internet connection and/or refresh the page.')
 			console.error('API request failed')
 		}
 
@@ -85,12 +86,13 @@ export function WeatherContextProvider({ children }: { children: ReactNode }) {
 		city,
 		loading,
 		error,
+		setError,
 		setCity,
 	}
 
 	return (
 		<WeatherContext.Provider value={contextData}>
-			{children}
+			{props.children}
 		</WeatherContext.Provider>
 	)
 }

@@ -8,8 +8,14 @@ import { useWeatherContext } from '../../contexts/useWeatherContext';
 export default function SearchBar() {
 	const [fuseQuery, setFuseQuery] = useState('')
 	const [input, setInput] = useState('')
-	const { setCity } = useWeatherContext()
+	const { city, setCity, error, setError } = useWeatherContext()
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		if (error) {
+			setError(null)
+		}
+	}, [city])
 
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => setFuseQuery(input), 200);
@@ -36,7 +42,8 @@ export default function SearchBar() {
 				setInput(results[0].city)
 				inputRef.current.blur()
 			} else {
-				alert('Sorry, this city does not exist in the data. Please adjust your search term to include a larger Danish city.')
+				setCity('')
+				setError('Sorry, this city does not exist in the data. \n Please adjust your search term to include a larger Danish city.')
 			}
 		}
 

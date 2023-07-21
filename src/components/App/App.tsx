@@ -5,9 +5,10 @@ import FavoritesStar from '../FavoritesStar/FavoritesStar'
 import FavoritesBar from '../FavoritesBar/FavoritesBar'
 import classNames from 'classnames'
 import SearchBar from '../SearchBar/SearchBar'
-import MainInfo from '../MainInfoBox/MainInfoBox'
-import Error from '../ErrorBox/ErrorBox'
+import MainInfo from '../MainInfo/MainInfo'
+import Error from '../Error/Error'
 import useLocalStorage from '../../hooks/useLocalStorage'
+import Forecast from '../Forecast/Forecast'
 
 function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
@@ -63,11 +64,7 @@ function App() {
 						/>
 					</div>
 					<div className={styles.forecast}>
-						<MainInfo
-							favoriteCities={favoriteCities}
-							setFavoriteCities={setFavoriteCities}
-							favoriteClickHandler={favoriteClickHandler}
-						/>
+						<Forecast />
 					</div>
 				</>
 			)}
