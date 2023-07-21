@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react"
-import { useWeatherContext } from "../../../contexts/useWeatherContext"
+import { useWeatherContext } from "../../contexts/useWeatherContext"
 import styles from './main-info.module.scss'
 import classNames from "classnames"
 
