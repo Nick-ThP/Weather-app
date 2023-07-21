@@ -5,8 +5,8 @@ import FavoritesStar from '../FavoritesStar/FavoritesStar'
 import FavoritesBar from '../FavoritesBar/FavoritesBar'
 import classNames from 'classnames'
 import SearchBar from '../SearchBar/SearchBar'
-import MainInfo from '../MainInfo/MainInfo'
-import Error from '../Error/Error'
+import MainInfo from '../MainInfoBox/MainInfoBox'
+import Error from '../ErrorBox/ErrorBox'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
 function App() {
