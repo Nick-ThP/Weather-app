@@ -2,8 +2,19 @@ import classNames from 'classnames'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import styles from './favorites-bar.module.scss'
 
-export default function FavoritesBar(props: { favoriteCities: string[] }) {
+type Props = {
+	favoriteCities: string[]
+	toggleShow: (param: boolean) => void
+}
+
+export default function FavoritesBar(props: Props) {
 	const { city, setCity } = useWeatherContext()
+
+	function clickHandler(city: string) {
+		setCity(city)
+		props.toggleShow(false)
+		window.scrollTo(0, 0)
+	}
 
 	function createAbb(city: string) {
 		if (city.split(' ').length === 1) {
@@ -21,7 +32,7 @@ export default function FavoritesBar(props: { favoriteCities: string[] }) {
 				<li
 					key={idx}
 					className={classNames(favCity === city && styles.chosen)}
-					onClick={() => setCity(favCity)}
+					onClick={() => clickHandler(favCity)}
 				>
 					{createAbb(favCity)}
 				</li>

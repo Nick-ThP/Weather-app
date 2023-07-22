@@ -19,18 +19,24 @@ export function useWeatherContext() {
 	let context = useContext(WeatherContext)
 
 	if (context === undefined) {
-		throw Error('WeatherContext is used outside of its provider')
+		console.error('WeatherContext is used outside of its provider')
 	}
 
 	return context
 }
 
 export function WeatherContextProvider(props: { children: ReactNode }) {
-	const [city, setCity] = useLocalStorage<string>('city', 'Aalborg')
+	const [city, _setCity] = useLocalStorage<string>('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
-	const [weatherIcons, setWeatherIcons] = useState<IconPack | null>(null)
+	console.log("📡 ~ file: useWeatherContext.tsx:31 ~ WeatherContextProvider ~ weatherData:", weatherData)
+	const [weatherIcons, setWeatherIcons] = useState<IconPack[] | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(false)
+
+	function setCity(city: string) {
+		_setCity(city)
+		setError(null)
+	}
 
 	const executeApiRequest = useCallback(async () => {
 		function createBulkDataURL() {
@@ -45,16 +51,18 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 				return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
 			}
 
-			return ''
+			throw Error('Something is wrong with the provided city data')
 		}
 
-		function createIconUrl(bulkData: IWeatherData) {
-			const icon = bulkData?.list[0].weather[0].icon
+		function createIconsUrl(bulkData: IWeatherData) {
+			const icons = bulkData?.list.map(time => (
+				{
+					normal: `https://openweathermap.org/img/wn/${time.weather[0].icon}.png`,
+					zoomed: `https://openweathermap.org/img/wn/${time.weather[0].icon}@2x.png`,
+				}
+			))
 
-			return {
-				normal: `https://openweathermap.org/img/wn/${icon}.png`,
-				zoomed: `https://openweathermap.org/img/wn/${icon}@2x.png`,
-			}
+			return icons
 		}
 
 		setError(null)
@@ -63,12 +71,12 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
 			setWeatherData(bulkRes.data)
-			setWeatherIcons(createIconUrl(bulkRes.data))
+			setWeatherIcons(createIconsUrl(bulkRes.data))
 		}
 
-		catch {
+		catch(err) {
 			setError('Something went wrong. \n Check your internet connection and/or refresh the page.')
-			console.error('API request failed')
+			console.error(err)
 		}
 
 		finally {

@@ -99,7 +99,7 @@ export interface IconPack {
 
 export interface IWeatherContext {
 	weatherData: IWeatherData | null
-	weatherIcons: IconPack | null
+	weatherIcons: IconPack[] | null
 	city: string
 	loading: boolean
 	error: string | null

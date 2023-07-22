@@ -2,9 +2,17 @@
 
 .dates {
 	@include flex-centering;
+	gap: .5rem;
 }
 
 .date {
-	margin: 2rem;
 	background-color: aqua;
+	white-space: pre-line;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.dates {
+		flex-direction: column;
+	}
 }

@@ -8,14 +8,8 @@ import { useWeatherContext } from '../../contexts/useWeatherContext';
 export default function SearchBar() {
 	const [fuseQuery, setFuseQuery] = useState('')
 	const [input, setInput] = useState('')
-	const { city, setCity, error, setError } = useWeatherContext()
+	const { setCity, setError } = useWeatherContext()
 	const inputRef = useRef<HTMLInputElement>(null)
-
-	useEffect(() => {
-		if (error) {
-			setError(null)
-		}
-	}, [city])
 
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => setFuseQuery(input), 200);

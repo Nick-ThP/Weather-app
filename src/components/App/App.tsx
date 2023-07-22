@@ -6,22 +6,14 @@ import FavoritesBar from '../FavoritesBar/FavoritesBar'
 import classNames from 'classnames'
 import SearchBar from '../SearchBar/SearchBar'
 import MainInfo from '../MainInfo/MainInfo'
-import Error from '../Error/Error'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import Forecast from '../Forecast/Forecast'
+import Box from '../reuseables/Box/Box'
 
 function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const { error } = useWeatherContext()
-
-	function favoriteClickHandler(city: string) {
-		if (favoriteCities.find(favCity => favCity === city)) {
-			setFavoriteCities(favoriteCities.filter(favCity => favCity !== city))
-		} else {
-			setFavoriteCities([city, ...favoriteCities].sort())
-		}
-	}
 
 	return (
 		<div className={classNames(styles.container, error && styles.errorOccured)}>
@@ -37,6 +29,7 @@ function App() {
 			)}>
 				<FavoritesBar
 					favoriteCities={favoriteCities}
+					toggleShow={setIsFavMobileOpen}
 				/>
 			</div>
 			<FavoritesStar
@@ -45,26 +38,32 @@ function App() {
 			/>
 			{error ? (
 				<div className={styles.error}>
-					<Error />
+					<Box error={true}>
+						{error}
+					</Box>
 				</div>
 			) : (
 				<>
 					<div className={styles.mainInfo}>
-						<MainInfo
-							favoriteCities={favoriteCities}
-							setFavoriteCities={setFavoriteCities}
-							favoriteClickHandler={favoriteClickHandler}
-						/>
+						<Box>
+							<MainInfo
+								favoriteCities={favoriteCities}
+								setFavoriteCities={setFavoriteCities}
+							/>
+						</Box>
 					</div>
 					<div className={styles.secondaryInfo}>
-						<MainInfo
-							favoriteCities={favoriteCities}
-							setFavoriteCities={setFavoriteCities}
-							favoriteClickHandler={favoriteClickHandler}
-						/>
+						<Box>
+							<MainInfo
+								favoriteCities={favoriteCities}
+								setFavoriteCities={setFavoriteCities}
+							/>
+						</Box>
 					</div>
 					<div className={styles.forecast}>
-						<Forecast />
+						<Box>
+							<Forecast />
+						</Box>
 					</div>
 				</>
 			)}
