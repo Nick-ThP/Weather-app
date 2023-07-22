@@ -54,7 +54,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 			throw Error('Something is wrong with the provided city data')
 		}
 
-		function createIconsUrl(bulkData: IWeatherData) {
+		function createIconsURLs(bulkData: IWeatherData) {
 			const icons = bulkData?.list.map(time => (
 				{
 					normal: `https://openweathermap.org/img/wn/${time.weather[0].icon}.png`,
@@ -71,7 +71,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
 			setWeatherData(bulkRes.data)
-			setWeatherIcons(createIconsUrl(bulkRes.data))
+			setWeatherIcons(createIconsURLs(bulkRes.data))
 		}
 
 		catch(err) {
