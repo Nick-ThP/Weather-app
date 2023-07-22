@@ -46,7 +46,9 @@ export default function MainInfo(props: Props) {
 			</div>
 			<div className={styles.row}>
 				<h3>Current weather:</h3>
-				{/* <img src={weatherIcons?[0].zoomed} alt="current weather depiction" /> */}
+				{weatherIcons && weatherIcons.length > 0 && (
+					<img src={weatherIcons[0].zoomed} alt="current weather depiction" />
+				)}
 			</div>
 		</>
 	)

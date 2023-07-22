@@ -28,7 +28,6 @@ export function useWeatherContext() {
 export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [city, _setCity] = useLocalStorage<string>('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
-	console.log("📡 ~ file: useWeatherContext.tsx:31 ~ WeatherContextProvider ~ weatherData:", weatherData)
 	const [weatherIcons, setWeatherIcons] = useState<IconPack[] | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(false)
