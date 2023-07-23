@@ -4,13 +4,12 @@ import styles from './forecast.module.scss'
 export default function Forecast() {
 	const { weatherData, weatherIcons } = useWeatherContext()
 	const amountOfDates = 9
-	console.log(weatherIcons)
 
 	function createDateInfo(timeStamp: number) {
 		const fullDate = new Date(timeStamp * 1000);
 		const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-		return `${weekDays[fullDate.getDay()]} ${fullDate.getDate()}/${fullDate.getMonth()}\n${fullDate.getHours()}:00`
+		return `${weekDays[fullDate.getDay()].substring(0, 3)} ${fullDate.getDate()}/${fullDate.getMonth()}\n${fullDate.getHours()}:00`
 	}
 
 	return (

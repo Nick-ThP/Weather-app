@@ -21,7 +21,7 @@ li {
 	background-color: black;
 	color: white;
 	border-radius: 50%;
-	border: 3px solid white;
+	border: 2px solid white;
 	cursor: pointer;
 
 	&:hover {
@@ -31,7 +31,7 @@ li {
 
 .chosen {
 	color: $accent-color;
-	border: 3px solid $accent-color;
+	border: 2px solid $accent-color;
 
 	&:hover {
 		opacity: 1;

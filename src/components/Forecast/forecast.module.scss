@@ -2,13 +2,15 @@
 
 .dates {
 	@include flex-centering;
-	justify-content: space-between;
-	gap: .5rem;
 }
 
 .date {
-	background-color: aqua;
 	white-space: pre-line;
+	padding: 1rem;
+
+	&:not(:first-child) {
+		border-left: 2px solid $dark-color;
+	}
 }
 
 @media only screen and (max-width: 768px) {
