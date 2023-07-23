@@ -13,8 +13,11 @@ export default function Forecast() {
 	}
 
 	return (
-		<>
-			<h3>Weather forecast for the next full day</h3>
+		<div className={styles.wrapper}>
+			<div className={styles.switches}>
+				<h3>Next 24 hours</h3>
+				<h3>Next full week</h3>
+			</div>
 			<div className={styles.dates}>
 				{weatherData?.list?.filter((_, idx) => idx <= amountOfDates - 1).map((date, idx) => (
 					<div className={styles.date} key={idx}>
@@ -26,6 +29,6 @@ export default function Forecast() {
 					</div>
 				))}
 			</div>
-		</>
+		</div>
 	)
 }

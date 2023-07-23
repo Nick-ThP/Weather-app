@@ -1,5 +1,14 @@
 @import '../../utils/variables.scss';
 
+.wrapper {
+	@include flex-centering;
+}
+
+.switches {
+	@include flex-centering;
+	flex-direction: column;
+}
+
 .dates {
 	@include flex-centering;
 }
@@ -14,6 +23,15 @@
 }
 
 @media only screen and (max-width: 768px) {
+
+	.wrapper {
+		flex-direction: column;
+	}
+
+	.switches {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
 	.dates {
 		flex-direction: column;
