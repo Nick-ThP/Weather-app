@@ -1,21 +1,36 @@
 @import '../../utils/variables.scss';
 
+.wrapper {
+	@include flex-centering;
+	justify-content: space-between;
+	gap: 1rem;
+	height: 100%;
+}
+
+.column {
+	@include flex-centering;
+	flex-direction: column;
+	align-items: start;
+}
+
 .row {
 	@include flex-centering;
 	justify-content: space-between;
+	gap: 1rem;
 }
 
-h2 {
-	font-size: 2rem;
+.line {
+	height: 80%;
+	border-left: 2px solid $dark-color;
 }
 
-h3 {
-	font-size: 1.5rem;
+.temp {
+	font-size: 4rem;
+	font-family: $serif-font;
 }
 
 .star {
-	margin-right: 20px;
-	height: 5vh;
+	height: 2rem;
 	transition: 0.3s;
 	cursor: pointer;
 
@@ -28,4 +43,19 @@ h3 {
 		opacity: 0.3;
 		transform: rotate(360deg)
 	}
+}
+
+@media only screen and (max-width: 768px) {
+
+	.wrapper {
+		flex-direction: column;
+	}
+
+	.line {
+		height: 0;
+		width: 80%;
+		border-left: none;
+		border-bottom: 2px solid $dark-color;
+	}
+
 }

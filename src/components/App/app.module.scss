@@ -31,14 +31,17 @@
 
 .error {
 	grid-area: error;
-	padding: 2rem;
+	padding: 4rem;
 }
 
 .title {
 	@include flex-centering;
 	grid-area: title;
 	font-family: $serif-font;
-	font-size: 2.5rem;
+}
+
+h1 {
+	font-size: 5rem;
 }
 
 .search {
@@ -52,23 +55,23 @@
 
 .mainInfo {
 	grid-area: box-1;
-	padding: 2rem;
+	padding: 4rem 2rem 2rem 4rem;
 }
 
 .secondaryInfo {
 	grid-area: box-2;
-	padding: 2rem 2rem 2rem 0;
+	padding: 4rem 4rem 2rem 0;
 }
 
 .forecast {
 	grid-area: box-3;
-	padding: 0 2rem 2rem 2rem;
+	padding: 0 4rem 4rem 4rem;
 }
 
 @media only screen and (max-width: 768px) {
 
-	.title {
-		font-size: 1.5rem;
+	h1 {
+		font-size: 3rem;
 	}
 
 	.container {

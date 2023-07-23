@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.scss'
+import './index.module.scss'
 import App from './components/App/App'
 import { WeatherContextProvider } from './contexts/useWeatherContext'
 

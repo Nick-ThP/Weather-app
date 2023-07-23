@@ -47,7 +47,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 				const lon = Number(cityObject.lon)
 				const apiKey = process.env.REACT_APP_API_KEY
 
-				return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+				return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
 			}
 
 			throw Error('Something is wrong with the provided city data')

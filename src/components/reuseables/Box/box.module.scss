@@ -2,11 +2,9 @@
 
 .box {
 	@include frosted-glass;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+	@include flex-centering;
 	border-radius: 16px;
-	padding: 0 2vw;
+	padding: 0 1rem;
 }
 
 .error {
@@ -15,4 +13,21 @@
 	font-size: 2rem;
 	text-align: center;
 	white-space: pre-line;
+}
+
+h2 {
+	font-size: 1.5rem;
+	font-family: $serif-font;
+}
+
+h3 {
+	font-size: 1.2rem;
+	font-family: $sans-serif-font;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.box {
+		padding: 0 1rem;
+	}
 }

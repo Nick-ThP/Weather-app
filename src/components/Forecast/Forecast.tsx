@@ -22,6 +22,7 @@ export default function Forecast() {
 						{weatherIcons && weatherIcons.length > 0 && (
 							<img src={weatherIcons[idx].normal} alt="current weather depiction" />
 						)}
+						<div className={styles.temp}>{`${weatherData?.list[idx].main.temp.toString().substring(0, 2)}°`}</div>
 					</div>
 				))}
 			</div>
