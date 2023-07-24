@@ -22,16 +22,19 @@ li {
 	color: white;
 	border-radius: 50%;
 	border: 2px solid white;
+	box-shadow: 2px 2px 7px black;
 	cursor: pointer;
 
 	&:hover {
-		opacity: 0.85;
+		opacity: 0.75;
 	}
 }
 
 .chosen {
+	box-shadow: none;
 	color: $accent-color;
 	border: 2px solid $accent-color;
+	cursor: auto;
 
 	&:hover {
 		opacity: 1;

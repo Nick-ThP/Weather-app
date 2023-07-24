@@ -4,9 +4,10 @@
 	@include flex-centering;
 }
 
-.switches {
+.toggle {
 	@include flex-centering;
 	flex-direction: column;
+	gap: 1rem;
 }
 
 .dates {

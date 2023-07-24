@@ -3,7 +3,6 @@ import { useWeatherContext } from "../../contexts/useWeatherContext"
 import styles from './main-info.module.scss'
 import classNames from "classnames"
 
-
 interface Props {
 	favoriteCities: string[]
 	setFavoriteCities: (arr: string[]) => void
@@ -33,7 +32,7 @@ export default function MainInfo(props: Props) {
 		<div className={styles.wrapper}>
 			<div className={styles.column}>
 				<div className={styles.row}>
-					<h2>{city}</h2>
+					<h2>{weatherData?.city.name === city ? weatherData?.city.name : city}</h2>
 					<svg
 						className={classNames(styles.star, isFavorite
 							? styles.starFavorite
@@ -46,6 +45,9 @@ export default function MainInfo(props: Props) {
 					</svg>
 				</div>
 				<div className={styles.row}>
+					{`Currently ${weatherData?.list[0].weather[0].description}`}
+				</div>
+				<div className={styles.row}>
 					<div className={styles.temp}>{`${weatherData?.list[0].main.temp.toString().substring(0, 2)}°`}</div>
 					{weatherIcons && weatherIcons.length > 0 && (
 						<img src={weatherIcons[0].zoomed} alt="current weather depiction" />
@@ -55,7 +57,7 @@ export default function MainInfo(props: Props) {
 			<div className={styles.line} />
 			<div className={styles.column}>
 				<div className={styles.row}>
-					<h2>{city}</h2>
+					<h2>{weatherData?.city.name}</h2>
 					<svg
 						className={classNames(styles.star, isFavorite
 							? styles.starFavorite
