@@ -1,19 +1,13 @@
-import { useState } from 'react'
-import { useWeatherContext } from "../../contexts/useWeatherContext"
+import classNames from 'classnames';
+import { useState } from 'react';
+import { useWeatherContext } from "../../contexts/useWeatherContext";
+import { createDateInfo } from '../../utils/date-formatting';
 import Button from "../reuseables/Button/Button";
-import styles from './forecast.module.scss'
+import styles from './forecast.module.scss';
 
 export default function Forecast() {
 	const [forecastToggle, setForecastToggle] = useState<boolean>(true)
-	const { weatherData, weatherIcons } = useWeatherContext()
-	const amountOfDates = 9
-
-	function createDateInfo(timeStamp: number) {
-		const fullDate = new Date(timeStamp * 1000);
-		const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
-		return `${weekDays[fullDate.getDay()].substring(0, 3)} ${fullDate.getDate()}/${fullDate.getMonth()}\n${fullDate.getHours()}:00`
-	}
+	const { weatherData } = useWeatherContext()
 
 	function toggleDayWeek() {
 		setForecastToggle(!forecastToggle)
@@ -25,39 +19,46 @@ export default function Forecast() {
 				<Button
 					isClicked={forecastToggle}
 					clickFunc={toggleDayWeek}
-					clickType='toggle'
+					type='toggle'
 				>
-					Next 24 hours
+					Next 48 hours
 				</Button>
 				<Button
 					isClicked={!forecastToggle}
 					clickFunc={toggleDayWeek}
-					clickType='toggle'
+					type='toggle'
 				>
 					Next full week
 				</Button>
 			</div>
 			{forecastToggle ? (
 				<div className={styles.dates}>
-					{weatherData?.list?.filter((_, idx) => idx <= amountOfDates - 1).map((date, idx) => (
-						<div className={styles.date} key={idx}>
-							<div>{createDateInfo(date.dt)}</div>
-							{weatherIcons && weatherIcons.length > 0 && (
-								<img src={weatherIcons[idx].normal} alt="current weather depiction" />
-							)}
-							<div className={styles.temp}>{`${weatherData?.list[idx].main.temp.toString().substring(0, 2)}°`}</div>
+					{weatherData?.hourly.filter((_, idx) => idx % 3 === 0).map((date, idx) => (
+						<div
+							className={classNames(styles.date, createDateInfo(date.dt).time.length === 4 && Number(createDateInfo(date.dt).time.substring(0, 1)) <= 2 && styles.dateAfterMidnight)} key={idx}
+						>
+							<>
+								<div>{createDateInfo(date.dt).time}</div>
+								<img
+									src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}
+									alt="current weather depiction"
+								/>
+								<div className={styles.temp}>{`${weatherData?.hourly[idx].temp.toString().substring(0, 2)}°`}</div>
+								{weatherData?.hourly[idx].pop! > 0 && `${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
+							</>
 						</div>
 					))}
 				</div>
 			) : (
 				<div className={styles.dates}>
-					{weatherData?.list?.filter((_, idx) => idx <= amountOfDates - 1).map((date, idx) => (
+					{weatherData?.daily.map((date, idx) => (
 						<div className={styles.date} key={idx}>
-							<div>{createDateInfo(date.dt)}</div>
-							{weatherIcons && weatherIcons.length > 0 && (
-								<img src={weatherIcons[idx].normal} alt="current weather depiction" />
-							)}
-							<div className={styles.temp}>{`${weatherData?.list[idx].main.temp.toString().substring(0, 2)}°`}</div>
+							<div>{createDateInfo(date.dt).date}</div>
+							<img
+								src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}
+								alt="current weather depiction"
+							/>
+							<div className={styles.temp}>{`${weatherData?.daily[idx].temp.toString().substring(0, 2)}°`}</div>
 						</div>
 					))}
 				</div>

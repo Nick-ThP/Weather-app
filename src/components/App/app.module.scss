@@ -31,7 +31,7 @@
 
 .error {
 	grid-area: error;
-	padding: 4rem 6rem;
+	padding: 4rem 8rem;
 }
 
 .title {
@@ -55,17 +55,17 @@ h1 {
 
 .mainInfo {
 	grid-area: box-1;
-	padding: 4rem 2rem 2rem 6rem;
+	padding: 4rem 2rem 2rem 8rem;
 }
 
 .secondaryInfo {
 	grid-area: box-2;
-	padding: 4rem 6rem 2rem 0;
+	padding: 4rem 8rem 2rem 0;
 }
 
 .forecast {
 	grid-area: box-3;
-	padding: 0 6rem 4rem 6rem;
+	padding: 0 8rem 4rem 8rem;
 }
 
 @media only screen and (max-width: 768px) {

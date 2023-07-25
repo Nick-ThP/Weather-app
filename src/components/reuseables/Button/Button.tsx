@@ -1,19 +1,19 @@
+import classNames from 'classnames'
 import { ReactNode } from 'react'
 import styles from './button.module.scss'
-import classNames from 'classnames'
 
 type Props = {
 	children: ReactNode
 	isClicked: boolean
 	clickFunc?: () => void
-	clickType?: 'toggle' | 'action'
+	type?: 'toggle' | 'action'
 }
 
 
 export default function Button(props: Props) {
 	function createClick() {
 		if (props.clickFunc) {
-			switch (props.clickType) {
+			switch (props.type) {
 				case 'action':
 					return props.clickFunc()
 				case 'toggle':

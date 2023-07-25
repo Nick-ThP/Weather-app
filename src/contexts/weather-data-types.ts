@@ -1,72 +1,49 @@
+export interface IWeatherContext {
+	weatherData: IWeatherData | null
+	city: string
+	loading: boolean
+	error: string | null
+	setError: (value: string | null) => void
+	setCity: (value: string) => void
+}
+
 export interface IWeatherData {
-	cod: string;
-	message: number;
-	cnt: number;
-	list: List[];
-	city: City;
-}
-
-export interface City {
-	id: number;
-	name: string;
-	coord: Coord;
-	country: string;
-	population: number;
-	timezone: number;
-	sunrise: number;
-	sunset: number;
-}
-
-export interface Coord {
 	lat: number;
 	lon: number;
+	timezone: string;
+	timezone_offset: number;
+	current: Current;
+	hourly: Current[];
+	daily: Daily[];
 }
 
-export interface List {
+export interface Current {
 	dt: number;
-	main: MainClass;
-	weather: Weather[];
-	clouds: Clouds;
-	wind: Wind;
+	sunrise?: number;
+	sunset?: number;
+	temp: number;
+	feels_like: number;
+	pressure: number;
+	humidity: number;
+	dew_point: number;
+	uvi: number;
+	clouds: number;
 	visibility: number;
-	pop: number;
-	sys: Sys;
-	dt_txt: string;
+	wind_speed: number;
+	wind_deg: number;
+	wind_gust: number;
+	weather: Weather[];
+	pop?: number;
 	rain?: Rain;
 }
 
-export interface Clouds {
-	all: number;
-}
-
-export interface MainClass {
-	temp: number;
-	feels_like: number;
-	temp_min: number;
-	temp_max: number;
-	pressure: number;
-	sea_level: number;
-	grnd_level: number;
-	humidity: number;
-	temp_kf: number;
-}
-
 export interface Rain {
-	"3h": number;
-}
-
-export interface Sys {
-	pod: Pod;
-}
-
-export enum Pod {
-	D = "d",
-	N = "n",
+	"1h": number;
 }
 
 export interface Weather {
 	id: number;
-	main: MainEnum;
+	main: Main;
 	description: Description;
 	icon: string;
 }
@@ -76,33 +53,51 @@ export enum Description {
 	ClearSky = "clear sky",
 	FewClouds = "few clouds",
 	LightRain = "light rain",
+	ModerateRain = "moderate rain",
 	OvercastClouds = "overcast clouds",
 	ScatteredClouds = "scattered clouds",
 }
 
-export enum MainEnum {
+export enum Main {
 	Clear = "Clear",
 	Clouds = "Clouds",
 	Rain = "Rain",
 }
 
-export interface Wind {
-	speed: number;
-	deg: number;
-	gust: number;
+export interface Daily {
+	dt: number;
+	sunrise: number;
+	sunset: number;
+	moonrise: number;
+	moonset: number;
+	moon_phase: number;
+	temp: Temp;
+	feels_like: FeelsLike;
+	pressure: number;
+	humidity: number;
+	dew_point: number;
+	wind_speed: number;
+	wind_deg: number;
+	wind_gust: number;
+	weather: Weather[];
+	clouds: number;
+	pop: number;
+	rain?: number;
+	uvi: number;
 }
 
-export interface IconPack {
-	normal: string
-	zoomed: string
+export interface FeelsLike {
+	day: number;
+	night: number;
+	eve: number;
+	morn: number;
 }
 
-export interface IWeatherContext {
-	weatherData: IWeatherData | null
-	weatherIcons: IconPack[] | null
-	city: string
-	loading: boolean
-	error: string | null
-	setError: (value: string | null) => void
-	setCity: (value: string) => void
+export interface Temp {
+	day: number;
+	min: number;
+	max: number;
+	night: number;
+	eve: number;
+	morn: number;
 }

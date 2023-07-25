@@ -17,12 +17,19 @@
 }
 
 .date {
-	white-space: pre-line;
 	padding: 1rem;
+	font-size: .75rem;
 
 	&:not(:first-child) {
-		border-left: 2px solid $dark-color;
+		border-left: 1px solid rgb(0, 0, 0, .1);
 	}
+
+	&AfterMidnight {
+		&:not(:first-child) {
+			border-left: 2px solid $dark-color;
+		}
+	}
+
 }
 
 @media only screen and (max-width: 768px) {
