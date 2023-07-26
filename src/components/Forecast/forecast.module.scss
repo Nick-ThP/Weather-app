@@ -26,7 +26,7 @@
 
 	&AfterMidnight {
 		&:not(:first-child) {
-			border-left: 2px solid $dark-color;
+			border-left: 2px solid $basis-color;
 		}
 	}
 

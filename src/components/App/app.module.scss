@@ -2,6 +2,8 @@
 
 .container {
 	background-image: url(../../images/background.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
@@ -31,17 +33,26 @@
 
 .error {
 	grid-area: error;
-	padding: 4rem 8rem;
+	padding: 4rem 8rem 3rem 8rem;
 }
 
 .title {
 	@include flex-centering;
+	flex-direction: column;
+	justify-content: end;
 	grid-area: title;
-	font-family: $serif-font;
-}
 
-h1 {
-	font-size: 5rem;
+	h1 {
+		font-family: $serif-font;
+		font-size: 6rem;
+		margin-bottom: 0;
+	}
+
+	p {
+		font-family: $cursive-font;
+		font-size: 2rem;
+		margin: .5rem 0 2rem 0;
+	}
 }
 
 .search {
@@ -50,17 +61,16 @@ h1 {
 
 .favorites {
 	grid-area: favorites;
-	border-right: 2px solid $dark-color;
 }
 
 .mainInfo {
 	grid-area: box-1;
-	padding: 4rem 2rem 2rem 8rem;
+	padding: 3rem 2rem 2rem 8rem;
 }
 
 .secondaryInfo {
 	grid-area: box-2;
-	padding: 4rem 8rem 2rem 0;
+	padding: 3rem 8rem 2rem 0;
 }
 
 .forecast {
@@ -125,10 +135,10 @@ h1 {
 	.error,
 	.mainInfo,
 	.forecast {
-		padding: 1.5rem;
+		padding: 2rem;
 	}
 
 	.secondaryInfo {
-		padding: 0 1.5rem;
+		padding: 0 2rem;
 	}
 }

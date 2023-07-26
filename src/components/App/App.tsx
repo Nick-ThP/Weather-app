@@ -24,7 +24,8 @@ function App() {
 	return (
 		<div className={classNames(styles.container, error && styles.errorOccured)}>
 			<div className={styles.title}>
-				<h1>Weather App</h1>
+				<h1>Simple weather</h1>
+				<p>A simplified source for weather information</p>
 			</div>
 			<div className={styles.search}>
 				<SearchBar />

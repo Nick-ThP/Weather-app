@@ -11,7 +11,7 @@ export function createDateInfo(timeStamp: number) {
 	]
 
 	return {
-		date: `${weekDays[fullDate.getDay()].substring(0, 3)} ${fullDate.getDate()}/${fullDate.getMonth()}`,
+		date: `${weekDays[fullDate.getDay()].substring(0, 3)}. ${fullDate.getDate()}/${fullDate.getMonth()}`,
 		time: `${fullDate.getHours()}:00`
 	}
 }

@@ -56,29 +56,54 @@ export default function MainInfo(props: Props) {
 					)}
 				</div>
 				<div className={styles.row}>
-					{`Currently ${weatherData?.current.weather[0].description}`}
+					<div className={styles.currentWeather}>
+						{weatherData?.current.weather[0].description.split('').map((letter, idx) => idx === 0 ? letter.toUpperCase() : letter).join('')}
+					</div>
 				</div>
 				<div className={styles.row}>
 					<div className={styles.temp}>{`${weatherData?.current.temp.toString().substring(0, 2)}°`}</div>
+					{weatherData?.current.weather[0].icon && (
 						<img
 							src={`https://openweathermap.org/img/wn/${weatherData?.current.weather[0].icon}@2x.png`}
 							alt="current weather depiction"
 						/>
+					)}
 				</div>
 			</div>
 			<div className={styles.line} />
 			<div className={styles.column}>
 				<div className={styles.row}>
 					<img className={styles.icon} src={sun} alt="UV Index" />
-					<div className={styles.description}>Current UV max: {weatherData?.current.uvi}</div>
+					<div className={styles.description}>
+						<div>
+							UV index
+						</div>
+						<div>
+							{`${Number(weatherData?.current.uvi.toString().substring(0, 3))} ${weatherData?.current.uvi && weatherData?.current.uvi < 6 ? '(low)' : weatherData?.current.uvi && weatherData?.current.uvi < 8 ? '(high)' : '(very high)'}`}
+						</div>
+					</div>
 				</div>
 				<div className={styles.row}>
 					<img className={styles.icon} src={wind} alt="Wind" />
-					<div className={styles.description}>Wind speed: {weatherData?.current.wind_speed} m/s</div>
+					<div className={styles.description}>
+						<div>
+							Wind speed
+						</div>
+						<div>
+							{Number(weatherData?.current.wind_speed.toString().substring(0, 3))} m/s
+						</div>
+					</div>
 				</div>
 				<div className={styles.row}>
 					<img className={styles.icon} src={rain} alt="Rainfall" />
-					<div className={styles.description}>Rain this hour: {weatherData?.hourly[0].pop} mm</div>
+					<div className={styles.description}>
+						<div>
+							Rain this hour
+						</div>
+						<div>
+							{weatherData?.hourly[0].pop ? Number(weatherData?.hourly[0].pop?.toString().substring(0, 3)) : 0} mm
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

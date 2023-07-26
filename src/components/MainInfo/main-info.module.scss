@@ -9,20 +9,21 @@
 
 .column {
 	display: flex;
-	align-items: start;
+	&:first-child {
+		align-items: start;
+	}
 	justify-content: space-around;
 	flex-direction: column;
 	flex: 1;
 	padding: 1rem;
 
 	&:last-of-type {
-		margin: .7rem 0;
+		margin: .7rem 0 .3rem 0;
 	}
 }
 
 .row {
 	@include flex-centering;
-	justify-content: space-between;
 	gap: 1rem;
 }
 
@@ -32,13 +33,19 @@
 	align-self: center;
 }
 
+.currentWeather {
+	font-style: italic;
+}
+
 .temp {
-	font-size: 4rem;
+	font-size: 5rem;
+	font-weight: bold;
 	font-family: $serif-font;
 }
 
 .star {
-	height: 2rem;
+	height: 1.8rem;
+	margin-top: -.1rem;
 	transition: 0.3s;
 	cursor: pointer;
 
@@ -63,12 +70,16 @@
 }
 
 .icon {
-	height: 2.5rem;
+	height: 2.8rem;
 	aspect-ratio: 1 / 1;
 }
 
 .description {
-	font-size: 1.25rem;
+	display: flex;
+	justify-content: space-between;
+	flex: 1;
+	font-size: 1.3rem;
+	font-weight: bold;
 }
 
 @media only screen and (max-width: 768px) {
@@ -81,7 +92,7 @@
 		height: 0;
 		width: 80%;
 		border-left: none;
-		border-bottom: 2px solid $dark-color;
+		border-bottom: 2px solid $basis-color;
 	}
 
 }

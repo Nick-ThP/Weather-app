@@ -2,23 +2,23 @@
 
 .container {
 	height: 100%;
-	@include frosted-glass;
 	@include flex-centering;
+	align-items: start;
 }
 
 input {
 	padding: .5rem 1rem;
-	border-radius: 16px;
+	border-radius: 12px;
 	font-size: 1.5rem;
 	border: none;
 	outline: none;
-	border: 3px solid $dark-color;
+	border: 2px solid rgb(0, 0, 0, .3);
 	background: none;
 	caret-color: $accent-color;
 
 	&::placeholder {
-		color: black;
-		opacity: 0.5;
+		color: rgb(0, 0, 0, .3);
+		font-family: $sans-serif-font;
 	}
 
 	&::-webkit-calendar-picker-indicator {
@@ -30,7 +30,7 @@ input {
 	}
 
 	&:focus {
-		border: 3px solid $accent-color;
+		border: 2px solid $accent-color;
 	}
 
 	&:focus::placeholder {

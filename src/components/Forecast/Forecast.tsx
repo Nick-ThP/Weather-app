@@ -6,32 +6,32 @@ import Button from "../reuseables/Button/Button";
 import styles from './forecast.module.scss';
 
 export default function Forecast() {
-	const [forecastToggle, setForecastToggle] = useState<boolean>(true)
+	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
 	const { weatherData } = useWeatherContext()
 
-	function toggleDayWeek() {
-		setForecastToggle(!forecastToggle)
+	function toggleForecast() {
+		setIsForecastToggle(!isForecastToggle)
 	}
 
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.toggle}>
 				<Button
-					isClicked={forecastToggle}
-					clickFunc={toggleDayWeek}
+					isClicked={isForecastToggle}
+					clickFunc={toggleForecast}
 					type='toggle'
 				>
 					Next 48 hours
 				</Button>
 				<Button
-					isClicked={!forecastToggle}
-					clickFunc={toggleDayWeek}
+					isClicked={!isForecastToggle}
+					clickFunc={toggleForecast}
 					type='toggle'
 				>
 					Next full week
 				</Button>
 			</div>
-			{forecastToggle ? (
+			{isForecastToggle ? (
 				<div className={styles.dates}>
 					{weatherData?.hourly.filter((_, idx) => idx % 3 === 0).map((date, idx) => (
 						<div
@@ -44,7 +44,7 @@ export default function Forecast() {
 									alt="current weather depiction"
 								/>
 								<div className={styles.temp}>{`${weatherData?.hourly[idx].temp.toString().substring(0, 2)}°`}</div>
-								{weatherData?.hourly[idx].pop! > 0 && `${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
+								{Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) > 0 && `${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
 							</>
 						</div>
 					))}

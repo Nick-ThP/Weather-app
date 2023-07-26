@@ -15,26 +15,27 @@ ul {
 li {
 	@include flex-centering;
 	aspect-ratio: 1 / 1;
+	font-family: $serif-font;
 	width: 70%;
 	margin-top: 1rem;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	background-color: black;
-	color: white;
+	color: $basis-color;
 	border-radius: 50%;
-	border: 2px solid white;
-	box-shadow: 2px 2px 7px black;
+	box-shadow: 2px 2px 4px black;
 	cursor: pointer;
+	opacity: .95;
 
 	&:hover {
-		opacity: 0.75;
+		opacity: .75;
 	}
 }
 
 .chosen {
 	box-shadow: none;
 	color: $accent-color;
-	border: 2px solid $accent-color;
 	cursor: auto;
+	opacity: 1;
 
 	&:hover {
 		opacity: 1;

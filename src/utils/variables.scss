@@ -1,16 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,700;1,400&family=Reenie+Beanie&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&family=Suez+One&display=swap');
 
-$serif-font: 'Audiowide', cursive;
-$sans-serif-font: 'Raleway', sans-serif;
-$primary-color: #e7e7e7;
-$dark-color: rgb(97, 20, 39, .5);
-$accent-color: #ff8400;
+// Fonts
+$serif-font: 'Suez One', serif;
+$sans-serif-font: 'Cabin', sans-serif;
+$cursive-font: 'Reenie Beanie', cursive;
 
+// Colors
+$background-color: rgba(122, 94, 82, 0.3);
+$mobile-background-color: #7A5D51;
+$basis-color: rgb(255, 158, 141, 0.75);
+$accent-color: #FB753C;
+$darker-basis-color: #C79883;
+
+// Measurements
 $favorites-width: 5vw;
-$title-height: 25vh;
-$search-height: 10vh;
+$title-height: 30vh;
+$search-height: 5vh;
 
+
+// Mixins
 @mixin flex-centering {
 	display: flex;
 	justify-content: center;
@@ -21,8 +29,8 @@ $search-height: 10vh;
 	@if $error {
 		background: rgba(255, 0, 0, 0.2)
 	} @else {
-		background: rgba(255, 255, 255, 0.2);
+		background: $background-color;
 	}
-	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 	backdrop-filter: blur(10px);
 }
