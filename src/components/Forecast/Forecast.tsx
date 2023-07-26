@@ -37,15 +37,15 @@ export default function Forecast() {
 						<div
 							className={classNames(styles.date, createDateInfo(date.dt).time.length === 4 && Number(createDateInfo(date.dt).time.substring(0, 1)) <= 2 && styles.dateAfterMidnight)} key={idx}
 						>
-							<>
-								<div>{createDateInfo(date.dt).time}</div>
-								<img
-									src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}
-									alt="current weather depiction"
-								/>
-								<div className={styles.temp}>{`${weatherData?.hourly[idx].temp.toString().substring(0, 2)}°`}</div>
-								{Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) > 0 && `${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
-							</>
+							<div>{createDateInfo(date.dt).time}</div>
+							<img
+								src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}
+								alt="current weather depiction"
+							/>
+							<div className={styles.temp}>{`${weatherData?.hourly[idx].temp.toString().substring(0, 2)}°`}</div>
+							<div className={styles.rain}>
+								{(Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) > 0 && `${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`) || ''}
+							</div>
 						</div>
 					))}
 				</div>

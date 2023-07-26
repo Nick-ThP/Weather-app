@@ -1,9 +1,10 @@
 @import '../../utils/variables.scss';
 
 .wrapper {
+	height: $forecast-height;
 	@include flex-centering;
-	width: 100%;
 	justify-content: space-between;
+	width: 100%;
 }
 
 .toggle {
@@ -14,11 +15,18 @@
 
 .dates {
 	@include flex-centering;
+	align-items: start;
+	height: 100%;
 }
 
 .date {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	height: 100%;
 	padding: 1rem;
-	font-size: .75rem;
+	font-size: 1rem;
 
 	&:not(:first-child) {
 		border-left: 1px solid rgb(0, 0, 0, .1);
@@ -26,15 +34,21 @@
 
 	&AfterMidnight {
 		&:not(:first-child) {
-			border-left: 2px solid $basis-color;
+			border-left: 1px solid black;
 		}
 	}
 
 }
 
+.rain {
+	margin-top: .5rem;
+	font-size: .75rem;
+}
+
 @media only screen and (max-width: 768px) {
 
 	.wrapper {
+		height: auto;
 		flex-direction: column;
 	}
 

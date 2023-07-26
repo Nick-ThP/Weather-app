@@ -1,0 +1,21 @@
+@import '../../utils/variables.scss';
+
+.wrapper {
+	display: flex;
+	gap: 1rem;
+	height: $info-box-height;
+	width: 100%;
+}
+
+.line {
+	@include separator-line
+}
+
+@media only screen and (max-width: 768px) {
+
+	.wrapper {
+		flex-direction: column;
+		height: auto;
+	}
+
+}

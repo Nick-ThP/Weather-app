@@ -9,7 +9,7 @@
 	overflow: hidden;
 	display: grid;
 	grid-template-columns:
-		$favorites-width auto auto;
+		$favorites-width 1fr 1fr;
 	grid-template-rows:
 		$title-height $search-height auto auto;
 	grid-template-areas:
@@ -17,7 +17,6 @@
 		"favorites search search"
 		"favorites box-1 box-2"
 		"favorites box-3 box-3";
-	background-color: darkslategrey;
 }
 
 .errorOccured {
@@ -38,14 +37,14 @@
 
 .title {
 	@include flex-centering;
-	flex-direction: column;
 	justify-content: end;
+	flex-direction: column;
 	grid-area: title;
 
 	h1 {
 		font-family: $serif-font;
 		font-size: 6rem;
-		margin-bottom: 0;
+		margin: 0;
 	}
 
 	p {
@@ -81,7 +80,7 @@
 @media only screen and (max-width: 768px) {
 
 	h1 {
-		font-size: 3rem;
+		font-size: 4rem;
 	}
 
 	.container {
@@ -119,7 +118,7 @@
 		left: 0;
 		width: 25vw;
 		height: 100vh;
-		transition: 0.1s;
+		transition: .1s;
 
 		&ShowOnMobile {
 			display: block;

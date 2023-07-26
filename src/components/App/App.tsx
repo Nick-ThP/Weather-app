@@ -7,6 +7,7 @@ import FavoritesStar from '../FavoritesStar/FavoritesStar'
 import Forecast from '../Forecast/Forecast'
 import MainInfo from '../MainInfo/MainInfo'
 import SearchBar from '../SearchBar/SearchBar'
+import SecondayInfo from '../SecondaryInfo/SecondayInfo'
 import Box from '../reuseables/Box/Box'
 import styles from './app.module.scss'
 
@@ -61,10 +62,7 @@ function App() {
 					</div>
 					<div className={styles.secondaryInfo}>
 						<Box>
-							<MainInfo
-								favoriteCities={favoriteCities}
-								setFavoriteCities={setFavoriteCities}
-							/>
+							<SecondayInfo />
 						</Box>
 					</div>
 					<div className={styles.forecast}>

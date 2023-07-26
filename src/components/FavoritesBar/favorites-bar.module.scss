@@ -2,27 +2,27 @@
 
 ul {
 	@include frosted-glass;
-	display: flex;
-	align-items: center;
+	@include flex-centering;
+	justify-content: start;
 	flex-direction: column;
-	height: 100vh;
+	height: 100%;
 	text-align: center;
 	list-style-type: none;
-	padding: 0;
+	padding: 1rem 0;
 	margin: 0;
+	gap: 1rem;
 }
 
 li {
 	@include flex-centering;
-	aspect-ratio: 1 / 1;
 	font-family: $serif-font;
 	width: 70%;
-	margin-top: 1rem;
+	aspect-ratio: 1 / 1;
 	font-size: 1.25rem;
 	background-color: black;
 	color: $basis-color;
 	border-radius: 50%;
-	box-shadow: 2px 2px 4px black;
+	box-shadow: 2px 2px 5px black;
 	cursor: pointer;
 	opacity: .95;
 
