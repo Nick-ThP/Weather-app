@@ -1,6 +1,6 @@
 @import '../../utils/variables.scss';
 
-ul {
+.container {
 	@include frosted-glass;
 	@include flex-centering;
 	justify-content: start;
@@ -11,33 +11,4 @@ ul {
 	padding: 1rem 0;
 	margin: 0;
 	gap: 1rem;
-}
-
-li {
-	@include flex-centering;
-	font-family: $serif-font;
-	width: 70%;
-	aspect-ratio: 1 / 1;
-	font-size: 1.25rem;
-	background-color: black;
-	color: $basis-color;
-	border-radius: 50%;
-	box-shadow: 2px 2px 5px black;
-	cursor: pointer;
-	opacity: .95;
-
-	&:hover {
-		opacity: .75;
-	}
-}
-
-.chosen {
-	box-shadow: none;
-	color: $accent-color;
-	cursor: auto;
-	opacity: 1;
-
-	&:hover {
-		opacity: 1;
-	}
 }

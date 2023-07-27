@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
+import Button from '../reuseables/Button/Button'
 import styles from './favorites-bar.module.scss'
 
 type Props = {
@@ -27,16 +27,19 @@ export default function FavoritesBar(props: Props) {
 	}
 
 	return (
-		<ul>
+		<div className={styles.container}>
 			{props.favoriteCities.length > 0 && props.favoriteCities.map((favCity, idx) => (
-				<li
+				<Button
 					key={idx}
-					className={classNames(favCity === city && styles.chosen)}
-					onClick={() => clickHandler(favCity)}
+					isClicked={favCity === city}
+					clickFunc={() => clickHandler(favCity)}
+					type="toggle"
+					shape="round"
+					width="70%"
 				>
 					{createAbb(favCity)}
-				</li>
+				</Button>
 			))}
-		</ul>
+		</div>
 	)
 }

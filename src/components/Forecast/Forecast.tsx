@@ -19,14 +19,16 @@ export default function Forecast() {
 				<Button
 					isClicked={isForecastToggle}
 					clickFunc={toggleForecast}
-					type='toggle'
+					type="toggle"
+					width="10.5rem"
 				>
 					Next 48 hours
 				</Button>
 				<Button
 					isClicked={!isForecastToggle}
 					clickFunc={toggleForecast}
-					type='toggle'
+					type="toggle"
+					width="10.5rem"
 				>
 					Next full week
 				</Button>

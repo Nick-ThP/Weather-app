@@ -4,17 +4,23 @@ import styles from './button.module.scss'
 
 type Props = {
 	children: ReactNode
-	isClicked: boolean
-	clickFunc?: () => void
-	type?: 'toggle' | 'action'
+	isClicked?: boolean
+	clickFunc?: (val?: unknown) => void
+	type?: 'standard' | 'toggle'
+	width?: string
+	shape?: 'rectangular' | 'round'
 }
 
-
-export default function Button(props: Props) {
+export default function Button({
+	type = 'standard',
+	width = 'auto',
+	shape = 'rectangular',
+	...props
+}: Props) {
 	function createClick() {
 		if (props.clickFunc) {
-			switch (props.type) {
-				case 'action':
+			switch (type) {
+				case 'standard':
 					return props.clickFunc()
 				case 'toggle':
 					return props.isClicked ? undefined : props.clickFunc()
@@ -26,8 +32,9 @@ export default function Button(props: Props) {
 
 	return (
 		<button
-			className={classNames(props.isClicked ? styles.clicked : styles.unclicked)}
+			className={classNames(props.isClicked && styles.clicked, styles[shape])}
 			onClick={createClick}
+			style={{ width: width }}
 		>
 			{props.children}
 		</button>

@@ -6,14 +6,40 @@
 
 html {
 	font-size: 16px;
+	overflow: hidden;
 }
 
 body {
 	margin: 0;
+	position: fixed;
 	font-family: $sans-serif-font;
 }
 
+@media only screen and (max-width: 1600px) {
+	html {
+		font-size: 15px;
+	}
+}
+
+@media only screen and (max-width: 1400px) {
+	html {
+		font-size: 14px;
+	}
+}
+
 @media only screen and (max-width: 1200px) {
+	html {
+		font-size: 13px;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
 	html {
 		font-size: 14px;
 	}
