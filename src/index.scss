@@ -12,6 +12,7 @@ html {
 body {
 	margin: 0;
 	position: fixed;
+	overflow-y: scroll;
 	font-family: $sans-serif-font;
 }
 
