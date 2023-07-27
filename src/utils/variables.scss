@@ -39,16 +39,3 @@ $info-box-height: 22.5vh;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
 	backdrop-filter: blur(10px);
 }
-
-@mixin separator-line {
-	height: 100%;
-	border-left: 2px solid rgb(0, 0, 0, .1);
-	align-self: center;
-
-	@media only screen and (max-width: 768px) {
-		height: 0;
-		width: 100%;
-		border-left: none;
-		border-bottom: 2px solid rgb(0, 0, 0, .1);
-	}
-}

@@ -7,10 +7,6 @@
 	width: 100%;
 }
 
-.line {
-	@include separator-line
-}
-
 @media only screen and (max-width: 768px) {
 
 	.wrapper {

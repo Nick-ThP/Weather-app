@@ -5,6 +5,7 @@ import rain from '../../images/rain.png'
 import sun from '../../images/sun.png'
 import wind from '../../images/wind.png'
 import { createDateInfo } from "../../utils/date-formatting"
+import Line from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
 
 interface Props {
@@ -51,7 +52,7 @@ export default function MainInfo(props: Props) {
 				<div className={styles.row}>
 					{weatherData?.current.dt && (
 						<div className={styles.date}>
-							{`${createDateInfo(weatherData?.current.dt).date} - ${createDateInfo(weatherData?.current.dt).time}`}
+							{`${createDateInfo(weatherData?.current.dt).dateShort} - ${createDateInfo(weatherData?.current.dt).time}`}
 						</div>
 					)}
 				</div>
@@ -70,7 +71,7 @@ export default function MainInfo(props: Props) {
 					)}
 				</div>
 			</div>
-			<div className={styles.line} />
+			<Line type="box" />
 			<div className={styles.column}>
 				<div className={styles.row}>
 					<img className={styles.icon} src={sun} alt="UV Index" />

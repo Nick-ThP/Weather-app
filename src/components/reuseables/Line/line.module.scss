@@ -1,0 +1,37 @@
+.basis {
+	height: 100%;
+	align-self: center;
+}
+
+.box {
+	border-left: 2px solid rgb(0, 0, 0, .1);
+}
+
+.date {
+	border-left: 1px solid rgb(0, 0, 0, .1);
+
+	&MidnightSplit {
+		border-left: 1px solid rgb(0, 0, 0, .5);
+	}
+}
+
+
+@media only screen and (max-width: 768px) {
+	.basis {
+		height: 0;
+		width: 100%;
+		border-left: none;
+	}
+
+	.box {
+		border-bottom: 2px solid rgb(0, 0, 0, .1);
+	}
+
+	.date {
+		border-bottom: 1px solid rgb(0, 0, 0, .1);
+
+		&MidnightSplit {
+			border-bottom: 1px solid rgb(0, 0, 0, .5);
+		}
+	}
+}
