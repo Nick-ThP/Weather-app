@@ -8,7 +8,6 @@ type Props = {
 
 
 export default function Line({midnightSplit = false, ...props}: Props) {
-	console.log(midnightSplit)
 	return (
 		<div className={classNames(styles.basis, styles[props.type], midnightSplit && styles.dateMidnightSplit)} />
 	)

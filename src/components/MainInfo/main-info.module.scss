@@ -1,41 +1,37 @@
 @import '../../utils/variables.scss';
 
 .wrapper {
-	display: flex;
-	gap: 1rem;
-	height: $info-box-height;
-	width: 100%;
+	@include box-wrapper
 }
 
 .column {
-	display: flex;
-	justify-content: space-around;
-	flex-direction: column;
-	flex: 1;
-	padding: 0 1rem;
+	@include box-column;
 
-	&:first-child {
+	&First {
 		align-items: start;
 	}
-
-	&:last-child {
-		justify-content: space-between;
-		margin: .8rem 0 0 0;
-	}
-
 }
 
 .row {
-	@include flex-centering;
-	gap: 1rem;
+	@include box-row;
+}
+
+.skeleton {
+	@include box-skeleton
+}
+
+h2 {
+	font-size: 2rem;
+	margin: 0 0 1rem 0;
+	font-family: $serif-font;
 }
 
 .currentWeather {
 	font-style: italic;
-	margin-top: 2.5px;
 }
 
 .temp {
+	margin-bottom: -.5rem;
 	font-size: 4.5rem;
 	font-weight: bold;
 	font-family: $serif-font;
@@ -44,7 +40,7 @@
 .star {
 	height: 1.8rem;
 	aspect-ratio: 1 / 1;
-	margin-top: -.1rem;
+	margin: .5px 0 1rem 0;
 	transition: .3s;
 	cursor: pointer;
 
@@ -68,7 +64,11 @@
 	}
 }
 
-.icon {
+.dynamicIcon {
+	margin-bottom: -1.5rem;
+}
+
+.staticIcon {
 	height: 2.8rem;
 	aspect-ratio: 1 / 1;
 }

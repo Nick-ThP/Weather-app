@@ -8,7 +8,7 @@ import { IWeatherContext, IWeatherData } from "./weather-data-types"
 const WeatherContext = createContext<IWeatherContext>({
 	weatherData: null,
 	city: '',
-	loading: false,
+	isLoading: false,
 	error: null,
 	setError() { },
 	setCity() { },
@@ -28,7 +28,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [city, _setCity] = useLocalStorage<string>('city', 'Aalborg')
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
 	const [error, setError] = useState<string | null>(null)
-	const [loading, setLoading] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	function setCity(city: string) {
 		_setCity(city)
@@ -52,7 +52,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		}
 
 		setError(null)
-		setLoading(true)
+		setIsLoading(true)
 
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
@@ -65,7 +65,9 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		}
 
 		finally {
-			setLoading(false)
+			// setTimeout(() => {
+			// 	setIsLoading(false)
+			// }, 500)
 		}
 	}, [city])
 
@@ -76,7 +78,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 	const contextData: IWeatherContext = {
 		weatherData,
 		city,
-		loading,
+		isLoading,
 		error,
 		setError,
 		setCity,

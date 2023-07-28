@@ -1,7 +1,7 @@
 export interface IWeatherContext {
 	weatherData: IWeatherData | null
 	city: string
-	loading: boolean
+	isLoading: boolean
 	error: string | null
 	setError: (value: string | null) => void
 	setCity: (value: string) => void

@@ -1,10 +1,27 @@
 @import '../../utils/variables.scss';
 
 .wrapper {
-	display: flex;
-	gap: 1rem;
-	height: $info-box-height;
+	@include box-wrapper;
+}
+
+.column {
+	@include box-column;
+	justify-content: space-around;
+}
+
+.row {
+	@include box-row;
+}
+
+.skeleton {
+	@include box-skeleton;
+}
+
+.information {
 	width: 100%;
+	font-size: 1rem;
+	display: flex;
+	justify-content: space-between;
 }
 
 @media only screen and (max-width: 768px) {
@@ -13,5 +30,4 @@
 		flex-direction: column;
 		height: auto;
 	}
-
 }

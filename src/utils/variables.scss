@@ -7,17 +7,16 @@ $cursive-font: 'Reenie Beanie', cursive;
 
 // Colors
 $background-color: rgba(122, 94, 82, .3);
-$mobile-background-color: #7A5D51;
-$basis-color: rgb(255, 158, 141, .75);
-$accent-color: #FB753C;
-$darker-basis-color: #C79883;
+$basis-color: #f3a893;
+$accent-color: #EC6E4C;
+
 
 // Measurements
 $favorites-width: 5vw;
-$title-height: 27.5vh;
+$title-height: minmax(auto, 35vh);
 $search-height: 5vh;
 $forecast-height: 15vh;
-$info-box-height: 22.5vh;
+$info-box-height: 25vh;
 
 
 // Mixins
@@ -39,3 +38,32 @@ $info-box-height: 22.5vh;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
 	backdrop-filter: blur(10px);
 }
+
+@mixin box-wrapper {
+	display: flex;
+	gap: 1rem;
+	height: $info-box-height;
+	width: 100%;
+}
+
+@mixin box-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1;
+	gap: .5rem;
+	padding: 1rem;
+}
+
+@mixin box-row {
+	@include flex-centering;
+	gap: 1rem;
+}
+
+@mixin box-skeleton {
+	display: flex;
+	justify-content: space-between;
+	margin-top: .5rem;
+}
+
+
