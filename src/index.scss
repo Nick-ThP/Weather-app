@@ -6,9 +6,12 @@
 
 html {
 	font-size: 16px;
+	height: -webkit-fill-available;
 }
 
 body {
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
 	margin: 0;
 	font-family: $sans-serif-font;
 }
