@@ -3,9 +3,9 @@
 .container {
 	@include frosted-glass;
 	@include flex-centering;
-	justify-content: start;
+	justify-content: center;
 	flex-direction: column;
-	height: 100vh;
+	height: 100%;
 	text-align: center;
 	list-style-type: none;
 	padding: 1rem 0;
