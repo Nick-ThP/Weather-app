@@ -39,7 +39,7 @@ export function MainInfo(props: Props) {
 		<div className={styles.wrapper}>
 			<div className={classNames(styles.column, !isLoading && styles.columnFirst)}>
 				{isLoading ? (
-					<Skeleton count={4.5} className={styles.skeleton} />
+					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
 					<>
 						<div className={styles.row}>
@@ -83,7 +83,7 @@ export function MainInfo(props: Props) {
 			<Line type="box" />
 			<div className={styles.column}>
 				{isLoading ? (
-					<Skeleton count={4.5} className={styles.skeleton} />
+					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
 					<>
 						<div className={styles.row}>
