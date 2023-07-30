@@ -18,9 +18,14 @@ export function Forecast() {
 	return (
 		<div className={classNames(styles.wrapper, isLoading && styles.skeletonWrapper)}>
 			{isLoading ? (
-				// <div className={styles.skeletonWrapper}>
-					<Skeleton circle count={5} className={styles.skeleton} />
-				// </div>
+				<>
+					<div className={styles.skeletons}>
+						<Skeleton className={styles.skeleton} circle count={12} inline width={'4rem'} height={'4rem'} />
+					</div>
+					<div className={styles.skeletons}>
+						<Skeleton className={styles.skeleton} count={12} inline width={'4rem'} height={'.75rem'} />
+					</div>
+				</>
 			) : (
 				<>
 					<div className={styles.buttons}>

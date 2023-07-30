@@ -1,21 +1,28 @@
 @import '../../utils/variables.scss';
 
 .wrapper {
+	overflow: hidden;
 	height: $forecast-height;
-	align-items: center;
+	display: flex;
 	width: 100%;
+	align-items: center;
 	gap: 2rem;
 	padding: 0 1rem 0 .8rem;
 }
 
 .skeletonWrapper {
-	@include box-skeleton;
-	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: auto;
+	white-space: nowrap;
+	padding: 2.3rem 0;
 }
 
 .skeleton {
-	display: flex;
-	justify-content: space-evenly;
+	&:not(:first-child) {
+		margin-left: 4rem;
+	}
 }
 
 .buttons {
