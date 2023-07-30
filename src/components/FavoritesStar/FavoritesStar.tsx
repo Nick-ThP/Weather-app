@@ -6,7 +6,7 @@ type Props = {
 	toggleShow: (param: boolean) => void
 }
 
-export default function FavoritesStar(props: Props) {
+export function FavoritesStar(props: Props) {
 	return (
 		<svg
 			className={classNames(styles.star, props.show

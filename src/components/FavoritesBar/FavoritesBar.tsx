@@ -1,5 +1,5 @@
 import { useWeatherContext } from '../../contexts/useWeatherContext'
-import Button from '../reuseables/Button/Button'
+import { Button } from '../reuseables/Button/Button'
 import styles from './favorites-bar.module.scss'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 	toggleShow: (param: boolean) => void
 }
 
-export default function FavoritesBar(props: Props) {
+export function FavoritesBar(props: Props) {
 	const { city, setCity } = useWeatherContext()
 
 	function clickHandler(city: string) {

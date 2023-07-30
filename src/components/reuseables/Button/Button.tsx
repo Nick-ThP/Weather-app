@@ -11,7 +11,7 @@ type Props = {
 	shape?: 'rectangular' | 'round'
 }
 
-export default function Button({
+export function Button({
 	type = 'standard',
 	width = 'auto',
 	shape = 'rectangular',

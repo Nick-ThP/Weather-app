@@ -1,11 +1,11 @@
 import classNames from "classnames"
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
-import Line from "../reuseables/Line/Line"
-import styles from './secondary-info.module.scss'
 import { createDateInfo } from "../../utils/date-formatting"
+import { Line } from "../reuseables/Line/Line"
+import styles from './secondary-info.module.scss'
 
-export default function SecondayInfo() {
+export function SecondayInfo() {
 	const { weatherData, isLoading } = useWeatherContext()
 
 	return (

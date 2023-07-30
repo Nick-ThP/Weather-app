@@ -10,7 +10,6 @@ button {
 	border: none;
 	font-size: 1.2rem;
 	font-family: $serif-font;
-	padding: 1rem;
 
 	&:hover {
 		opacity: .75;
@@ -19,6 +18,7 @@ button {
 
 .rectangular {
 	border-radius: 12px;
+	padding: 1rem;
 }
 
 .round {

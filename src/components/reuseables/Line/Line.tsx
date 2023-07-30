@@ -7,7 +7,7 @@ type Props = {
 }
 
 
-export default function Line({midnightSplit = false, ...props}: Props) {
+export function Line({midnightSplit = false, ...props}: Props) {
 	return (
 		<div className={classNames(styles.basis, styles[props.type], midnightSplit && styles.dateMidnightSplit)} />
 	)

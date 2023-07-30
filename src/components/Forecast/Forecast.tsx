@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useWeatherContext } from "../../contexts/useWeatherContext";
 import { createDateInfo } from '../../utils/date-formatting';
-import Button from "../reuseables/Button/Button";
-import Line from '../reuseables/Line/Line';
+import { Button } from "../reuseables/Button/Button";
+import { Line } from '../reuseables/Line/Line';
 import styles from './forecast.module.scss';
 
-export default function Forecast() {
+export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
 	const { weatherData, isLoading } = useWeatherContext()
 
@@ -23,7 +23,6 @@ export default function Forecast() {
 				// </div>
 			) : (
 				<>
-
 					<div className={styles.buttons}>
 						<Button
 							isClicked={isForecastToggle}
@@ -92,3 +91,4 @@ export default function Forecast() {
 		</div>
 	)
 }
+

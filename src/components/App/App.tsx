@@ -1,17 +1,17 @@
 import classNames from 'classnames'
 import { useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
-import useLocalStorage from '../../hooks/useLocalStorage'
-import FavoritesBar from '../FavoritesBar/FavoritesBar'
-import FavoritesStar from '../FavoritesStar/FavoritesStar'
-import Forecast from '../Forecast/Forecast'
-import MainInfo from '../MainInfo/MainInfo'
-import SearchBar from '../SearchBar/SearchBar'
-import SecondayInfo from '../SecondaryInfo/SecondayInfo'
-import Box from '../reuseables/Box/Box'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
+import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
+import { Forecast } from '../Forecast/Forecast'
+import { MainInfo } from '../MainInfo/MainInfo'
+import { SearchBar } from '../SearchBar/SearchBar'
+import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
+import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
 
-function App() {
+export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [
 		'København',
 		'Aarhus',
@@ -75,5 +75,3 @@ function App() {
 		</div>
 	)
 }
-
-export default App

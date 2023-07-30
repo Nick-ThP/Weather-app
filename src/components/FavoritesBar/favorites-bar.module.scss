@@ -3,7 +3,7 @@
 .container {
 	@include frosted-glass;
 	@include flex-centering;
-	justify-content: center;
+	justify-content: start;
 	flex-direction: column;
 	height: 100%;
 	text-align: center;
@@ -11,4 +11,11 @@
 	padding: 1rem 0;
 	margin: 0;
 	gap: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.container {
+		justify-content: center;
+	}
 }

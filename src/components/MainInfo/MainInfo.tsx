@@ -7,7 +7,7 @@ import rain from '../../images/rain.png'
 import sun from '../../images/sun.png'
 import wind from '../../images/wind.png'
 import { createDateInfo } from "../../utils/date-formatting"
-import Line from "../reuseables/Line/Line"
+import { Line } from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 	setFavoriteCities: (arr: string[]) => void
 }
 
-export default function MainInfo(props: Props) {
+export function MainInfo(props: Props) {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false)
 	const { city, weatherData, isLoading } = useWeatherContext()
 

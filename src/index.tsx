@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { SkeletonTheme } from 'react-loading-skeleton'
-import App from './components/App/App'
+import { App } from './components/App/App'
 import { WeatherContextProvider } from './contexts/useWeatherContext'
 import './index.scss'
 

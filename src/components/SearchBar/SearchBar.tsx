@@ -5,7 +5,7 @@ import { City } from '../../data/city-types';
 import cityData from '../../data/cityData.json';
 import styles from './search-bar.module.scss';
 
-export default function SearchBar() {
+export function SearchBar() {
 	const [fuseQuery, setFuseQuery] = useState('')
 	const [input, setInput] = useState('')
 	const { setCity, setError } = useWeatherContext()
