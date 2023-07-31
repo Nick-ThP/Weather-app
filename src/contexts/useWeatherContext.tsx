@@ -65,9 +65,9 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		}
 
 		finally {
-			// setTimeout(() => {
-			// 	setIsLoading(false)
-			// }, 500)
+			setTimeout(() => {
+				setIsLoading(false)
+			}, 300)
 		}
 	}, [city])
 

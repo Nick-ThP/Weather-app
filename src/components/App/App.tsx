@@ -11,6 +11,7 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
+import { MobileLoader } from '../MobileLoader/MobileLoader'
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [
@@ -27,7 +28,7 @@ export function App() {
 	return (
 		<>
 			{isLoading && isMobile ? (
-				<div>hi</div>
+				<MobileLoader />
 			) : (
 				<div className={classNames(styles.container, error && styles.errorOccured)}>
 					<div className={styles.title}>

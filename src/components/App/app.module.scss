@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .container {
-	background: center /cover no-repeat url(../../images/background.jpg);
+	background: center / cover no-repeat url(../../images/background.jpg);
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -30,7 +30,7 @@
 
 .error {
 	grid-area: error;
-	padding: 4rem 8rem 3rem 8rem;
+	padding: 3rem 8rem 4rem 8rem;
 }
 
 .title {
@@ -62,12 +62,12 @@
 
 .mainInfo {
 	grid-area: box-1;
-	padding: 3rem 2rem 2rem 8rem;
+	padding: 3rem 1rem 2rem 8rem;
 }
 
 .secondaryInfo {
 	grid-area: box-2;
-	padding: 3rem 8rem 2rem 0;
+	padding: 3rem 8rem 2rem 1rem;
 }
 
 .forecast {
@@ -82,21 +82,21 @@
 		height: auto;
 		display: grid;
 		grid-template-columns:
-			auto;
+			100vw;
 		grid-template-rows:
 			$title-height-mobile $search-height repeat(3, auto);
 		grid-template-areas:
 			"title"
 			"search"
 			"box-1"
-			"box-2"
-			"box-3";
+			"box-3"
+			"box-2";
 	}
 
 	.errorOccured {
 		height: 100vh;
 		grid-template-columns:
-			auto;
+			100vw;
 		grid-template-rows:
 			$title-height-mobile $search-height auto;
 		grid-template-areas:
@@ -141,11 +141,11 @@
 
 	.error,
 	.mainInfo,
-	.forecast {
+	.secondaryInfo {
 		padding: 2rem;
 	}
 
-	.secondaryInfo {
+	.forecast {
 		padding: 0 2rem;
 	}
 }

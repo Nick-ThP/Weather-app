@@ -2,6 +2,7 @@ import classNames from "classnames"
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { createDateInfo } from "../../utils/date-formatting"
+import { createWindInfo } from "../../utils/wind-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
 
@@ -10,7 +11,7 @@ export function SecondayInfo() {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={classNames(styles.column)}>
+			<div className={classNames(styles.column, !isLoading && styles.columnJustification)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
@@ -18,62 +19,35 @@ export function SecondayInfo() {
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Clouds
+									Feels like
 								</div>
 								<div>
-									{weatherData?.current.clouds}
+									{`${weatherData?.current.feels_like.toString().substring(0, 2)}° C`}
 								</div>
 							</div>
 						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Dew points
+									Wind direction
 								</div>
-								<div>
-									{weatherData?.current.dew_point}
-								</div>
+								{weatherData?.current.wind_deg && (
+									<div>
+										{createWindInfo(weatherData?.current.wind_deg)}
+									</div>
+								)}
 							</div>
 						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Humidity
+									Wind gusts
 								</div>
 								<div>
-									{weatherData?.current.humidity}
+									{weatherData?.current.wind_gust ? `${weatherData?.current.wind_gust} km/h` : 'None'}
 								</div>
 							</div>
 						</div>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Pressure
-								</div>
-								<div>
-									{weatherData?.current.pressure}
-								</div>
-							</div>
-						</div>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Visibility
-								</div>
-								<div>
-									{weatherData?.current.visibility}
-								</div>
-							</div>
-						</div>
-					</>
-				)}
-			</div>
-			<Line type="box" />
-			<div className={classNames(styles.column)}>
-				{isLoading ? (
-					<Skeleton count={3.5} className={styles.skeleton} />
-				) : (
-					<>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
@@ -98,33 +72,62 @@ export function SecondayInfo() {
 								)}
 							</div>
 						</div>
+					</>
+				)}
+			</div>
+			<Line type="box" />
+			<div className={classNames(styles.column, !isLoading && styles.columnJustification)}>
+				{isLoading ? (
+					<Skeleton count={3.5} className={styles.skeleton} />
+				) : (
+					<>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Wind degree
+									Cloud cover
 								</div>
 								<div>
-									{weatherData?.current.wind_deg}
+									{`${weatherData?.current.clouds} %`}
 								</div>
 							</div>
 						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Wind gust
+									Humidity
 								</div>
 								<div>
-									{weatherData?.current.wind_gust}
+									{`${weatherData?.current.humidity} %`}
 								</div>
 							</div>
 						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
-									Feels like
+									Dew point
 								</div>
 								<div>
-									{weatherData?.current.feels_like}
+									{`${weatherData?.current.dew_point.toString().substring(0, 2)}° C`}
+								</div>
+							</div>
+						</div>
+						<div className={styles.row}>
+							<div className={styles.information}>
+								<div>
+									Pressure
+								</div>
+								<div>
+									{`↔ ${weatherData?.current.pressure} mb`}
+								</div>
+							</div>
+						</div>
+						<div className={styles.row}>
+							<div className={styles.information}>
+								<div>
+									Visibility
+								</div>
+								<div>
+									{`${weatherData?.current.visibility} m`}
 								</div>
 							</div>
 						</div>

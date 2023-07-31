@@ -35,6 +35,8 @@ h2 {
 	font-size: 4.5rem;
 	font-weight: bold;
 	font-family: $serif-font;
+	letter-spacing: .2rem;
+	text-align: justify;
 }
 
 .star {
@@ -69,7 +71,7 @@ h2 {
 }
 
 .staticIcon {
-	height: 2.8rem;
+	height: 2.5rem;
 	aspect-ratio: 1 / 1;
 }
 

@@ -13,13 +13,11 @@ $accent-color: #EC6E4C;
 
 // Measurements
 $favorites-width: 5vw;
-$title-height: minmax(auto, 35vh);
+$title-height: 35vh;
 $title-height-mobile: 20vh;
 $search-height: 5vh;
 $forecast-height: 15vh;
 $info-box-height: 25vh;
-
-
 
 // Mixins
 @mixin flex-centering {
@@ -30,7 +28,7 @@ $info-box-height: 25vh;
 
 @mixin frosted-glass($error: false) {
 	@if $error {
-		background: rgba(255, 0, 0, .2)
+		background: rgba(255, 0, 0, .3)
 	}
 
 	@else {

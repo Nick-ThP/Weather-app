@@ -6,7 +6,10 @@
 
 .column {
 	@include box-column;
-	justify-content: space-around;
+
+	&Justification {
+		justify-content: space-around;
+	}
 }
 
 .row {
@@ -29,5 +32,9 @@
 	.wrapper {
 		flex-direction: column;
 		height: auto;
+	}
+
+	.column {
+		padding: 0;
 	}
 }
