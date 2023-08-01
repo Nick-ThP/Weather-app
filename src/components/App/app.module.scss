@@ -35,7 +35,7 @@
 
 .title {
 	@include flex-centering;
-	justify-content: end;
+	justify-content: flex-end;
 	flex-direction: column;
 	grid-area: title;
 
@@ -118,7 +118,7 @@
 		}
 	}
 
-	.favorites {
+	.favorites article {
 		overflow: hidden;
 		position: fixed;
 		z-index: 1;

@@ -32,8 +32,8 @@ export function App() {
 			) : (
 				<div className={classNames(styles.container, error && styles.errorOccured)}>
 					<div className={styles.title}>
-						<h1>Simple weather</h1>
-						<p>A simplified source for weather information</p>
+						<h1>Simple Weather</h1>
+						<p>A Simplified Source for Weather Information</p>
 					</div>
 					<div className={styles.search}>
 						<SearchBar />
