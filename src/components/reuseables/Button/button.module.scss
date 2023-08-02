@@ -5,14 +5,14 @@ button {
 	cursor: pointer;
 	box-shadow: 2px 2px 5px black;
 	color: $basis-color;
-	opacity: .95;
+	opacity: 1;
 	background-color: black;
 	border: none;
 	font-size: 1.2rem;
 	font-family: $serif-font;
 
 	&:hover {
-		opacity: .75;
+		opacity: .8;
 	}
 }
 
@@ -30,9 +30,6 @@ button {
 	cursor: auto;
 	box-shadow: none;
 	color: $accent-color;
-	opacity: 1;
-
-	&:hover {
-		opacity: 1;
-	}
+	opacity: .8;
+	pointer-events: none;
 }

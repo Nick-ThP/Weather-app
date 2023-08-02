@@ -78,6 +78,8 @@
 @media only screen and (max-width: 768px) {
 
 	.container {
+		background-size: auto 2600px;
+		background-position: 50% 0%;
 		position: absolute;
 		height: auto;
 		display: grid;
@@ -118,7 +120,7 @@
 		}
 	}
 
-	.favorites article {
+	.favorites {
 		overflow: hidden;
 		position: fixed;
 		z-index: 1;
