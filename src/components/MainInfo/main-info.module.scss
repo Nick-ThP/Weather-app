@@ -67,7 +67,7 @@ h2 {
 }
 
 .dynamicIcon {
-	margin-bottom: -1.5rem;
+	margin-bottom: -.5rem;
 }
 
 .staticIcon {
@@ -93,6 +93,15 @@ h2 {
 	.column {
 		padding: 0;
 		align-items: stretch;
+
+		&:last-child {
+			margin: .5rem 0 .5rem 0;
+			gap: 1.5rem;
+		}
+	}
+
+	.row {
+		justify-content: space-between;
 	}
 
 	h2 {
@@ -103,12 +112,17 @@ h2 {
 		height: 3rem;
 	}
 
+	.currentWeather,
+	.currentDate {
+		font-size: 1.25rem;
+	}
+
 	.temp {
 		font-size: 8rem;
 	}
 
-	.row {
-		justify-content: space-between;
+	.dynamicIcon {
+		margin-top: 1rem;
+		margin-right: -.75rem;
 	}
-
 }

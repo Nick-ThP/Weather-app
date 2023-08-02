@@ -57,7 +57,7 @@ export function MainInfo(props: Props) {
 						</div>
 						<div className={styles.row}>
 							{weatherData?.current.dt && (
-								<div>
+								<div className={styles.currentDate}>
 									{`${createDateInfo(weatherData?.current.dt).dateShort} - ${createDateInfo(weatherData?.current.dt).time}`}
 								</div>
 							)}

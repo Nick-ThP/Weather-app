@@ -56,7 +56,8 @@
 	gap: 2.5rem;
 }
 
-.date {
+.date,
+.hour {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -99,10 +100,19 @@
 		gap: 1rem;
 	}
 
-	.date {
+	.date,
+	.hour {
 		flex-direction: row;
 		justify-content: space-around;
+		padding: 0 1rem;
 		gap: 1rem;
+		display: grid;
+		grid-template-columns: 25% repeat(2, 1fr) 15%;
+	}
+
+	.hour {
+		text-align: center;
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	.rain {
