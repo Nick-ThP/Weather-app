@@ -7,11 +7,11 @@ import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
 import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
 import { Forecast } from '../Forecast/Forecast'
 import { MainInfo } from '../MainInfo/MainInfo'
+import { MobileLoader } from '../MobileLoader/MobileLoader'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
-import { MobileLoader } from '../MobileLoader/MobileLoader'
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [
@@ -73,7 +73,7 @@ export function App() {
 								</Box>
 							</div>
 							<div className={styles.forecast}>
-								<Box>
+								<Box forecast>
 									<Forecast />
 								</Box>
 							</div>

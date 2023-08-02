@@ -32,9 +32,24 @@
 	.wrapper {
 		flex-direction: column;
 		height: auto;
+		gap: 1rem;
 	}
 
 	.column {
 		padding: 0;
+		margin: .5rem 0 .5rem 0;
+		gap: 1rem;
+
+		&:first-child {
+			margin-bottom: 0;
+		}
+
+		&:last-child {
+			margin-top: 0;
+		}
+	}
+
+	.information {
+		font-size: 1.2rem;
 	}
 }

@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
+import { useMediaQuery } from '../../../hooks/useMediaQuery'
 import styles from './button.module.scss'
 
 type Props = {
@@ -8,15 +9,19 @@ type Props = {
 	clickFunc?: (val?: unknown) => void
 	type?: 'standard' | 'toggle'
 	width?: string
+	mobileWidth?: string
 	shape?: 'rectangular' | 'round'
 }
 
 export function Button({
 	type = 'standard',
 	width = 'auto',
+	mobileWidth = width,
 	shape = 'rectangular',
 	...props
 }: Props) {
+	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
+
 	function createClick() {
 		if (props.clickFunc) {
 			switch (type) {
@@ -34,7 +39,7 @@ export function Button({
 		<button
 			className={classNames(props.isClicked && styles.clicked, styles[shape])}
 			onClick={createClick}
-			style={{ width: width }}
+			style={{ width: isMobile ? mobileWidth : width }}
 		>
 			{props.children}
 		</button>

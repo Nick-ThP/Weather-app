@@ -80,15 +80,22 @@
 		height: auto;
 		flex-direction: column;
 		padding: 0;
+		gap: 0;
+		align-items: stretch;
 	}
 
 	.buttons {
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: stretch;
+		gap: 0rem;
+		width: auto;
+		margin: 0;
+		padding: 0;
 	}
 
 	.dates,
 	.hours {
+		padding: 1rem 1rem;
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
@@ -108,6 +115,10 @@
 		gap: 1rem;
 		display: grid;
 		grid-template-columns: 25% repeat(2, 1fr) 15%;
+	}
+
+	.rain {
+		font-size: .75rem;
 	}
 
 	.hour {

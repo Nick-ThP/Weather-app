@@ -36,6 +36,7 @@ export function Forecast() {
 							clickFunc={toggleForecast}
 							type="toggle"
 							width="10.5rem"
+							mobileWidth="50%"
 						>
 							Next 48 hours
 						</Button>
@@ -44,6 +45,7 @@ export function Forecast() {
 							clickFunc={toggleForecast}
 							type="toggle"
 							width="10.5rem"
+							mobileWidth="50%"
 						>
 							Next full week
 						</Button>

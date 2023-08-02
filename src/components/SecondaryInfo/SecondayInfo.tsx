@@ -1,12 +1,14 @@
 import classNames from "classnames"
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
+import { useMediaQuery } from "../../hooks/useMediaQuery"
 import { createDateInfo } from "../../utils/date-formatting"
 import { createWindInfo } from "../../utils/wind-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
 
 export function SecondayInfo() {
+	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
 	const { weatherData, isLoading } = useWeatherContext()
 
 	return (
@@ -75,7 +77,7 @@ export function SecondayInfo() {
 					</>
 				)}
 			</div>
-			<Line type="box" />
+			{!isMobile && <Line type="box" />}
 			<div className={classNames(styles.column, !isLoading && styles.columnJustification)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
