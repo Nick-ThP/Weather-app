@@ -10,7 +10,7 @@ import styles from './forecast.module.scss';
 
 export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
-	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { weatherData, isLoading } = useWeatherContext()
 
 	function toggleForecast() {

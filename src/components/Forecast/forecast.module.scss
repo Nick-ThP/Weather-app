@@ -74,7 +74,7 @@
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
 
 	.wrapper {
 		height: auto;
@@ -95,7 +95,7 @@
 
 	.dates,
 	.hours {
-		padding: 1rem 1rem;
+		padding: 1rem 0rem;
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
@@ -114,19 +114,21 @@
 		padding: 0 1rem;
 		gap: 1rem;
 		display: grid;
+		text-align: center;
 		grid-template-columns: 25% repeat(2, 1fr) 15%;
+	}
+
+	.hour {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	img {
+		display: flex;
+		margin: 0 auto;
 	}
 
 	.rain {
 		font-size: .75rem;
-	}
-
-	.hour {
-		text-align: center;
-		grid-template-columns: repeat(4, 1fr);
-	}
-
-	.rain {
 		margin: 0;
 	}
 

@@ -22,7 +22,7 @@ export function App() {
 		'Esbjerg'
 	])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
-	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, isLoading } = useWeatherContext()
 
 	return (

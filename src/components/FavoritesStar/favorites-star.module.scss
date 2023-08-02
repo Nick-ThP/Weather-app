@@ -4,7 +4,7 @@
 	display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
 
 	.star {
 		display: block;
@@ -13,6 +13,7 @@
 		bottom: .8rem;
 		left: .8rem;
 		width: 19.5vw;
+		max-width: 97.5px;
 		aspect-ratio: 1 / 1;
 		transition: .3s;
 		border-radius: 50%;

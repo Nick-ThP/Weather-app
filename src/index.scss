@@ -37,8 +37,14 @@ body {
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
 	html {
 		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+	html {
+		font-size: 12px;
 	}
 }

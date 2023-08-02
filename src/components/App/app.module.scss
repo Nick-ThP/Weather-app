@@ -75,7 +75,7 @@
 	padding: 0 8rem 4rem 8rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
 
 	.container {
 		background-size: auto 2600px;
@@ -108,10 +108,11 @@
 	}
 
 	.title {
+		justify-content: center;
 
 		h1 {
-			font-size: 3rem;
-			margin: 0;
+			font-size: 3.25rem;
+			margin: 2rem 0 0 0;
 		}
 
 		p {
@@ -127,6 +128,7 @@
 		top: 0;
 		left: 0;
 		width: 25vw;
+		max-width: 120px;
 		height: 100%;
 		transition: .1s;
 
@@ -144,10 +146,10 @@
 	.error,
 	.mainInfo,
 	.forecast {
-		padding: 2rem;
+		padding: 1rem;
 	}
 
 	.secondaryInfo {
-		padding: 0 2rem;
+		padding: 0 1rem;
 	}
 }

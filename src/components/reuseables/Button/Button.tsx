@@ -20,7 +20,7 @@ export function Button({
 	shape = 'rectangular',
 	...props
 }: Props) {
-	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 
 	function createClick() {
 		if (props.clickFunc) {

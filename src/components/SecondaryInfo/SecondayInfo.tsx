@@ -8,7 +8,7 @@ import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
 
 export function SecondayInfo() {
-	const [isMobile] = useMediaQuery('only screen and (max-width: 768px)')
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { weatherData, isLoading } = useWeatherContext()
 
 	return (
