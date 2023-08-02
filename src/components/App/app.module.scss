@@ -143,13 +143,18 @@
 		}
 	}
 
-	.error,
 	.mainInfo,
-	.forecast {
+	.forecast,
+	.error {
 		padding: 1.5rem;
 	}
 
 	.secondaryInfo {
 		padding: 0 1.5rem;
+	}
+
+	.forecast,
+	.error {
+		padding-bottom: 2.5rem;
 	}
 }
