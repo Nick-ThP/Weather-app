@@ -28,15 +28,6 @@ export function FavoritesBar(props: Props) {
 		return city.split(' ').map(word => word.substring(0, 1)).join('').substring(0, 3).toUpperCase()
 	}
 
-	const item = document.getElementById("hours");
-
-	if (item) {
-		window.addEventListener("wheel", function (e) {
-			if (e.deltaY > 0) item.scrollLeft += 100;
-			else item.scrollLeft -= 100;
-		});
-	}
-
 	return (
 		<ul>
 			<AnimatePresence custom={props.favoriteCities}>

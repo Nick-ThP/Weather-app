@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useWeatherContext } from "../../contexts/useWeatherContext";
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { createDateInfo } from '../../utils/date-formatting';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
@@ -10,6 +11,7 @@ import styles from './forecast.module.scss';
 export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
 	const { weatherData, isLoading } = useWeatherContext()
+	const scrollRef = useHorizontalScroll()
 
 	function toggleForecast() {
 		setIsForecastToggle(!isForecastToggle)
@@ -49,7 +51,7 @@ export function Forecast() {
 						</Button>
 					</div>
 					{isForecastToggle ? (
-						<div className={styles.hours}>
+						<div className={styles.hours} ref={scrollRef}>
 							{weatherData?.hourly.map((hour, idx) => (
 								<div className={styles.hourWithLine} key={idx}>
 									{idx > 0 && (
