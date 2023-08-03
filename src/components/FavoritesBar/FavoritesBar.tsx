@@ -29,7 +29,7 @@ export function FavoritesBar(props: Props) {
 
 	return (
 		<ul>
-			<AnimatePresence>
+			<AnimatePresence initial={false}>
 				{props.favoriteCities.map((favCity, idx) => (
 					<motion.li
 						key={favCity}
