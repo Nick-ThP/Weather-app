@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 ul {
-	@include flex-centering;
+	display: flex;
 	@include frosted-glass;
 	justify-content: flex-start;
 	flex-direction: column;

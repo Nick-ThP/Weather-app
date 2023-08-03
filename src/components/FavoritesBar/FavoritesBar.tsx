@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
 import { useWeatherContext } from '../../contexts/useWeatherContext';
 import { Button } from '../reuseables/Button/Button';
 import styles from './favorites-bar.module.scss';
@@ -10,6 +10,7 @@ type Props = {
 
 export function FavoritesBar(props: Props) {
 	const { city, setCity } = useWeatherContext()
+	const isPresent = useIsPresent();
 
 	function clickHandler(city: string) {
 		setCity(city)
@@ -29,15 +30,16 @@ export function FavoritesBar(props: Props) {
 
 	return (
 		<ul>
-			<AnimatePresence initial={false}>
+			<AnimatePresence>
 				{props.favoriteCities.map((favCity, idx) => (
 					<motion.li
 						key={favCity}
-						initial={{ opacity: 0, x: -30 }}
-						animate={{ opacity: 1, x: 0 }}
-						exit={{ opacity: 0, x: -30 }}
-						transition={{ duration: .5 }}
-						className={styles.individualButtonWrapper}
+						initial={{ scale: 0, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0, opacity: 0 }}
+						transition={{ type: "spring", stiffness: 900, damping: 40 }}
+						style={{ position: isPresent ? "static" : "absolute" }}
+						layout
 					>
 						<Button
 							isClicked={favCity === city}
@@ -51,6 +53,6 @@ export function FavoritesBar(props: Props) {
 					</motion.li>
 				))}
 			</AnimatePresence>
-		</ul>
+		</ul >
 	)
 }
