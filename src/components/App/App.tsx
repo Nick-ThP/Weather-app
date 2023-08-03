@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
@@ -15,11 +15,7 @@ import styles from './app.module.scss'
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [
-		'København',
-		'Aarhus',
-		'Odense',
-		'Aalborg',
-		'Esbjerg'
+
 	])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')

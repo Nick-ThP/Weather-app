@@ -13,27 +13,157 @@ body {
 	font-family: $sans-serif-font;
 }
 
-@media only screen and (max-width: 1600px) {
+
+
+
+
+@media only screen and (min-width: 6001px) {
 	html {
-		font-size: 15px;
+		font-size: 54px;
 	}
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 6000px) {
+	html {
+		font-size: 52px;
+	}
+}
+
+@media only screen and (max-width: 5600px) {
+	html {
+		font-size: 50px;
+	}
+}
+
+@media only screen and (max-width: 5400px) {
+	html {
+		font-size: 48px;
+	}
+}
+
+@media only screen and (max-width: 5200px) {
+	html {
+		font-size: 46px;
+	}
+}
+
+@media only screen and (max-width: 5000px) {
+	html {
+		font-size: 44px;
+	}
+}
+
+@media only screen and (max-width: 4800px) {
+	html {
+		font-size: 42px;
+	}
+}
+
+@media only screen and (max-width: 4600px) {
+	html {
+		font-size: 40px;
+	}
+}
+
+@media only screen and (max-width: 4400px) {
+	html {
+		font-size: 38px;
+	}
+}
+
+@media only screen and (max-width: 4200px) {
+	html {
+		font-size: 36px;
+	}
+}
+
+@media only screen and (max-width: 4000px) {
+	html {
+		font-size: 34px;
+	}
+}
+
+@media only screen and (max-width: 3800px) {
+	html {
+		font-size: 32px;
+	}
+}
+
+@media only screen and (max-width: 3600px) {
+	html {
+		font-size: 30px;
+	}
+}
+
+@media only screen and (max-width: 3400px) {
+	html {
+		font-size: 28px;
+	}
+}
+
+@media only screen and (max-width: 3200px) {
+	html {
+		font-size: 26px;
+	}
+}
+
+@media only screen and (max-width: 3000px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+@media only screen and (max-width: 2800px) {
+	html {
+		font-size: 22px;
+	}
+}
+
+@media only screen and (max-width: 2600px) {
+	html {
+		font-size: 20px;
+	}
+}
+
+@media only screen and (max-width: 2400px) {
+	html {
+		font-size: 19px;
+	}
+}
+
+@media only screen and (max-width: 2200px) {
+	html {
+		font-size: 18px;
+	}
+}
+
+@media only screen and (max-width: 2000px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media only screen and (max-width: 1800px) {
 	html {
 		font-size: 14px;
 	}
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1600px) {
 	html {
-		font-size: 13px;
+		font-size: 12px;
 	}
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1400px) {
 	html {
-		font-size: 12px;
+		font-size: 10px;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	html {
+		font-size: 8px;
 	}
 }
 

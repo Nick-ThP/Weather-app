@@ -62,6 +62,9 @@
 
 .mainInfo {
 	grid-area: box-1;
+	position: relative;
+	bottom: 0;
+	right: 0;
 	padding: 3rem 1rem 2rem 8rem;
 }
 
@@ -78,7 +81,7 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background-size: auto 2600px;
+		background-size: auto 5000px;
 		background-position: 50% 0%;
 		position: absolute;
 		height: auto;

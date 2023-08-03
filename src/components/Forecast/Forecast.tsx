@@ -2,15 +2,13 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useWeatherContext } from "../../contexts/useWeatherContext";
-import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { createDateInfo } from '../../utils/date-formatting';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
 import styles from './forecast.module.scss';
 
 export function Forecast() {
-	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
-	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
+	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
 	const { weatherData, isLoading } = useWeatherContext()
 
 	function toggleForecast() {
@@ -32,15 +30,6 @@ export function Forecast() {
 				<>
 					<div className={styles.buttons}>
 						<Button
-							isClicked={isForecastToggle}
-							clickFunc={toggleForecast}
-							type="toggle"
-							width="10.5rem"
-							mobileWidth="50%"
-						>
-							Next 48 hours
-						</Button>
-						<Button
 							isClicked={!isForecastToggle}
 							clickFunc={toggleForecast}
 							type="toggle"
@@ -49,13 +38,22 @@ export function Forecast() {
 						>
 							Next full week
 						</Button>
+						<Button
+							isClicked={isForecastToggle}
+							clickFunc={toggleForecast}
+							type="toggle"
+							width="10.5rem"
+							mobileWidth="50%"
+						>
+							Next 48 hours
+						</Button>
 					</div>
 					{isForecastToggle ? (
 						<div className={styles.hours}>
-							{weatherData?.hourly.filter((_, idx) => idx % 3 === 0).map((hour, idx) => (
+							{weatherData?.hourly.map((hour, idx) => (
 								<div className={styles.hourWithLine} key={idx}>
 									{idx > 0 && (
-										<Line type="date" midnightSplit={createDateInfo(hour.dt).time.length === 4 && Number(createDateInfo(hour.dt).time.substring(0, 1)) <= 2} />
+										<Line type="date" midnightSplit={createDateInfo(hour.dt).time === '0:00'} />
 									)}
 									<div className={styles.hour}>
 										<div>{createDateInfo(hour.dt).time}</div>
@@ -79,13 +77,13 @@ export function Forecast() {
 										<Line type="date" />
 									)}
 									<div className={styles.date}>
-										<div>{isMobile ? createDateInfo(date.dt).dateShort : createDateInfo(date.dt).dateFull}</div>
+										<div>{createDateInfo(date.dt).dateShort}</div>
 										<img
 											src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}
 											alt="current weather depiction"
 										/>
 										<div className={styles.temp}>
-											{`${weatherData?.daily[idx].temp.min.toString().substring(0, 2)}° / ${weatherData?.daily[idx].temp.max.toString().substring(0, 2)}°`}
+											{`${weatherData?.daily[idx].temp.max.toString().substring(0, 2)}° / ${weatherData?.daily[idx].temp.min.toString().substring(0, 2)}°`}
 										</div>
 										<div className={classNames(styles.rain, Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 && styles.rainHidden)}>
 											{`${Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 ? '0.0' : Number(weatherData?.daily[idx].pop?.toString().substring(0, 3))} mm`}

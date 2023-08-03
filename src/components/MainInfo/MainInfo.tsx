@@ -31,7 +31,7 @@ export function MainInfo(props: Props) {
 		if (props.favoriteCities.find(favCity => favCity === city)) {
 			props.setFavoriteCities(props.favoriteCities.filter(favCity => favCity !== city))
 		} else {
-			props.setFavoriteCities([...props.favoriteCities, city])
+			props.setFavoriteCities([...props.favoriteCities, city].sort())
 		}
 	}
 

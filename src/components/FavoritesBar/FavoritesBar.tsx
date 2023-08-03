@@ -28,9 +28,18 @@ export function FavoritesBar(props: Props) {
 		return city.split(' ').map(word => word.substring(0, 1)).join('').substring(0, 3).toUpperCase()
 	}
 
+	const item = document.getElementById("hours");
+
+	if (item) {
+		window.addEventListener("wheel", function (e) {
+			if (e.deltaY > 0) item.scrollLeft += 100;
+			else item.scrollLeft -= 100;
+		});
+	}
+
 	return (
 		<ul>
-			<AnimatePresence>
+			<AnimatePresence custom={props.favoriteCities}>
 				{props.favoriteCities.map((favCity, idx) => (
 					<motion.li
 						key={favCity}
@@ -38,7 +47,7 @@ export function FavoritesBar(props: Props) {
 						animate={{ scale: 1, opacity: 1 }}
 						exit={{ scale: 0, opacity: 0 }}
 						transition={{ type: "spring", stiffness: 900, damping: 40 }}
-						style={{ position: isPresent ? "static" : "absolute" }}
+						className={!isPresent ? styles.absolute : undefined}
 						layout
 					>
 						<Button
