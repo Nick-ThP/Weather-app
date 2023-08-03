@@ -1,14 +1,19 @@
 @import '../../utils/variables.scss';
 
-.container {
-	@include frosted-glass;
+ul {
 	@include flex-centering;
+	@include frosted-glass;
 	justify-content: flex-start;
 	flex-direction: column;
 	height: 100vh;
-	text-align: center;
-	list-style-type: none;
 	padding: 1rem 0;
 	margin: 0;
+	list-style-type: none;
 	gap: 1rem;
+}
+
+li {
+	@include flex-centering;
+	width: 100%;
+	text-align: center;
 }
