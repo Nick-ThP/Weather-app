@@ -9,6 +9,7 @@ import wind from '../../images/wind.png'
 import { createDateInfo } from "../../utils/date-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
+import { createTemperatureInfo } from "../../utils/temperature-formatting"
 
 interface Props {
 	favoriteCities: string[]
@@ -68,7 +69,9 @@ export function MainInfo(props: Props) {
 							</div>
 						</div>
 						<div className={styles.row}>
-							<div className={styles.temp}>{`${weatherData?.current.temp.toString().substring(0, 2)}°`}</div>
+							{weatherData?.current.temp && (
+								<div className={styles.temp}>{`${createTemperatureInfo(weatherData?.current.temp)}°`}</div>
+							)}
 							{weatherData?.current.weather[0].icon && (
 								<img
 									className={styles.dynamicIcon}

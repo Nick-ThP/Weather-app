@@ -7,6 +7,7 @@ import { createDateInfo } from '../../utils/date-formatting';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
 import styles from './forecast.module.scss';
+import { createTemperatureInfo } from '../../utils/temperature-formatting';
 
 export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
@@ -63,7 +64,7 @@ export function Forecast() {
 											src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
 											alt="current weather depiction"
 										/>
-										<div className={styles.temp}>{`${weatherData?.hourly[idx].temp.toString().substring(0, 2)}°`}</div>
+										<div className={styles.temp}>{`${createTemperatureInfo(weatherData?.hourly[idx].temp)}°`}</div>
 										<div className={classNames(styles.rain, Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) === 0.0 && styles.rainHidden)}>
 											{`${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) === 0.0 ? '0.0' : Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
 										</div>
@@ -85,7 +86,7 @@ export function Forecast() {
 											alt="current weather depiction"
 										/>
 										<div className={styles.temp}>
-											{`${weatherData?.daily[idx].temp.max.toString().substring(0, 2)}° / ${weatherData?.daily[idx].temp.min.toString().substring(0, 2)}°`}
+											{`${createTemperatureInfo(weatherData?.daily[idx].temp.max)}° / ${createTemperatureInfo(weatherData?.daily[idx].temp.min)}°`}
 										</div>
 										<div className={classNames(styles.rain, Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 && styles.rainHidden)}>
 											{`${Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 ? '0.0' : Number(weatherData?.daily[idx].pop?.toString().substring(0, 3))} mm`}

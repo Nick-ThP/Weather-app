@@ -3,7 +3,7 @@
 button {
 	@include flex-centering;
 	cursor: pointer;
-	box-shadow: 1px 1px 3px rgb(0, 0, 0, .75);
+	box-shadow: 1px 1px 3px rgb(0, 0, 0, .2);
 	color: $basis-color;
 	opacity: 1;
 	background-color: black;
@@ -39,6 +39,7 @@ button {
 	.rectangular {
 		border-radius: 12px 0 0 0;
 		padding: 1rem;
+		box-shadow: 1px 1px 3px rgb(0, 0, 0, .5);
 
 		&:last-child {
 			border-radius: 0 12px 0 0;

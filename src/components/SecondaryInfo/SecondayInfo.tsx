@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { useMediaQuery } from "../../hooks/useMediaQuery"
 import { createDateInfo } from "../../utils/date-formatting"
+import { createTemperatureInfo } from "../../utils/temperature-formatting"
 import { createWindInfo } from "../../utils/wind-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
@@ -23,9 +24,11 @@ export function SecondayInfo() {
 								<div>
 									Feels like
 								</div>
-								<div>
-									{`${weatherData?.current.feels_like.toString().substring(0, 2)}° C`}
-								</div>
+								{weatherData?.current.feels_like && (
+									<div>
+										{`${createTemperatureInfo(weatherData?.current.feels_like)}° C`}
+									</div>
+								)}
 							</div>
 						</div>
 						<div className={styles.row}>
@@ -108,9 +111,11 @@ export function SecondayInfo() {
 								<div>
 									Dew point
 								</div>
-								<div>
-									{`${weatherData?.current.dew_point.toString().substring(0, 2)}° C`}
-								</div>
+								{weatherData?.current.dew_point && (
+									<div>
+										{`${weatherData?.current.dew_point.toString().substring(0, 2)}° C`}
+									</div>
+								)}
 							</div>
 						</div>
 						<div className={styles.row}>

@@ -24,7 +24,7 @@ export function App() {
 			{isLoading && isMobile ? (
 				<MobileLoader />
 			) : (
-				<div className={classNames(styles.container, error && styles.errorOccured)}>
+				<div className={classNames(styles.container, error && styles.errorOccured, favoriteCities.length === 0 && styles.containerWithoutFavorites, error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites)}>
 					<div className={styles.title}>
 						<h1>Simple Weather</h1>
 						<p>A Simplified Source for Weather Information</p>
@@ -32,15 +32,17 @@ export function App() {
 					<div className={styles.search}>
 						<SearchBar />
 					</div>
-					<div className={classNames(styles.favorites, isFavMobileOpen
-						? styles.favoritesShowOnMobile
-						: styles.favoritesHideOnMobile
-					)}>
-						<FavoritesBar
-							favoriteCities={favoriteCities}
-							toggleShow={setIsFavMobileOpen}
-						/>
-					</div>
+					{(favoriteCities.length > 0 || isMobile) && (
+						<div className={classNames(styles.favorites, isFavMobileOpen
+							? styles.favoritesShowOnMobile
+							: styles.favoritesHideOnMobile
+						)}>
+							<FavoritesBar
+								favoriteCities={favoriteCities}
+								toggleShow={setIsFavMobileOpen}
+							/>
+						</div>
+					)}
 					<FavoritesStar
 						show={isFavMobileOpen}
 						toggleShow={setIsFavMobileOpen}
