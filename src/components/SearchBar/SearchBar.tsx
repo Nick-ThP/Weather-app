@@ -63,7 +63,7 @@ export function SearchBar() {
 				onKeyUp={(e) => handleChooseCity(e)}
 			/>
 			<datalist id="fuzzyList">
-				{results.map((cityObj: City, idx: number) => (
+				{results.map((cityObj, idx) => (
 					<option key={idx} value={cityObj.city} />
 				))}
 			</datalist>
