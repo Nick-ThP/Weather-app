@@ -83,6 +83,19 @@ h2 {
 	font-weight: bold;
 }
 
+@media only screen and (max-width: 1500px) {
+
+	.temp {
+		margin-bottom: 0;
+		margin-top: -2rem;
+	}
+
+	.dynamicIcon {
+		margin-bottom: 0;
+		margin-top: -2rem;
+	}
+}
+
 @media only screen and (max-width: 1000px) {
 
 	.wrapper {
@@ -122,11 +135,14 @@ h2 {
 	}
 
 	.temp {
+		margin-top: 0;
 		font-size: 8rem;
+		margin-bottom: -.5rem;
 	}
 
 	.dynamicIcon {
 		margin-top: 1rem;
 		margin-right: -1.2rem;
+		margin-bottom: -.5rem;
 	}
 }
