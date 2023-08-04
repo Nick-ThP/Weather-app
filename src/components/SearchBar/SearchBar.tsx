@@ -12,7 +12,9 @@ export function SearchBar() {
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		const searchTimeout = setTimeout(() => setFuseQuery(input), 200);
+		const searchTimeout = setTimeout(() => {
+			setFuseQuery(input.charAt(0).toUpperCase() + input.slice(1))
+		}, 200);
 
 		return () => clearTimeout(searchTimeout);
 	}, [input])
@@ -61,7 +63,7 @@ export function SearchBar() {
 				onKeyUp={(e) => handleChooseCity(e)}
 			/>
 			<datalist id="fuzzyList">
-				{results.map((cityObj: City, idx) => (
+				{results.map((cityObj: City, idx: number) => (
 					<option key={idx} value={cityObj.city} />
 				))}
 			</datalist>
