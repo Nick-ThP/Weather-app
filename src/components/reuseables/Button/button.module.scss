@@ -3,7 +3,7 @@
 button {
 	@include flex-centering;
 	cursor: pointer;
-	box-shadow: 1px 1px 3px rgb(0, 0, 0, .2);
+	box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
 	color: $basis-color;
 	opacity: 1;
 	background-color: black;
@@ -17,7 +17,7 @@ button {
 }
 
 .rectangular {
-	border-radius: 12px;
+	border-radius: $border-radius;
 	padding: 1rem;
 }
 
@@ -37,12 +37,11 @@ button {
 @media only screen and (max-width: 1000px) {
 
 	.rectangular {
-		border-radius: 12px 0 0 0;
+		border-radius: .666rem 0 0 0;
 		padding: 1rem;
-		box-shadow: 1px 1px 3px rgb(0, 0, 0, .5);
 
 		&:last-child {
-			border-radius: 0 12px 0 0;
+			border-radius: 0 .666rem 0 0;
 		}
 	}
 }

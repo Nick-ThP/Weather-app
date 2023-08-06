@@ -42,7 +42,7 @@ h2 {
 .star {
 	height: 1.8rem;
 	aspect-ratio: 1 / 1;
-	margin: .5px 0 1rem 0;
+	margin-bottom: 1.1rem;
 	transition: .3s;
 	cursor: pointer;
 
@@ -107,6 +107,10 @@ h2 {
 		padding: 0;
 		align-items: stretch;
 
+		&:first-child {
+			padding-top: 1rem;
+		}
+
 		&:last-child {
 			margin: .5rem 0;
 			gap: 1.5rem;
@@ -115,10 +119,6 @@ h2 {
 
 	.row {
 		justify-content: space-between;
-
-		&:first-child {
-			margin-top: 1rem;
-		}
 	}
 
 	h2 {

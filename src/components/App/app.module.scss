@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .container {
-	background: center / cover no-repeat url(../../images/background.jpg);
+	background: center / cover no-repeat url(../../images/background.jpg) fixed;
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -106,14 +106,13 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background-size: auto 6000px;
 		background-position: 50% 0%;
 		position: absolute;
 		height: auto;
 		display: grid;
 		padding: 0;
 		grid-template-columns:
-			100vw;
+			100%;
 		grid-template-rows:
 			$title-height-mobile $search-height repeat(3, auto);
 		grid-template-areas:
@@ -127,7 +126,7 @@
 	.errorOccured {
 		height: 100vh;
 		grid-template-columns:
-			100vw;
+			100%;
 		grid-template-rows:
 			$title-height-mobile $search-height auto;
 		grid-template-areas:

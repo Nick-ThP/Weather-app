@@ -50,7 +50,7 @@
 
 	&::-webkit-scrollbar-thumb {
 		background-color: rgb(0, 0, 0, .1);
-		border-radius: 12px;
+		border-radius: $border-radius;
 	}
 
 	&::-webkit-scrollbar-thumb:hover {

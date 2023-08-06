@@ -4,15 +4,15 @@
 }
 
 .box {
-	border-left: 2px solid rgb(0, 0, 0, .1);
+	border-left: .2rem solid rgb(0, 0, 0, .1);
 }
 
 .date {
 	height: 75%;
-	border-left: 1px solid rgb(0, 0, 0, .1);
+	border-left: .1rem solid rgb(0, 0, 0, .1);
 
 	&MidnightSplit {
-		border-left: 1.5px solid rgb(0, 0, 0, .5);
+		border-left: .15rem solid rgb(0, 0, 0, .5);
 	}
 }
 
@@ -25,14 +25,14 @@
 	}
 
 	.box {
-		border-bottom: 2px solid rgb(0, 0, 0, .1);
+		border-bottom: .2rem solid rgb(0, 0, 0, .1);
 	}
 
 	.date {
-		border-bottom: 1px solid rgb(0, 0, 0, .1);
+		border-bottom: .1rem solid rgb(0, 0, 0, .1);
 
 		&MidnightSplit {
-			border-bottom: 1.5px solid rgb(0, 0, 0, .5);
+			border-bottom: .15rem solid rgb(0, 0, 0, .5);
 		}
 	}
 }
