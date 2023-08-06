@@ -20,3 +20,8 @@
 	background-color: $background-color;
 	backdrop-filter: blur(100px);
 }
+
+.container > div {
+	display: flex;
+	margin: 0 auto;
+}
