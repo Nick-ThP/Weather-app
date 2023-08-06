@@ -5,8 +5,8 @@
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
-	background: center / cover no-repeat url('../../images/background.jpg');
+	height: 100%;
+	background: center / cover no-repeat url('../../images/background.jpg') fixed;
 	@include flex-centering;
 }
 
@@ -19,9 +19,4 @@
 	height: 100vh;
 	background-color: $background-color;
 	backdrop-filter: blur(100px);
-}
-
-.container > div {
-	display: flex;
-	margin: 0 auto 0 10vh;
 }
