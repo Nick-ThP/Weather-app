@@ -62,6 +62,7 @@
 	justify-content: flex-end;
 	flex-direction: column;
 	grid-area: title;
+	text-align: center;
 
 	h1 {
 		font-family: $serif-font;
@@ -110,6 +111,7 @@
 		position: absolute;
 		height: auto;
 		display: grid;
+		padding: 0;
 		grid-template-columns:
 			100vw;
 		grid-template-rows:

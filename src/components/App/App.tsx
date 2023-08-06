@@ -32,21 +32,23 @@ export function App() {
 					<div className={styles.search}>
 						<SearchBar />
 					</div>
-					{(favoriteCities.length > 0 || isMobile) && (
-						<div className={classNames(styles.favorites, isFavMobileOpen
-							? styles.favoritesShowOnMobile
-							: styles.favoritesHideOnMobile
-						)}>
-							<FavoritesBar
-								favoriteCities={favoriteCities}
+					{(favoriteCities.length > 0) && (
+						<>
+							<div className={classNames(styles.favorites, isFavMobileOpen
+								? styles.favoritesShowOnMobile
+								: styles.favoritesHideOnMobile
+							)}>
+								<FavoritesBar
+									favoriteCities={favoriteCities}
+									toggleShow={setIsFavMobileOpen}
+								/>
+							</div>
+							<FavoritesStar
+								show={isFavMobileOpen}
 								toggleShow={setIsFavMobileOpen}
 							/>
-						</div>
+						</>
 					)}
-					<FavoritesStar
-						show={isFavMobileOpen}
-						toggleShow={setIsFavMobileOpen}
-					/>
 					{error ? (
 						<div className={styles.error}>
 							<Box error={true}>
