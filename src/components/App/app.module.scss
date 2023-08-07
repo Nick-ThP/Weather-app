@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .container {
-	background: center / cover no-repeat url(../../images/background.jpg) fixed;
+	background: center / cover no-repeat url(../../images/background.jpg);
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -68,6 +68,10 @@
 		font-family: $serif-font;
 		font-size: 6rem;
 		margin: 0;
+		background-clip: text;
+		background: -webkit-linear-gradient(black, $background-color);
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
 	}
 
 	p {
@@ -106,6 +110,7 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
+		background-size: auto 5000px;
 		background-position: 50% 0%;
 		position: absolute;
 		height: auto;
@@ -136,16 +141,12 @@
 	}
 
 	.title {
+		height: auto;
 		justify-content: center;
 
 		h1 {
-			font-size: 3.5rem;
-			margin: 2rem 0 0 0;
-		}
-
-		p {
-			font-size: 1.5rem;
-			margin: .5rem 0 1.75rem 0;
+			font-size: 3rem;
+			padding: 1.5rem;
 		}
 	}
 

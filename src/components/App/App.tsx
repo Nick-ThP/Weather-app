@@ -27,7 +27,9 @@ export function App() {
 				<div className={classNames(styles.container, error && styles.errorOccured, favoriteCities.length === 0 && styles.containerWithoutFavorites, error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites)}>
 					<div className={styles.title}>
 						<h1>Simple Weather</h1>
-						<p>A Simplified Source for Weather Information</p>
+						{!isMobile && (
+							<p>A Simplified Source for Weather Information</p>
+						)}
 					</div>
 					<div className={styles.search}>
 						<SearchBar />

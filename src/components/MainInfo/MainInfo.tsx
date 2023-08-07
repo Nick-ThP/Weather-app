@@ -10,6 +10,7 @@ import { createDateInfo } from "../../utils/date-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
 import { createTemperatureInfo } from "../../utils/temperature-formatting"
+import { useMediaQuery } from "../../hooks/useMediaQuery"
 
 interface Props {
 	favoriteCities: string[]
@@ -18,6 +19,7 @@ interface Props {
 
 export function MainInfo(props: Props) {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false)
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { city, weatherData, isLoading } = useWeatherContext()
 
 	useLayoutEffect(() => {
@@ -83,7 +85,7 @@ export function MainInfo(props: Props) {
 					</>
 				)}
 			</div>
-			<Line type="box" />
+			{!isMobile && <Line type="box" />}
 			<div className={styles.column}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
