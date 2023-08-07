@@ -58,15 +58,15 @@
 }
 
 .title {
+	grid-area: title;
 	@include flex-centering;
 	justify-content: flex-end;
 	flex-direction: column;
-	grid-area: title;
 	text-align: center;
 
 	h1 {
 		font-family: $serif-font;
-		font-size: 6rem;
+		font-size: 6.5rem;
 		margin: 0;
 		background-clip: text;
 		background: -webkit-linear-gradient(black, $background-color);
@@ -76,7 +76,7 @@
 
 	p {
 		font-family: $cursive-font;
-		font-size: 2rem;
+		font-size: 2.25rem;
 		margin: .5rem 0 2rem 0;
 	}
 }
@@ -91,9 +91,6 @@
 
 .mainInfo {
 	grid-area: box-1;
-	position: relative;
-	bottom: 0;
-	right: 0;
 	padding: 3rem 1rem 2rem 8rem;
 }
 
@@ -111,7 +108,7 @@
 
 	.container {
 		background-size: auto 5000px;
-		background-position: 50% 0%;
+		background-position: 10% 0%;
 		position: absolute;
 		height: auto;
 		display: grid;
@@ -141,7 +138,6 @@
 	}
 
 	.title {
-		height: auto;
 		justify-content: center;
 
 		h1 {

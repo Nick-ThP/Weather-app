@@ -65,7 +65,7 @@
 
 .dates {
 	justify-content: center;
-	gap: 3.5rem;
+	gap: 3.4rem;
 }
 
 .hourWithLine {
@@ -75,7 +75,7 @@
 
 .dateWithLine {
 	display: flex;
-	gap: 3.5rem;
+	gap: 3.4rem;
 }
 
 .hour,
@@ -137,15 +137,15 @@
 		display: grid;
 		text-align: center;
 		grid-template-columns: 25% repeat(2, 1fr) 15%;
+
+		img {
+			display: flex;
+			margin: 0 auto;
+		}
 	}
 
 	.hour {
 		grid-template-columns: repeat(4, 1fr);
-	}
-
-	.date > img {
-		display: flex;
-		margin: 0 auto;
 	}
 
 	.rain {
