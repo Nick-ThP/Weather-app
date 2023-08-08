@@ -1,9 +1,9 @@
 @import '../../utils/variables.scss';
 
 .container {
-	background: center / cover no-repeat url(../../images/background.jpg);
+	background: center / cover no-repeat url(../../images/background.jpg) fixed;
 	overflow: hidden;
-	height: 100vh;
+	height: 100svh;
 	width: 100vw;
 	display: grid;
 	grid-template-columns:
@@ -107,7 +107,6 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background-size: auto 5000px;
 		background-position: 10% 0%;
 		position: absolute;
 		height: auto;
