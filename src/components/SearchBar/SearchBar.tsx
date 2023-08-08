@@ -14,7 +14,7 @@ export function SearchBar() {
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => {
 			setFuseQuery(input.charAt(0).toUpperCase() + input.slice(1))
-		}, 200);
+		}, 150);
 
 		return () => clearTimeout(searchTimeout);
 	}, [input])
