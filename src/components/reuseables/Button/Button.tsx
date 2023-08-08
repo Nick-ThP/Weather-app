@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { useMediaQuery } from '../../../hooks/useMediaQuery'
 import styles from './button.module.scss'
 
-type Props = {
+export type Props = {
 	children: ReactNode
 	isClicked?: boolean
 	clickFunc?: (val?: unknown) => void
@@ -40,6 +40,7 @@ export function Button({
 			className={classNames(props.isClicked && styles.clicked, styles[shape])}
 			onClick={createClick}
 			style={{ width: isMobile ? mobileWidth : width }}
+			data-testid={isMobile ? 'mobile-button' : 'desktop-button'}
 		>
 			{props.children}
 		</button>
