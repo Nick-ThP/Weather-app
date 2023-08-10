@@ -68,7 +68,8 @@ export function SecondayInfo() {
 										datasets: [
 											{
 												label: 'Rainfall this hour (mm)',
-												data: weatherData?.minutely.map((_, idx) => idx),
+												// data: weatherData?.minutely.map((_, idx) => idx),
+												data: weatherData?.minutely.map(time => time.precipitation),
 												backgroundColor: "#ec6e4c",
 											},
 										],
