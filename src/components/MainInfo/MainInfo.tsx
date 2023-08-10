@@ -3,14 +3,17 @@ import { useLayoutEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useWeatherContext } from "../../contexts/useWeatherContext"
+import { useMediaQuery } from "../../hooks/useMediaQuery"
 import rain from '../../images/rain.png'
 import sun from '../../images/sun.png'
+import sunrise from '../../images/sunrise.png'
+import sunset from '../../images/sunset.png'
 import wind from '../../images/wind.png'
 import { createDateInfo } from "../../utils/date-formatting"
+import { createTemperatureInfo } from "../../utils/temperature-formatting"
 import { Line } from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
-import { createTemperatureInfo } from "../../utils/temperature-formatting"
-import { useMediaQuery } from "../../hooks/useMediaQuery"
+
 
 interface Props {
 	favoriteCities: string[]
@@ -40,7 +43,7 @@ export function MainInfo(props: Props) {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={classNames(styles.column, !isLoading && styles.columnFirst)}>
+			<div className={classNames(styles.column, (!isMobile && !isLoading) && styles.columnFirst)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
@@ -85,8 +88,8 @@ export function MainInfo(props: Props) {
 					</>
 				)}
 			</div>
-			{!isMobile && <Line type="box" />}
-			<div className={styles.column}>
+			<Line type="box" />
+			<div className={classNames(styles.column, (!isMobile && !isLoading) && styles.columnSecond)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
@@ -120,8 +123,27 @@ export function MainInfo(props: Props) {
 									Rain this hour
 								</div>
 								<div>
-									{weatherData?.hourly[0].pop ? Number(weatherData?.hourly[0].pop?.toString().substring(0, 3)) : 0} mm
+									{weatherData?.current.rain ? Number(weatherData?.current.rain?.["1h"].toString().substring(0, 3)) : 0} mm
 								</div>
+							</div>
+						</div>
+						<Line type="box" horizontalOnDesktop />
+						<div className={styles.sunRow}>
+							<div className={styles.sunInfo}>
+								<img className={styles.staticIcon} src={sunrise} alt="sunrise" />
+								{weatherData?.current.sunrise && (
+									<div>
+										{createDateInfo(weatherData?.current.sunrise).preciseTime}
+									</div>
+								)}
+							</div>
+							<div className={styles.sunInfo}>
+								<img className={styles.staticIcon} src={sunset} alt="sunset" />
+								{weatherData?.current.sunset && (
+									<div>
+										{createDateInfo(weatherData?.current.sunset).preciseTime}
+									</div>
+								)}
 							</div>
 						</div>
 					</>

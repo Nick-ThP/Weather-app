@@ -14,6 +14,7 @@ const WeatherContext = createContext<IWeatherContext>({
 	setCity() { },
 })
 
+
 export function useWeatherContext() {
 	let context = useContext(WeatherContext)
 

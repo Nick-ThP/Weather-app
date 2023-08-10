@@ -8,8 +8,14 @@ import styles from './search-bar.module.scss';
 export function SearchBar() {
 	const [fuseQuery, setFuseQuery] = useState('')
 	const [input, setInput] = useState('')
-	const { setCity, setError } = useWeatherContext()
+	const { city, setCity, setError } = useWeatherContext()
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		if (city !== input) {
+			setInput('')
+		}
+	}, [city]);
 
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => {

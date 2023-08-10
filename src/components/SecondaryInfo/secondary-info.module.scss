@@ -20,6 +20,15 @@
 	@include box-skeleton;
 }
 
+.chart {
+	height: 100%;
+}
+
+.staticIcon {
+	height: 2.5rem;
+	aspect-ratio: 1 / 1;
+}
+
 .information {
 	width: 100%;
 	font-size: 1rem;

@@ -4,10 +4,10 @@ import Skeleton from 'react-loading-skeleton';
 import { useWeatherContext } from "../../contexts/useWeatherContext";
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { createDateInfo } from '../../utils/date-formatting';
+import { createTemperatureInfo } from '../../utils/temperature-formatting';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
 import styles from './forecast.module.scss';
-import { createTemperatureInfo } from '../../utils/temperature-formatting';
 
 export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
@@ -65,8 +65,8 @@ export function Forecast() {
 											alt="current weather depiction"
 										/>
 										<div className={styles.temp}>{`${createTemperatureInfo(weatherData?.hourly[idx].temp)}°`}</div>
-										<div className={classNames(styles.rain, Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) === 0.0 && styles.rainHidden)}>
-											{`${Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3)) === 0.0 ? '0.0' : Number(weatherData?.hourly[idx].pop?.toString().substring(0, 3))} mm`}
+										<div className={classNames(styles.rain, !weatherData?.hourly[idx].rain && styles.rainHidden)}>
+											{`${!weatherData?.hourly[idx].rain?.['1h'] ? '0.0' : Number(weatherData?.hourly[idx].rain?.['1h'].toString().split('.').pop())} mm`}
 										</div>
 									</div>
 								</div>
@@ -88,8 +88,8 @@ export function Forecast() {
 										<div className={styles.temp}>
 											{`${createTemperatureInfo(weatherData?.daily[idx].temp.max)}° / ${createTemperatureInfo(weatherData?.daily[idx].temp.min)}°`}
 										</div>
-										<div className={classNames(styles.rain, Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 && styles.rainHidden)}>
-											{`${Number(weatherData?.daily[idx].pop?.toString().substring(0, 3)) === 0.0 ? '0.0' : Number(weatherData?.daily[idx].pop?.toString().substring(0, 3))} mm`}
+										<div className={classNames(styles.rain, !weatherData?.daily[idx].rain && styles.rainHidden)}>
+											{`${!weatherData?.daily[idx].rain ? '0.0' : Number(weatherData?.daily[idx].rain?.toString().substring(0, 3))} mm`}
 										</div>
 									</div>
 								</div>

@@ -13,6 +13,7 @@ export interface IWeatherData {
 	timezone: string;
 	timezone_offset: number;
 	current: Current;
+	minutely: Minutely[];
 	hourly: Current[];
 	daily: Daily[];
 }
@@ -34,11 +35,9 @@ export interface Current {
 	wind_gust: number;
 	weather: Weather[];
 	pop?: number;
-	rain?: Rain;
-}
-
-export interface Rain {
-	"1h": number;
+	rain?: {
+		'1h': number
+	}
 }
 
 export interface Weather {
@@ -53,7 +52,6 @@ export enum Description {
 	ClearSky = "clear sky",
 	FewClouds = "few clouds",
 	LightRain = "light rain",
-	ModerateRain = "moderate rain",
 	OvercastClouds = "overcast clouds",
 	ScatteredClouds = "scattered clouds",
 }
@@ -82,8 +80,8 @@ export interface Daily {
 	weather: Weather[];
 	clouds: number;
 	pop: number;
-	rain?: number;
 	uvi: number;
+	rain?: number;
 }
 
 export interface FeelsLike {
@@ -100,4 +98,9 @@ export interface Temp {
 	night: number;
 	eve: number;
 	morn: number;
+}
+
+export interface Minutely {
+	dt: number;
+	precipitation: number;
 }

@@ -4,7 +4,14 @@
 }
 
 .box {
-	border-left: .2rem solid rgb(0, 0, 0, .1);
+	border-left: .15rem solid rgb(0, 0, 0, .1);
+}
+
+.horizontalOnDesktop {
+	height: 0;
+	border-left: none;
+	width: 100%;
+	border-bottom: .15rem solid rgb(0, 0, 0, .1);
 }
 
 .date {
@@ -12,7 +19,7 @@
 	border-left: .1rem solid rgb(0, 0, 0, .1);
 
 	&MidnightSplit {
-		border-left: .15rem solid rgb(0, 0, 0, .5);
+		border-left: .1rem solid rgb(0, 0, 0, .5);
 	}
 }
 
