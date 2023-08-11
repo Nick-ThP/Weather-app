@@ -5,11 +5,17 @@ import { useWeatherContext } from "../../contexts/useWeatherContext";
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { createDateInfo } from '../../utils/date-formatting';
 import { createTemperatureInfo } from '../../utils/temperature-formatting';
+import { TimeInfo } from '../App/App';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
 import styles from './forecast.module.scss';
 
-export function Forecast() {
+type Props = {
+	futureTimeInterval: TimeInfo | null
+	setFutureTimeInterval: (val: TimeInfo | null) => void
+}
+
+export function Forecast(props: Props) {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
 	const { weatherData, isLoading } = useWeatherContext()
 	const scrollRef = useHorizontalScroll()
@@ -53,12 +59,12 @@ export function Forecast() {
 					</div>
 					{isForecastToggle ? (
 						<div className={styles.hours} ref={scrollRef}>
-							{weatherData?.hourly.map((hour, idx) => (
+							{weatherData?.hourly.filter((hour, idx) => idx !== 0).map((hour, idx) => (
 								<div className={styles.hourWithLine} key={idx}>
 									{idx > 0 && (
 										<Line type="date" midnightSplit={createDateInfo(hour.dt).time === '0:00'} />
 									)}
-									<div className={styles.hour}>
+									<div className={classNames(styles.hour, props.futureTimeInterval?.dt === hour.dt && styles.hourSelected)} onClick={() => props.setFutureTimeInterval(props.futureTimeInterval?.dt === hour.dt ? null : { type: 'hour', dt: hour.dt })}>
 										<div>{createDateInfo(hour.dt).time}</div>
 										<img
 											src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
@@ -79,7 +85,7 @@ export function Forecast() {
 									{idx > 0 && (
 										<Line type="date" />
 									)}
-									<div className={styles.date}>
+									<div className={classNames(styles.date, props.futureTimeInterval?.dt === date.dt && styles.hourSelected)} onClick={() => props.setFutureTimeInterval(props.futureTimeInterval?.dt === date.dt ? null : { type: 'date', dt: date.dt })}>
 										<div>{createDateInfo(date.dt).dateShort}</div>
 										<img
 											src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}

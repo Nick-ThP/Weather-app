@@ -70,6 +70,27 @@ h2 {
 	}
 }
 
+.currentDate {
+	display: flex;
+	gap: 1rem;
+}
+
+.refreshSpan {
+	display: flex;
+	gap: .3rem;
+}
+
+.refreshIcon {
+	height: 1.5rem;
+	margin-top: -.2rem;
+	aspect-ratio: 1 / 1;
+	cursor: pointer;
+
+	&:hover {
+		opacity: .5;
+	}
+}
+
 .dynamicIcon {
 	height: 6rem;
 	margin-left: -1.5rem;

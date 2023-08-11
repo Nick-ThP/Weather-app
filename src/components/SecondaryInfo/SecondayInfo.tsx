@@ -15,11 +15,17 @@ import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { createDateInfo } from "../../utils/date-formatting"
 import { createTemperatureInfo } from "../../utils/temperature-formatting"
 import { createWindInfo } from "../../utils/wind-formatting"
+import { TimeInfo } from '../App/App'
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
+import { Button } from '../reuseables/Button/Button'
 
+type Props = {
+	futureTimeInterval: TimeInfo | null
+	setFutureTimeInterval: (val: TimeInfo | null) => void
+}
 
-export function SecondayInfo() {
+export function SecondayInfo(props: Props) {
 	const { weatherData, isLoading } = useWeatherContext()
 
 	ChartJS.register(
@@ -40,43 +46,58 @@ export function SecondayInfo() {
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
 					<>
-						<div className={styles.chart}>
-							{weatherData?.current.temp && (
-								<Bar
-									redraw
-									options={{
-										responsive: true,
-										animation: {
-											duration: 700,
-											easing: 'easeInOutSine',
-										},
-										plugins: {
-											legend: {
-												labels: {
-													font: {
-														size: 16,
-														family: "'Cabin', sans-serif",
-														style: 'normal'
-													}
+						{props.futureTimeInterval ? (
+							<div className={styles.futureMessage}>
+								<div>
+									You have currently selected a future time interval.
+									Please click below to return to the current hour interval.
+								</div>
+								<Button
+									type="standard"
+									clickFunc={() => props.setFutureTimeInterval(null)}
+								>
+									Return
+								</Button>
+							</div>
+						) : (
+
+							<div className={styles.chart}>
+								{weatherData?.current.temp && (
+									<Bar
+										options={{
+											responsive: true,
+											animation: {
+												duration: 700,
+												easing: 'easeInOutSine',
+											},
+											plugins: {
+												legend: {
+													labels: {
+														font: {
+															size: 16,
+															family: "'Cabin', sans-serif",
+															style: 'normal'
+														}
+													},
+													position: 'top' as const,
 												},
-												position: 'top' as const,
 											},
-										},
-									}}
-									data={{
-										labels: weatherData?.minutely.map(time => createDateInfo(time.dt).preciseTime),
-										datasets: [
-											{
-												label: 'Rainfall this hour (mm)',
-												// data: weatherData?.minutely.map((_, idx) => idx),
-												data: weatherData?.minutely.map(time => time.precipitation),
-												backgroundColor: "#ec6e4c",
-											},
-										],
-									}}
-								/>
-							)}
-						</div>
+										}}
+										data={{
+											labels: weatherData?.minutely.map(time => createDateInfo(time.dt).preciseTime),
+											datasets: [
+												{
+													label: 'Rainfall this hour (mm)',
+													// data: weatherData?.minutely.map((_, idx) => idx),
+													data: weatherData?.minutely.map(time => time.precipitation),
+													backgroundColor: "#ec6e4c",
+												},
+											],
+										}}
+									/>
+								)}
+							</div>
+						)}
 					</>
 				)}
 			</div>

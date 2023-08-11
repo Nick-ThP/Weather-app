@@ -81,8 +81,22 @@
 .hour,
 .date {
 	@include flex-centering;
+	box-sizing: revert;
 	flex-direction: column;
 	font-size: 1rem;
+	cursor: pointer;
+	padding-top: .2rem;
+	opacity: .9;
+
+	&:hover {
+		opacity: .5;
+	}
+
+	&Selected {
+		opacity: 1;
+		padding-top: 0;
+		border-top: .2rem solid $accent-color;
+	}
 }
 
 .rain {
@@ -127,8 +141,9 @@
 		gap: 1rem;
 	}
 
-	.date,
-	.hour {
+	.hour,
+	.date {
+		border-top: none;
 		flex-direction: row;
 		justify-content: space-around;
 		padding: 0 1rem;
@@ -141,6 +156,11 @@
 		img {
 			display: flex;
 			margin: 0 auto;
+		}
+
+		&Selected {
+			padding-right: .5rem;
+			border-right: .5rem solid $accent-color;
 		}
 	}
 

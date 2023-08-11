@@ -5,6 +5,7 @@ export interface IWeatherContext {
 	error: string | null
 	setError: (value: string | null) => void
 	setCity: (value: string) => void
+	refresh: () => void
 }
 
 export interface IWeatherData {

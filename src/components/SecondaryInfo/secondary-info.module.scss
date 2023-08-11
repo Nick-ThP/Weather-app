@@ -20,6 +20,17 @@
 	@include box-skeleton;
 }
 
+.futureMessage {
+	@include flex-centering;
+	flex-direction: column;
+	gap: 2rem;
+
+	&:first-child {
+		text-align: center;
+		font-weight: bold;
+	}
+}
+
 .chart {
 	height: 100%;
 }

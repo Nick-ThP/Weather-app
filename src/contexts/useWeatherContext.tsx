@@ -12,6 +12,7 @@ const WeatherContext = createContext<IWeatherContext>({
 	error: null,
 	setError() { },
 	setCity() { },
+ 	refresh() { }
 })
 
 
@@ -76,6 +77,8 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		executeApiRequest()
 	}, [executeApiRequest])
 
+	const refresh = executeApiRequest
+
 	const contextData: IWeatherContext = {
 		weatherData,
 		city,
@@ -83,6 +86,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		error,
 		setError,
 		setCity,
+		refresh
 	}
 
 	return (
