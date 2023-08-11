@@ -7,7 +7,6 @@
 .column {
 	@include box-column;
 	gap: 0rem;
-	max-width: 50%;
 
 	&Justification {
 		justify-content: space-around;
@@ -46,10 +45,9 @@
 }
 
 .chart {
-	flex: 1;
+	@include flex-centering;
 	height: 100%;
-	max-width: 100%;
-	overflow: none;
+	width: 100%;
 	padding-block: .6rem;
 }
 

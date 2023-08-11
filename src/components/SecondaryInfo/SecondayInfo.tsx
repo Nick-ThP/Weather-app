@@ -61,8 +61,6 @@ export function SecondayInfo(props: Props) {
 							<div className={styles.chart}>
 								{weatherData?.current.temp && (
 									<Bar
-										width="5rem"
-										height="10rem"
 										options={{
 											maintainAspectRatio: false,
 											responsive: true,
@@ -92,10 +90,10 @@ export function SecondayInfo(props: Props) {
 											},
 										}}
 										data={{
-											labels: weatherData?.minutely.map(time => createDateInfo(time.dt).preciseTime),
+											labels: weatherData?.minutely.map((time, idx) => idx % 6 === 0 && createDateInfo(time.dt).preciseTime).filter(Boolean),
 											datasets: [
 												{
-													data: weatherData?.minutely.map(time => time.precipitation),
+													data: weatherData?.minutely.map((time, idx) => idx % 6 === 0 && Math.random()).filter(Boolean),
 													backgroundColor: "#ec6e4c",
 												},
 											],
