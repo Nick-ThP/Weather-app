@@ -37,7 +37,7 @@ export function App() {
 		if (futureTimeInterval) {
 			setFutureTimeInterval(null)
 		}
-	}, [city, refresh])
+	}, [isLoading])
 
 	return (
 		<>
