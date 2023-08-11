@@ -6,6 +6,7 @@
 
 .column {
 	@include box-column;
+	gap: .35rem;
 
 	&First {
 		align-items: flex-start;
