@@ -23,7 +23,7 @@ export function App() {
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [futureTimeInterval, setFutureTimeInterval] = useState<TimeInfo | null>(null)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { city, error, isLoading, weatherData } = useWeatherContext()
+	const { city, error, isLoading, weatherData, refresh } = useWeatherContext()
 
 	function futureTimeHandler(date: TimeInfo | null) {
 		if (date?.dt === weatherData?.current.dt) {
@@ -37,7 +37,7 @@ export function App() {
 		if (futureTimeInterval) {
 			setFutureTimeInterval(null)
 		}
-	}, [city])
+	}, [city, refresh])
 
 	return (
 		<>
