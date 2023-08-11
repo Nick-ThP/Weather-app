@@ -72,7 +72,7 @@ export function Forecast(props: Props) {
 										/>
 										<div className={styles.temp}>{`${createTemperatureInfo(weatherData?.hourly[idx].temp)}°`}</div>
 										<div className={classNames(styles.rain, !weatherData?.hourly[idx].rain && styles.rainHidden)}>
-											{`${!weatherData?.hourly[idx].rain?.['1h'] ? '0.0' : Number(weatherData?.hourly[idx].rain?.['1h'].toString().split('.').pop())} mm`}
+											{`${Math.round(weatherData?.hourly[idx].rain?.['1h']! * 10) / 10} mm`}
 										</div>
 									</div>
 								</div>

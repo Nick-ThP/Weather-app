@@ -46,6 +46,7 @@
 
 .chart {
 	@include flex-centering;
+	flex: 1;
 	height: 100%;
 	width: 100%;
 	padding-block: .6rem;

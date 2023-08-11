@@ -9,10 +9,12 @@ import {
 	Tooltip,
 } from 'chart.js'
 import classNames from "classnames"
+import { useMemo } from 'react'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { createDateInfo } from "../../utils/date-formatting"
+import { convertMinutesToChunks } from '../../utils/minutes-to-chunks'
 import { createTemperatureInfo } from "../../utils/temperature-formatting"
 import { createWindInfo } from "../../utils/wind-formatting"
 import { TimeInfo } from '../App/App'
@@ -36,6 +38,12 @@ export function SecondayInfo(props: Props) {
 		Tooltip,
 		Legend
 	)
+
+
+	const precipitationArray = useMemo(() => {
+		return weatherData?.minutely.map((minute, idx) => idx < 60 ? Math.random() * 0.1 : null).filter(minute => minute !== null) as number[]
+	}, [weatherData])
+	console.log("📡 ~ file: SecondayInfo.tsx:45 ~ precipitationArray ~ precipitationArray:", precipitationArray)
 
 	return (
 		<div className={styles.wrapper}>
@@ -62,19 +70,56 @@ export function SecondayInfo(props: Props) {
 								{weatherData?.current.temp && (
 									<Bar
 										options={{
+											aspectRatio: 1.15,
 											maintainAspectRatio: false,
 											responsive: true,
 											animation: {
 												duration: 300,
-												easing: 'easeInOutSine',
+												easing: 'easeOutSine',
 											},
 											scales: {
 												y: {
-													min: 0,
-													max: 1,
+													suggestedMin: 0,
+													suggestedMax: 5,
+													grid: {
+														color: 'rgba(0, 0, 0, .3)',
+													},
+													ticks: {
+														color: 'rgba(0, 0, 0, 1)',
+														font: {
+															family: "sans-serif",
+															size: 12
+														},
+													}
 												},
+												x: {
+													grid: {
+														color: 'rgba(0, 0, 0, .3)',
+													},
+													ticks: {
+														color: 'rgba(0, 0, 0, 1)',
+														font: {
+															family: "'Cabin', sans-serif",
+															size: 12
+														}
+													}
+												}
 											},
 											plugins: {
+												tooltip: {
+													intersect: false,
+													backgroundColor: "rgba(0, 0, 0, 1)",
+													titleColor: "#f3a893",
+													bodyColor: "#f3a893",
+													bodySpacing: 2,
+													padding: 12,
+													position: "nearest",
+													cornerRadius: 12,
+													titleFont: {
+														family: "'Cabin', sans-serif",
+														size: 16
+													}
+												},
 												legend: {
 													display: false
 												},
@@ -84,16 +129,18 @@ export function SecondayInfo(props: Props) {
 														family: "'Cabin', sans-serif"
 													},
 													display: true,
-													text: 'Rainfall this hour (mm)',
+													text: 'Rainfall (mm)',
+													color: 'rgba(0, 0, 0, 1)'
 
-												}
-											},
+												},
+											}
 										}}
 										data={{
-											labels: weatherData?.minutely.map((time, idx) => idx % 6 === 0 && createDateInfo(time.dt).preciseTime).filter(Boolean),
+											labels: weatherData?.minutely.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime).filter(Boolean),
 											datasets: [
 												{
-													data: weatherData?.minutely.map((time, idx) => idx % 6 === 0 && Math.random()).filter(Boolean),
+													borderRadius: 12,
+													data: convertMinutesToChunks(precipitationArray, 6),
 													backgroundColor: "#ec6e4c",
 												},
 											],

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
