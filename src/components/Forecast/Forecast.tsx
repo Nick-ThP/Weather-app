@@ -16,7 +16,7 @@ type Props = {
 }
 
 export function Forecast(props: Props) {
-	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(false)
+	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
 	const { weatherData, isLoading } = useWeatherContext()
 	const scrollRef = useHorizontalScroll()
 
@@ -39,15 +39,6 @@ export function Forecast(props: Props) {
 				<>
 					<div className={styles.buttons}>
 						<Button
-							isClicked={!isForecastToggle}
-							clickFunc={toggleForecast}
-							type="toggle"
-							width="10.5rem"
-							mobileWidth="50%"
-						>
-							Next full week
-						</Button>
-						<Button
 							isClicked={isForecastToggle}
 							clickFunc={toggleForecast}
 							type="toggle"
@@ -55,6 +46,15 @@ export function Forecast(props: Props) {
 							mobileWidth="50%"
 						>
 							Next 48 hours
+						</Button>
+						<Button
+							isClicked={!isForecastToggle}
+							clickFunc={toggleForecast}
+							type="toggle"
+							width="10.5rem"
+							mobileWidth="50%"
+						>
+							Next full week
 						</Button>
 					</div>
 					{isForecastToggle ? (
