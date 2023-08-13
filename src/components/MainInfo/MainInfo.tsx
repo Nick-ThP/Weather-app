@@ -10,6 +10,7 @@ import sun from '../../images/sun.png'
 import sunrise from '../../images/sunrise.png'
 import sunset from '../../images/sunset.png'
 import wind from '../../images/wind.png'
+import { findFullDayWithHourInterval } from "../../utils/connect-dates"
 import { createDateInfo } from "../../utils/date-formatting"
 import { createTempOrTemps } from "../../utils/temperature-formatting"
 import { TimeInfo } from "../App/App"
@@ -26,7 +27,7 @@ interface Props {
 export function MainInfo(props: Props) {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { city, isLoading, refresh } = useWeatherContext()
+	const { city, isLoading, weatherData, refresh } = useWeatherContext()
 
 	useLayoutEffect(() => {
 		if (props.favoriteCities.find(favCity => favCity === city)) {
@@ -66,6 +67,19 @@ export function MainInfo(props: Props) {
 		}
 
 		return `${Math.round(uv * 10) / 10} ${scoreString}`
+	}
+
+	function findSunInfo(hourDateString: number, sunInfo: 'sunrise' | 'sunset') {
+		if (props.futureTimeInterval?.type === 'hour' && weatherData?.daily) {
+			const day = findFullDayWithHourInterval(hourDateString, weatherData?.daily.map(dates => dates.dt))
+			const info = weatherData.daily?.find(date => date.dt === day)
+
+			if (info) {
+				return createDateInfo(info[sunInfo]).preciseTime
+			}
+		}
+
+		return null
 	}
 
 	return (
@@ -178,15 +192,19 @@ export function MainInfo(props: Props) {
 						<div className={styles.sunRow}>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunrise} alt="sunrise" />
-								<div>
-									{props.weatherSource?.sunrise ? createDateInfo(props.weatherSource?.sunrise).preciseTime : '--:--'}
-								</div>
+								{props.weatherSource?.dt && props.weatherSource.sunrise && (
+									<div>
+										{findSunInfo(props.weatherSource?.dt, 'sunrise') || createDateInfo(props.weatherSource?.sunrise).preciseTime}
+									</div>
+								)}
 							</div>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunset} alt="sunset" />
-								<div>
-									{props.weatherSource?.sunset ? createDateInfo(props.weatherSource?.sunset).preciseTime : '--:--'}
-								</div>
+								{props.weatherSource?.dt && props.weatherSource.sunset && (
+									<div>
+										{findSunInfo(props.weatherSource?.dt, 'sunset') || createDateInfo(props.weatherSource?.sunset).preciseTime}
+									</div>
+								)}
 							</div>
 						</div>
 					</>
