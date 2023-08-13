@@ -41,28 +41,6 @@ export interface Current {
 	}
 }
 
-export interface Weather {
-	id: number;
-	main: Main;
-	description: Description;
-	icon: string;
-}
-
-export enum Description {
-	BrokenClouds = "broken clouds",
-	ClearSky = "clear sky",
-	FewClouds = "few clouds",
-	LightRain = "light rain",
-	OvercastClouds = "overcast clouds",
-	ScatteredClouds = "scattered clouds",
-}
-
-export enum Main {
-	Clear = "Clear",
-	Clouds = "Clouds",
-	Rain = "Rain",
-}
-
 export interface Daily {
 	dt: number;
 	sunrise: number;
@@ -83,6 +61,28 @@ export interface Daily {
 	pop: number;
 	uvi: number;
 	rain?: number;
+}
+
+export interface Weather {
+	id: number;
+	main: Main;
+	description: Description;
+	icon: string;
+}
+
+export enum Description {
+	BrokenClouds = "broken clouds",
+	ClearSky = "clear sky",
+	FewClouds = "few clouds",
+	LightRain = "light rain",
+	OvercastClouds = "overcast clouds",
+	ScatteredClouds = "scattered clouds",
+}
+
+export enum Main {
+	Clear = "Clear",
+	Clouds = "Clouds",
+	Rain = "Rain",
 }
 
 export interface FeelsLike {

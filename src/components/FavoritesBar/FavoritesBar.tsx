@@ -42,8 +42,8 @@ export function FavoritesBar(props: Props) {
 						layout
 					>
 						<Button
+							onClick={() => clickHandler(favCity)}
 							isClicked={favCity === city}
-							clickFunc={() => clickHandler(favCity)}
 							type="toggle"
 							shape="round"
 							width="70%"

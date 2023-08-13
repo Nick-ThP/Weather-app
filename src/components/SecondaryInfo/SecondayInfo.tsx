@@ -13,9 +13,10 @@ import { useMemo } from 'react'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
+import { Current, Daily } from '../../contexts/weather-data-types'
 import { createDateInfo } from "../../utils/date-formatting"
 import { convertMinutesToChunks } from '../../utils/minutes-to-chunks'
-import { createTemperatureInfo } from "../../utils/temperature-formatting"
+import { createTempOrTemps } from "../../utils/temperature-formatting"
 import { createWindInfo } from "../../utils/wind-formatting"
 import { TimeInfo } from '../App/App'
 import { Button } from '../reuseables/Button/Button'
@@ -23,6 +24,7 @@ import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
 
 type Props = {
+	weatherSource: Current | Daily | null
 	futureTimeInterval: TimeInfo | null
 	setFutureTimeInterval: (val: TimeInfo | null) => void
 }
@@ -39,11 +41,29 @@ export function SecondayInfo(props: Props) {
 		Legend
 	)
 
+	const chartBarAmount = 6
 
-	const precipitationArray = useMemo(() => {
-		return weatherData?.minutely.map((minute, idx) => idx < 60 ? Math.random() * 0.1 : null).filter(minute => minute !== null) as number[]
+	const chartValues = useMemo(() => {
+		if (weatherData?.minutely) {
+			return convertMinutesToChunks(weatherData?.minutely
+				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
+				.filter(minute => minute !== null) as number[], chartBarAmount)
+		}
+
+		// Test
+		return [3.5, 2.8, 4.7, 1.2, 9.5, 7.6]
 	}, [weatherData])
-	console.log("📡 ~ file: SecondayInfo.tsx:45 ~ precipitationArray ~ precipitationArray:", precipitationArray)
+
+	const chartLabels = useMemo(() => {
+		if (weatherData?.minutely) {
+			return weatherData?.minutely
+				.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
+				.filter(Boolean)
+		}
+
+		// Test
+		return ['1', '2', '3', '4', '5', '6']
+	}, [weatherData])
 
 	return (
 		<div className={styles.wrapper}>
@@ -55,98 +75,96 @@ export function SecondayInfo(props: Props) {
 						{props.futureTimeInterval ? (
 							<div className={styles.futureMessage}>
 								<div>
-									You have currently selected a future time interval.
+									You have currently selected a future {props.futureTimeInterval?.type === 'date' ? 'date' : 'hour'} interval.
 									Please click below to return to the current hour interval.
 								</div>
 								<Button
 									type="standard"
-									clickFunc={() => props.setFutureTimeInterval(null)}
+									onClick={() => props.setFutureTimeInterval(null)}
 								>
 									Return
 								</Button>
 							</div>
 						) : (
 							<div className={styles.chart}>
-								{weatherData?.current.temp && (
-									<Bar
-										options={{
-											aspectRatio: 1.15,
-											maintainAspectRatio: false,
-											responsive: true,
-											animation: {
-												duration: 300,
-												easing: 'easeOutSine',
-											},
-											scales: {
-												y: {
-													suggestedMin: 0,
-													suggestedMax: 5,
-													grid: {
-														color: 'rgba(0, 0, 0, .3)',
-													},
-													ticks: {
-														color: 'rgba(0, 0, 0, 1)',
-														font: {
-															family: "sans-serif",
-															size: 12
-														},
-													}
+								<Bar
+									options={{
+										aspectRatio: 1.15,
+										maintainAspectRatio: false,
+										responsive: true,
+										animation: {
+											duration: 300,
+											easing: 'easeOutSine',
+										},
+										scales: {
+											y: {
+												suggestedMin: 0,
+												suggestedMax: 5,
+												grid: {
+													color: 'rgba(0, 0, 0, .3)',
 												},
-												x: {
-													grid: {
-														color: 'rgba(0, 0, 0, .3)',
+												ticks: {
+													color: 'rgba(0, 0, 0, 1)',
+													font: {
+														family: "sans-serif",
+														size: 12
 													},
-													ticks: {
-														color: 'rgba(0, 0, 0, 1)',
-														font: {
-															family: "'Cabin', sans-serif",
-															size: 12
-														}
-													}
 												}
 											},
-											plugins: {
-												tooltip: {
-													intersect: false,
-													backgroundColor: "rgba(0, 0, 0, 1)",
-													titleColor: "#f3a893",
-													bodyColor: "#f3a893",
-													bodySpacing: 2,
-													padding: 12,
-													position: "nearest",
-													cornerRadius: 12,
-													titleFont: {
-														family: "'Cabin', sans-serif",
-														size: 16
-													}
+											x: {
+												grid: {
+													color: 'rgba(0, 0, 0, .3)',
 												},
-												legend: {
-													display: false
-												},
-												title: {
+												ticks: {
+													color: 'rgba(0, 0, 0, 1)',
 													font: {
-														size: 16,
-														family: "'Cabin', sans-serif"
-													},
-													display: true,
-													text: 'Rainfall (mm)',
-													color: 'rgba(0, 0, 0, 1)'
-
-												},
+														family: "'Cabin', sans-serif",
+														size: 12
+													}
+												}
 											}
-										}}
-										data={{
-											labels: weatherData?.minutely.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime).filter(Boolean),
-											datasets: [
-												{
-													borderRadius: 12,
-													data: convertMinutesToChunks(precipitationArray, 6),
-													backgroundColor: "#ec6e4c",
+										},
+										plugins: {
+											tooltip: {
+												intersect: false,
+												backgroundColor: "rgba(0, 0, 0, 1)",
+												titleColor: "#f3a893",
+												bodyColor: "#f3a893",
+												bodySpacing: 2,
+												padding: 12,
+												position: "nearest",
+												cornerRadius: 12,
+												titleFont: {
+													family: "'Cabin', sans-serif",
+													size: 16
+												}
+											},
+											legend: {
+												display: false
+											},
+											title: {
+												font: {
+													size: 16,
+													family: "'Cabin', sans-serif"
 												},
-											],
-										}}
-									/>
-								)}
+												display: true,
+												text: 'Rainfall (mm)',
+												color: 'rgba(0, 0, 0, 1)'
+
+											},
+										}
+									}}
+									data={{
+										labels: chartLabels,
+										datasets: [
+											{
+												borderRadius: 12,
+												data: chartValues,
+												backgroundColor: "#ec6e4c",
+											},
+										],
+									}}
+								/>
 							</div>
 						)}
 					</>
@@ -158,37 +176,35 @@ export function SecondayInfo(props: Props) {
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
 					<>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Feels like
-								</div>
-								{weatherData?.current.feels_like && (
+						{props.weatherSource?.feels_like && (
+							<div className={styles.row}>
+								<div className={styles.information}>
 									<div>
-										{`${createTemperatureInfo(weatherData?.current.feels_like)}° C`}
+										Feels like
 									</div>
-								)}
-							</div>
-						</div>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Wind direction
+									{`${createTempOrTemps(props.weatherSource?.feels_like)} ${typeof props.weatherSource?.feels_like === 'number' ? 'C' : ''}`}
 								</div>
-								{weatherData?.current.wind_deg && (
-									<div>
-										{createWindInfo(weatherData?.current.wind_deg)}
-									</div>
-								)}
 							</div>
-						</div>
+						)}
+						{props.weatherSource?.wind_deg && (
+							<div className={styles.row}>
+								<div className={styles.information}>
+									<div>
+										Wind direction
+									</div>
+									<div>
+										{createWindInfo(props.weatherSource?.wind_deg)}
+									</div>
+								</div>
+							</div>
+						)}
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
 									Wind gusts
 								</div>
 								<div>
-									{weatherData?.current.wind_gust ? `${weatherData?.current.wind_gust.toString().split('.')[0]} km/h` : 'None'}
+									{props.weatherSource?.wind_gust ? `${props.weatherSource?.wind_gust.toString().split('.')[0]} km/h` : 'None'}
 								</div>
 							</div>
 						</div>
@@ -198,7 +214,7 @@ export function SecondayInfo(props: Props) {
 									Cloud cover
 								</div>
 								<div>
-									{`${weatherData?.current.clouds} %`}
+									{`${props.weatherSource?.clouds} %`}
 								</div>
 							</div>
 						</div>
@@ -208,46 +224,35 @@ export function SecondayInfo(props: Props) {
 									Humidity
 								</div>
 								<div>
-									{`${weatherData?.current.humidity} %`}
+									{`${props.weatherSource?.humidity} %`}
 								</div>
 							</div>
 						</div>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Dew point
-								</div>
-								{weatherData?.current.dew_point && (
+						{props.weatherSource?.dew_point && (
+							<div className={styles.row}>
+								<div className={styles.information}>
 									<div>
-										{`${weatherData?.current.dew_point}° C`}
+										Dew point
 									</div>
-								)}
+									<div>
+										{`${props.weatherSource?.dew_point}° C`}
+									</div>
+								</div>
 							</div>
-						</div>
+						)}
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
 									Pressure
 								</div>
 								<div>
-									{`↔ ${weatherData?.current.pressure} mb`}
-								</div>
-							</div>
-						</div>
-						<div className={styles.row}>
-							<div className={styles.information}>
-								<div>
-									Visibility
-								</div>
-								<div>
-									{`${weatherData?.current.visibility} m`}
+									{`↔ ${props.weatherSource?.pressure} mb`}
 								</div>
 							</div>
 						</div>
 					</>
-				)
-				}
-			</div >
-		</div >
+				)}
+			</div>
+		</div>
 	)
 }

@@ -36,12 +36,19 @@ h2 {
 }
 
 .temp {
-	margin-bottom: -.5rem;
-	font-size: 4.5rem;
+	margin-bottom: -1rem;
+	font-size: 4rem;
 	font-weight: bold;
 	font-family: $serif-font;
 	letter-spacing: .2rem;
 	text-align: justify;
+
+	&Two {
+		margin-bottom: -.5rem;
+		font-size: 2rem;
+		font-weight: bold;
+		text-align: start;
+	}
 }
 
 .star {
@@ -83,7 +90,7 @@ h2 {
 
 .refreshIcon {
 	height: 1.5rem;
-	margin-top: -.2rem;
+	margin-top: -.121rem;
 	aspect-ratio: 1 / 1;
 	cursor: pointer;
 
@@ -95,7 +102,7 @@ h2 {
 .dynamicIcon {
 	height: 6rem;
 	margin-left: -1.5rem;
-	margin-bottom: -.5rem;
+	margin-bottom: -1rem;
 }
 
 .staticIcon {

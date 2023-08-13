@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import { useWeatherContext } from "../../contexts/useWeatherContext";
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { createDateInfo } from '../../utils/date-formatting';
-import { createTemperatureInfo } from '../../utils/temperature-formatting';
+import { formatTemperature } from '../../utils/temperature-formatting';
 import { TimeInfo } from '../App/App';
 import { Button } from "../reuseables/Button/Button";
 import { Line } from '../reuseables/Line/Line';
@@ -40,7 +40,7 @@ export function Forecast(props: Props) {
 					<div className={styles.buttons}>
 						<Button
 							isClicked={isForecastToggle}
-							clickFunc={toggleForecast}
+							onClick={toggleForecast}
 							type="toggle"
 							width="10.5rem"
 							mobileWidth="50%"
@@ -49,7 +49,7 @@ export function Forecast(props: Props) {
 						</Button>
 						<Button
 							isClicked={!isForecastToggle}
-							clickFunc={toggleForecast}
+							onClick={toggleForecast}
 							type="toggle"
 							width="10.5rem"
 							mobileWidth="50%"
@@ -59,7 +59,7 @@ export function Forecast(props: Props) {
 					</div>
 					{isForecastToggle ? (
 						<div className={styles.hours} ref={scrollRef}>
-							{weatherData?.hourly.filter((hour, idx) => idx !== 0).map((hour, idx) => (
+							{weatherData?.hourly.filter((_, idx) => idx !== 0).map((hour, idx) => (
 								<div className={styles.hourWithLine} key={idx}>
 									{idx > 0 && (
 										<Line type="date" midnightSplit={createDateInfo(hour.dt).time === '0:00'} />
@@ -70,9 +70,9 @@ export function Forecast(props: Props) {
 											src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
 											alt="current weather depiction"
 										/>
-										<div className={styles.temp}>{`${createTemperatureInfo(weatherData?.hourly[idx].temp)}°`}</div>
-										<div className={classNames(styles.rain, !weatherData?.hourly[idx].rain && styles.rainHidden)}>
-											{`${Math.round(weatherData?.hourly[idx].rain?.['1h']! * 10) / 10} mm`}
+										<div className={styles.temp}>{`${formatTemperature(hour.temp)}°`}</div>
+										<div className={classNames(styles.rain, !hour.rain && styles.rainHidden)}>
+											{`${hour.rain && Math.round(hour.rain?.['1h'] * 10) / 10} mm`}
 										</div>
 									</div>
 								</div>
@@ -92,10 +92,10 @@ export function Forecast(props: Props) {
 											alt="current weather depiction"
 										/>
 										<div className={styles.temp}>
-											{`${createTemperatureInfo(weatherData?.daily[idx].temp.max)}° / ${createTemperatureInfo(weatherData?.daily[idx].temp.min)}°`}
+											{`${formatTemperature(date.temp.max)}° / ${formatTemperature(date.temp.min)}°`}
 										</div>
-										<div className={classNames(styles.rain, !weatherData?.daily[idx].rain && styles.rainHidden)}>
-											{`${!weatherData?.daily[idx].rain ? '0.0' : Number(weatherData?.daily[idx].rain?.toString().substring(0, 3))} mm`}
+										<div className={classNames(styles.rain, !date.rain && styles.rainHidden)}>
+											{`${date.rain && Math.round(date.rain * 10) / 10} mm`}
 										</div>
 									</div>
 								</div>

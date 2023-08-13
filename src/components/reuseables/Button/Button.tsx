@@ -5,8 +5,8 @@ import styles from './button.module.scss'
 
 export type Props = {
 	children: ReactNode
+	onClick: (val?: unknown) => void
 	isClicked?: boolean
-	clickFunc?: (val?: unknown) => void
 	type?: 'standard' | 'toggle'
 	width?: string
 	mobileWidth?: string
@@ -23,12 +23,12 @@ export function Button({
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 
 	function createClick() {
-		if (props.clickFunc) {
+		if (props.onClick) {
 			switch (type) {
 				case 'standard':
-					return props.clickFunc()
+					return props.onClick()
 				case 'toggle':
-					return props.isClicked ? undefined : props.clickFunc()
+					return props.isClicked ? undefined : props.onClick()
 				default:
 					break
 			}
