@@ -44,7 +44,7 @@ export function SecondayInfo(props: Props) {
 	const chartBarAmount = 6
 
 	const chartValues = useMemo(() => {
-		if (weatherData?.minutely) {
+		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
 			return convertMinutesToChunks(weatherData?.minutely
 				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
 				.filter(minute => minute !== null) as number[], chartBarAmount)
@@ -55,7 +55,7 @@ export function SecondayInfo(props: Props) {
 	}, [weatherData])
 
 	const chartLabels = useMemo(() => {
-		if (weatherData?.minutely) {
+		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
 			return weatherData?.minutely
 				.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
 				.filter(Boolean)
@@ -67,7 +67,7 @@ export function SecondayInfo(props: Props) {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={classNames(styles.column, !isLoading && styles.columnJustification)}>
+			<div className={classNames(styles.column)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
@@ -75,8 +75,10 @@ export function SecondayInfo(props: Props) {
 						{props.futureTimeInterval ? (
 							<div className={styles.futureMessage}>
 								<div>
-									You have currently selected a future {props.futureTimeInterval?.type === 'date' ? 'date' : 'hour'} interval.
-									Please click below to return to the current hour interval.
+										You have selected a future {props.futureTimeInterval?.type === 'date' ? 'date' : 'hour interval'}.
+								</div>
+								<div>
+										Click the return button below to return to the current hour interval.
 								</div>
 								<Button
 									type="standard"

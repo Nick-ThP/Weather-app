@@ -8,12 +8,13 @@
 	@include box-column;
 	gap: 0rem;
 
-	&Justification {
-		justify-content: space-around;
+	&:has(.chart) {
+		justify-content: space-between;
+		padding-inline: .5rem;
 	}
 
-	&:has(.chart) {
-		padding-inline: .5rem;
+	&:has(.information) {
+		justify-content: space-around;
 	}
 }
 
@@ -36,10 +37,13 @@
 .futureMessage {
 	@include flex-centering;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: 2rem;
+	font-size: 1.1rem;
+	text-align: start;
+	align-items: start;
 
-	&:first-child {
-		text-align: center;
+	> div:first-child {
 		font-weight: bold;
 	}
 }
