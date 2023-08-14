@@ -55,14 +55,14 @@ export function MainInfo(props: Props) {
 	function createUvScore(uv: number) {
 		let scoreString = ''
 
-		if (uv > 0 && uv < 6) {
+		if (uv === 0) {
+			scoreString = '(none)'
+		} else if (uv < 6) {
 			scoreString = '(low)'
-		} else if (uv > 0 && uv < 8) {
+		} else if (uv < 8) {
 			scoreString = '(high)'
 		} else if (uv > 8) {
 			scoreString = '(very high)'
-		} else {
-			return 'No sunlight'
 		}
 
 		return `${Math.round(uv * 10) / 10} ${scoreString}`

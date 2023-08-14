@@ -235,7 +235,7 @@ export function SecondayInfo(props: Props) {
 										Dew point
 									</div>
 									<div>
-										{`${props.weatherSource?.dew_point}° C`}
+										{`${Math.round(props.weatherSource?.dew_point * 10) / 10}° C`}
 									</div>
 								</div>
 							</div>
@@ -246,7 +246,7 @@ export function SecondayInfo(props: Props) {
 									Pressure
 								</div>
 								<div>
-									{`↔ ${props.weatherSource?.pressure} mb`}
+									{`${props.weatherSource?.pressure} mb`}
 								</div>
 							</div>
 						</div>
