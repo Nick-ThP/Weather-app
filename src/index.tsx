@@ -11,10 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<React.StrictMode>
-		<SkeletonTheme baseColor="#f3a893" highlightColor="#EC6E4C">
-			<WeatherContextProvider>
+		<WeatherContextProvider>
+			<SkeletonTheme baseColor="#f3a893" highlightColor="#EC6E4C">
 				<App />
-			</WeatherContextProvider>
-		</SkeletonTheme>
+			</SkeletonTheme>
+		</WeatherContextProvider>
 	</React.StrictMode>
 )

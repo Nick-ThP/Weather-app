@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useMemo, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useWeatherContext } from "../../contexts/useWeatherContext"
@@ -10,7 +10,6 @@ import sun from '../../images/sun.png'
 import sunrise from '../../images/sunrise.png'
 import sunset from '../../images/sunset.png'
 import wind from '../../images/wind.png'
-import { findFullDayWithHourInterval } from "../../utils/connect-dates"
 import { createDateInfo } from "../../utils/date-formatting"
 import { createTempOrTemps } from "../../utils/temperature-formatting"
 import { TimeInfo } from "../App/App"
@@ -69,13 +68,13 @@ export function MainInfo(props: Props) {
 		return `${Math.round(uv * 10) / 10} ${scoreString}`
 	}
 
-	function findSunInfo(hourDateString: number, sunInfo: 'sunrise' | 'sunset') {
-		if (props.futureTimeInterval?.type === 'hour' && weatherData?.daily) {
-			const day = findFullDayWithHourInterval(hourDateString, weatherData?.daily.map(dates => dates.dt))
-			const info = weatherData.daily?.find(date => date.dt === day)
+	function findSunInfo(hourDateStamp: number, sunInfo: 'sunrise' | 'sunset') {
+		if (props.futureTimeInterval?.type === 'hour') {
+			const intervalDate = new Date(hourDateStamp * 1000).getDate()
+			const correspondingDate = weatherData?.daily.find(date => new Date(date.dt * 1000).getDate() === intervalDate)
 
-			if (info) {
-				return createDateInfo(info[sunInfo]).preciseTime
+			if (correspondingDate) {
+				return createDateInfo(correspondingDate[sunInfo]).preciseTime
 			}
 		}
 
@@ -192,18 +191,34 @@ export function MainInfo(props: Props) {
 						<div className={styles.sunRow}>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunrise} alt="sunrise" />
-								{props.weatherSource?.dt && props.weatherSource.sunrise && (
-									<div>
-										{findSunInfo(props.weatherSource?.dt, 'sunrise') || createDateInfo(props.weatherSource?.sunrise).preciseTime}
-									</div>
+								{props.weatherSource?.dt && (
+									<>
+										{props.weatherSource.sunrise ? (
+											<>
+												{createDateInfo(props.weatherSource?.sunrise).preciseTime}
+											</>
+										) : (
+											<>
+												{findSunInfo(props.weatherSource?.dt, 'sunrise')}
+											</>
+										)}
+									</>
 								)}
 							</div>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunset} alt="sunset" />
-								{props.weatherSource?.dt && props.weatherSource.sunset && (
-									<div>
-										{findSunInfo(props.weatherSource?.dt, 'sunset') || createDateInfo(props.weatherSource?.sunset).preciseTime}
-									</div>
+								{props.weatherSource?.dt && (
+									<>
+										{props.weatherSource.sunset ? (
+											<>
+												{createDateInfo(props.weatherSource?.sunset).preciseTime}
+											</>
+										) : (
+											<>
+												{findSunInfo(props.weatherSource?.dt, 'sunset')}
+											</>
+										)}
+									</>
 								)}
 							</div>
 						</div>

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { Current, Daily } from '../../contexts/weather-data-types'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
@@ -12,7 +13,6 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
-import { Current, Daily } from '../../contexts/weather-data-types'
 
 export type TimeInfo = {
 	type: 'hour' | 'date',
@@ -24,7 +24,7 @@ export function App() {
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [futureTimeInterval, setFutureTimeInterval] = useState<TimeInfo | null>(null)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { error, setError, isLoading, weatherData } = useWeatherContext()
+	const { error, isLoading, weatherData } = useWeatherContext()
 
 	function futureTimeHandler(date: TimeInfo | null) {
 		if (date?.dt === weatherData?.current.dt) {
@@ -41,17 +41,11 @@ export function App() {
 	}, [isLoading])
 
 	const weatherSource: Current | Daily | null = useMemo(() => {
-		function errorReturn() {
-			setError('Some provided data is out of sync. \n Refreshing the page should fix the problem.')
-
-			return null
-		}
-
 		if (futureTimeInterval) {
 			if (futureTimeInterval.type === 'hour') {
-				return weatherData?.hourly.find(hour => hour.dt === futureTimeInterval.dt) || errorReturn()
+				return weatherData?.hourly.find(hour => hour.dt === futureTimeInterval.dt) || null
 			} else if (futureTimeInterval.type === 'date') {
-				return weatherData?.daily.find(date => date.dt === futureTimeInterval.dt) || errorReturn()
+				return weatherData?.daily.find(date => date.dt === futureTimeInterval.dt) || null
 			}
 		}
 
@@ -59,8 +53,8 @@ export function App() {
 			return weatherData?.current
 		}
 
-		return errorReturn()
-	}, [weatherData, futureTimeInterval, setError])
+		return null
+	}, [weatherData, futureTimeInterval])
 
 	return (
 		<>

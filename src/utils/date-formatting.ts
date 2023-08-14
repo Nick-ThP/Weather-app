@@ -1,5 +1,5 @@
 export function createDateInfo(timeStamp: number) {
-	const fullDate = new Date(timeStamp * 1000);
+	const fullDate = new Date(timeStamp * 1000)
 	const weekDays = [
 		'Sunday',
 		'Monday',
