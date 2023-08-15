@@ -14,6 +14,7 @@ import { Bar } from 'react-chartjs-2'
 import Skeleton from "react-loading-skeleton"
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { Current, Daily } from '../../contexts/weather-data-types'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { createDateInfo } from "../../utils/date-formatting"
 import { convertMinutesToChunks } from '../../utils/minutes-to-chunks'
 import { createTempOrTemps } from "../../utils/temperature-formatting"
@@ -22,7 +23,6 @@ import { TimeInfo } from '../App/App'
 import { Button } from '../reuseables/Button/Button'
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 type Props = {
 	weatherSource: Current | Daily | null
@@ -46,25 +46,15 @@ export function SecondayInfo(props: Props) {
 	const chartBarAmount = 6
 
 	const chartValues = useMemo(() => {
-		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
-			return convertMinutesToChunks(weatherData?.minutely
-				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
-				.filter(minute => minute !== null) as number[], chartBarAmount)
-		}
-
-		// Test
-		return [3.5, 2.8, 4.7, 1.2, 9.5, 7.6]
+		return convertMinutesToChunks(weatherData?.minutely
+			.map((minute, idx) => idx < 60 ? minute.precipitation / 10 : null)
+			.filter(minute => minute !== null) as number[], chartBarAmount)
 	}, [weatherData])
 
 	const chartLabels = useMemo(() => {
-		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
-			return weatherData?.minutely
-				.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
-				.filter(Boolean)
-		}
-
-		// Test
-		return ['1', '2', '3', '4', '5', '6']
+		return weatherData?.minutely
+			.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
+			.filter(Boolean)
 	}, [weatherData])
 
 	return (

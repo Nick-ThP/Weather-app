@@ -92,7 +92,7 @@ export function App() {
 							/>
 						</>
 					)}
-					{isMobile && futureTimeInterval && (
+					{isMobile && (futureTimeInterval || error) && (
 						<MobileReturn />
 					)}
 					{error ? (
