@@ -103,7 +103,7 @@ export function MainInfo(props: Props) {
 						</div>
 						<div className={styles.row}>
 							{props.weatherSource?.dt && (
-								<div className={styles.currentDate}>
+								<div className={classNames(styles.currentDate)}>
 									<div>
 										{createDateInfo(props.weatherSource?.dt).dateFull}
 									</div>

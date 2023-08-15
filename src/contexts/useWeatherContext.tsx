@@ -31,7 +31,6 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
-	console.log(weatherData)
 
 	function setCity(city: string) {
 		_setCity(city)

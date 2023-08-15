@@ -11,7 +11,7 @@ import { MainInfo } from '../MainInfo/MainInfo'
 import { MobileLoader } from '../MobileLoader/MobileLoader'
 import { MobileReturn } from '../MobileReturn/MobileReturn'
 import { SearchBar } from '../SearchBar/SearchBar'
-import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
+import { SecondaryInfo } from '../SecondaryInfo/SecondaryInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
 
@@ -39,10 +39,10 @@ export function App() {
 	}
 
 	useLayoutEffect(() => {
-		if (futureTimeInterval) {
+		if (isLoading && futureTimeInterval) {
 			setFutureTimeInterval(null)
 		}
-	}, [isLoading])
+	}, [isLoading, futureTimeInterval])
 
 	const weatherSource: Current | Daily | null = useMemo(() => {
 		if (futureTimeInterval) {
@@ -115,7 +115,7 @@ export function App() {
 							</div>
 							<div className={styles.secondaryInfo}>
 								<Box>
-									<SecondayInfo
+									<SecondaryInfo
 										weatherSource={weatherSource}
 										futureTimeInterval={futureTimeInterval}
 										setFutureTimeInterval={futureTimeHandler}

@@ -30,7 +30,7 @@ type Props = {
 	setFutureTimeInterval: (val: TimeInfo | null) => void
 }
 
-export function SecondayInfo(props: Props) {
+export function SecondaryInfo(props: Props) {
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { weatherData, isLoading } = useWeatherContext()
 
@@ -46,7 +46,7 @@ export function SecondayInfo(props: Props) {
 	const chartBarAmount = 6
 
 	const chartValues = useMemo(() => {
-		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
+		if (weatherData?.minutely) {
 			return convertMinutesToChunks(weatherData?.minutely
 				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
 				.filter(minute => minute !== null) as number[], chartBarAmount)
@@ -57,14 +57,14 @@ export function SecondayInfo(props: Props) {
 	}, [weatherData])
 
 	const chartLabels = useMemo(() => {
-		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
+		if (weatherData?.minutely) {
 			return weatherData?.minutely
 				.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
 				.filter(Boolean)
 		}
 
 		// Showcasing purposes
-		return ['Just', 'Showing', 'For', 'Show', 'Casing', 'Purposes']
+		return ['No', 'Rain', 'So', 'Just', 'Show', 'Casing']
 	}, [weatherData])
 
 	return (
@@ -158,7 +158,7 @@ export function SecondayInfo(props: Props) {
 															family: "'Cabin', sans-serif"
 														},
 														display: true,
-														text: 'Rainfall (mm)',
+														text: weatherData?.minutely ? 'Rainfall (mm)' : '10 minute intervals of rain (mm)',
 														color: 'rgba(0, 0, 0, 1)'
 
 													},
