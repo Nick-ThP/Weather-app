@@ -46,15 +46,25 @@ export function SecondayInfo(props: Props) {
 	const chartBarAmount = 6
 
 	const chartValues = useMemo(() => {
-		return convertMinutesToChunks(weatherData?.minutely
-			.map((minute, idx) => idx < 60 ? minute.precipitation / 10 : null)
-			.filter(minute => minute !== null) as number[], chartBarAmount)
+		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
+			return convertMinutesToChunks(weatherData?.minutely
+				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
+				.filter(minute => minute !== null) as number[], chartBarAmount)
+		}
+
+		// Showcasing purposes
+		return [3.5, 2.8, 3.7, 1.2, 8.5, 7.6]
 	}, [weatherData])
 
 	const chartLabels = useMemo(() => {
-		return weatherData?.minutely
-			.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
-			.filter(Boolean)
+		if (weatherData?.minutely.find(minute => minute.precipitation !== 0)) {
+			return weatherData?.minutely
+				.map((time, idx) => (idx % 10 === 0) && idx < 51 && createDateInfo(time.dt).preciseTime)
+				.filter(Boolean)
+		}
+
+		// Showcasing purposes
+		return ['Just', 'Showing', 'For', 'Show', 'Casing', 'Purposes']
 	}, [weatherData])
 
 	return (
