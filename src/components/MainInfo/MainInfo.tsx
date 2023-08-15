@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { useLayoutEffect, useMemo, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useWeatherContext } from "../../contexts/useWeatherContext"
@@ -52,7 +52,7 @@ export function MainInfo(props: Props) {
 		}
 	}
 
-	function createUvScore(uv: number) {
+	function createUvInfo(uv: number) {
 		let scoreString = ''
 
 		if (uv === 0) {
@@ -68,7 +68,7 @@ export function MainInfo(props: Props) {
 		return `${Math.round(uv * 10) / 10} ${scoreString}`
 	}
 
-	function findSunInfo(hourDateStamp: number, sunInfo: 'sunrise' | 'sunset') {
+	function createSunInfo(hourDateStamp: number, sunInfo: 'sunrise' | 'sunset') {
 		if (props.futureTimeInterval?.type === 'hour') {
 			const intervalDate = new Date(hourDateStamp * 1000).getDate()
 			const correspondingDate = weatherData?.daily.find(date => new Date(date.dt * 1000).getDate() === intervalDate)
@@ -108,17 +108,22 @@ export function MainInfo(props: Props) {
 										{createDateInfo(props.weatherSource?.dt).dateFull}
 									</div>
 									<div className={styles.refreshSpan}>
-										{props.futureTimeInterval?.type !== 'date' && (
+										{props.futureTimeInterval?.type !== 'date' ? (
 											<>
 												{createDateInfo(props.weatherSource?.dt).preciseTime}
+											</>
+										) : (
+											<>
+												Full day
 											</>
 										)}
 										<svg
 											className={styles.refreshIcon}
-											viewBox="0 0 64 64"
-											onClick={refresh}
-										>
-											<path d="M 22 12 C 16.486 12 12 16.486 12 22 L 12 23 C 12 24.104 12.896 25 14 25 C 15.104 25 16 24.104 16 23 L 16 22 C 16 18.691 18.691 16 22 16 L 42 16 C 45.309 16 48 18.691 48 22 L 48 24 L 45.107422 24 C 44.213422 24 43.685313 25.003281 44.195312 25.738281 L 49.089844 32.8125 C 49.529844 33.4495 50.471109 33.4495 50.912109 32.8125 L 55.806641 25.738281 C 56.314641 25.003281 55.788531 24 54.894531 24 L 52 24 L 52 22 C 52 16.486 47.514 12 42 12 L 22 12 z M 14 30.708984 C 13.654375 30.708984 13.308391 30.869 13.087891 31.1875 L 8.1953125 38.261719 C 7.6873125 38.996719 8.2134219 40 9.1074219 40 L 12 40 L 12 42 C 12 47.514 16.486 52 22 52 L 42 52 C 47.514 52 52 47.514 52 42 L 52 41 C 52 39.896 51.104 39 50 39 C 48.896 39 48 39.896 48 41 L 48 42 C 48 45.309 45.309 48 42 48 L 22 48 C 18.691 48 16 45.309 16 42 L 16 40 L 18.892578 40 C 19.786578 40 20.314688 38.996719 19.804688 38.261719 L 14.910156 31.1875 C 14.690156 30.869 14.345625 30.708984 14 30.708984 z" />
+											viewBox="0 0 24 24"
+											width="24"
+											height="24"
+											onClick={refresh}>
+											<path d="M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z" />
 										</svg>
 									</div>
 								</div>
@@ -159,7 +164,7 @@ export function MainInfo(props: Props) {
 									UV index
 								</div>
 								<div>
-									{createUvScore(props.weatherSource?.uvi || 0)}
+									{createUvInfo(props.weatherSource?.uvi || 0)}
 								</div>
 							</div>
 						</div>
@@ -199,7 +204,7 @@ export function MainInfo(props: Props) {
 											</>
 										) : (
 											<>
-												{findSunInfo(props.weatherSource?.dt, 'sunrise')}
+												{createSunInfo(props.weatherSource?.dt, 'sunrise')}
 											</>
 										)}
 									</>
@@ -215,7 +220,7 @@ export function MainInfo(props: Props) {
 											</>
 										) : (
 											<>
-												{findSunInfo(props.weatherSource?.dt, 'sunset')}
+												{createSunInfo(props.weatherSource?.dt, 'sunset')}
 											</>
 										)}
 									</>

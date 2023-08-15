@@ -22,6 +22,7 @@ import { TimeInfo } from '../App/App'
 import { Button } from '../reuseables/Button/Button'
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 type Props = {
 	weatherSource: Current | Daily | null
@@ -30,6 +31,7 @@ type Props = {
 }
 
 export function SecondayInfo(props: Props) {
+	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { weatherData, isLoading } = useWeatherContext()
 
 	ChartJS.register(
@@ -67,112 +69,120 @@ export function SecondayInfo(props: Props) {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={classNames(styles.column)}>
-				{isLoading ? (
-					<Skeleton count={3.5} className={styles.skeleton} />
-				) : (
-					<>
-						{props.futureTimeInterval ? (
-							<div className={styles.futureMessage}>
-								<div>
-										You have selected a future {props.futureTimeInterval?.type === 'date' ? 'date' : 'hour interval'}.
-								</div>
-								<div>
-										Click the return button below to return to the current hour interval.
-								</div>
-								<Button
-									type="standard"
-									onClick={() => props.setFutureTimeInterval(null)}
-								>
-									Return
-								</Button>
-							</div>
+			{!(isMobile && props.futureTimeInterval) && (
+				<>
+					<div className={classNames(styles.column)}>
+						{isLoading ? (
+							<Skeleton count={3.5} className={styles.skeleton} />
 						) : (
-							<div className={styles.chart}>
-								<Bar
-									options={{
-										aspectRatio: 1.15,
-										maintainAspectRatio: false,
-										responsive: true,
-										animation: {
-											duration: 300,
-											easing: 'easeOutSine',
-										},
-										scales: {
-											y: {
-												suggestedMin: 0,
-												suggestedMax: 5,
-												grid: {
-													color: 'rgba(0, 0, 0, .3)',
+							<>
+								{props.futureTimeInterval ? (
+									<>
+										{!isMobile && (
+											<div className={styles.futureMessage}>
+												<div>
+													You have selected a future {props.futureTimeInterval?.type === 'date' ? 'date' : 'hour interval'}.
+												</div>
+												<div>
+													Click the return button below to return to the current hour interval.
+												</div>
+												<Button
+													type="standard"
+													onClick={() => props.setFutureTimeInterval(null)}
+												>
+													Return
+												</Button>
+											</div>
+										)}
+									</>
+								) : (
+									<div className={styles.chart}>
+										<Bar
+											options={{
+												aspectRatio: 1.15,
+												maintainAspectRatio: false,
+												responsive: true,
+												animation: {
+													duration: 300,
+													easing: 'easeOutSine',
 												},
-												ticks: {
-													color: 'rgba(0, 0, 0, 1)',
-													font: {
-														family: "sans-serif",
-														size: 12
+												scales: {
+													y: {
+														suggestedMin: 0,
+														suggestedMax: 5,
+														grid: {
+															color: 'rgba(0, 0, 0, .3)',
+														},
+														ticks: {
+															color: 'rgba(0, 0, 0, 1)',
+															font: {
+																family: "sans-serif",
+																size: 12
+															},
+														}
+													},
+													x: {
+														grid: {
+															color: 'rgba(0, 0, 0, .3)',
+														},
+														ticks: {
+															color: 'rgba(0, 0, 0, 1)',
+															font: {
+																family: "'Cabin', sans-serif",
+																size: 12
+															}
+														}
+													}
+												},
+												plugins: {
+													tooltip: {
+														intersect: false,
+														backgroundColor: "rgba(0, 0, 0, 1)",
+														titleColor: "#f3a893",
+														bodyColor: "#f3a893",
+														bodySpacing: 2,
+														padding: 12,
+														position: "nearest",
+														cornerRadius: 12,
+														titleFont: {
+															family: "'Cabin', sans-serif",
+															size: 16
+														}
+													},
+													legend: {
+														display: false
+													},
+													title: {
+														font: {
+															size: 16,
+															family: "'Cabin', sans-serif"
+														},
+														display: true,
+														text: 'Rainfall (mm)',
+														color: 'rgba(0, 0, 0, 1)'
+
 													},
 												}
-											},
-											x: {
-												grid: {
-													color: 'rgba(0, 0, 0, .3)',
-												},
-												ticks: {
-													color: 'rgba(0, 0, 0, 1)',
-													font: {
-														family: "'Cabin', sans-serif",
-														size: 12
-													}
-												}
-											}
-										},
-										plugins: {
-											tooltip: {
-												intersect: false,
-												backgroundColor: "rgba(0, 0, 0, 1)",
-												titleColor: "#f3a893",
-												bodyColor: "#f3a893",
-												bodySpacing: 2,
-												padding: 12,
-												position: "nearest",
-												cornerRadius: 12,
-												titleFont: {
-													family: "'Cabin', sans-serif",
-													size: 16
-												}
-											},
-											legend: {
-												display: false
-											},
-											title: {
-												font: {
-													size: 16,
-													family: "'Cabin', sans-serif"
-												},
-												display: true,
-												text: 'Rainfall (mm)',
-												color: 'rgba(0, 0, 0, 1)'
-
-											},
-										}
-									}}
-									data={{
-										labels: chartLabels,
-										datasets: [
-											{
-												borderRadius: 12,
-												data: chartValues,
-												backgroundColor: "#ec6e4c",
-											},
-										],
-									}}
-								/>
-							</div>
+											}}
+											data={{
+												labels: chartLabels,
+												datasets: [
+													{
+														borderRadius: 3,
+														data: chartValues,
+														backgroundColor: "#ec6e4c",
+													},
+												],
+											}}
+										/>
+									</div>
+								)}
+							</>
 						)}
-					</>
-				)}
-			</div>
-			<Line type="box" />
+					</div>
+					<Line type="box" />
+				</>
+			)}
 			<div className={classNames(styles.column, !isLoading && styles.columnJustification)}>
 				{isLoading ? (
 					<Skeleton count={3.5} className={styles.skeleton} />

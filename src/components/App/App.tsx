@@ -9,6 +9,7 @@ import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
 import { Forecast } from '../Forecast/Forecast'
 import { MainInfo } from '../MainInfo/MainInfo'
 import { MobileLoader } from '../MobileLoader/MobileLoader'
+import { MobileReturn } from '../MobileReturn/MobileReturn'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondayInfo } from '../SecondaryInfo/SecondayInfo'
 import { Box } from '../reuseables/Box/Box'
@@ -29,8 +30,11 @@ export function App() {
 	function futureTimeHandler(date: TimeInfo | null) {
 		if (date?.dt === weatherData?.current.dt) {
 			setFutureTimeInterval(null)
+
+			return
 		}
 
+		window.scrollTo(0, 0)
 		setFutureTimeInterval(date)
 	}
 
@@ -87,6 +91,9 @@ export function App() {
 								toggleShow={setIsFavMobileOpen}
 							/>
 						</>
+					)}
+					{isMobile && futureTimeInterval && (
+						<MobileReturn />
 					)}
 					{error ? (
 						<div className={styles.error}>
