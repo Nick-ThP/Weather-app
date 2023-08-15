@@ -48,8 +48,8 @@ export function SecondaryInfo(props: Props) {
 	const chartValues = useMemo(() => {
 		if (weatherData?.minutely) {
 			return convertMinutesToChunks(weatherData?.minutely
-				.map((minute, idx) => idx < 60 ? minute.precipitation : null)
-				.filter(minute => minute !== null) as number[], chartBarAmount)
+				.map(minute => minute.precipitation)
+				.filter((_, idx) => idx < 60), chartBarAmount)
 		}
 
 		// Showcasing purposes
