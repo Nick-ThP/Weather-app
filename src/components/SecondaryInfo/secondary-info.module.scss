@@ -7,14 +7,10 @@
 .column {
 	@include box-column;
 	gap: 0rem;
+	justify-content: space-between;
 
 	&:has(.chart) {
-		justify-content: space-between;
 		padding-inline: .5rem;
-	}
-
-	&:has(.information) {
-		justify-content: space-around;
 	}
 }
 
@@ -45,7 +41,7 @@
 		margin-top: 1.5rem;
 		display: inline-flex;
 		justify-content: center;
-		gap: .25rem;
+		gap: .6rem;
 	}
 }
 

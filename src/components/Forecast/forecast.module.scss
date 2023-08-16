@@ -95,7 +95,8 @@
 	&Selected {
 		opacity: 1;
 		padding-top: 0;
-		border-top: .2rem solid $accent-color;
+		border-top: .25rem solid $accent-color;
+		border-radius: $border-radius;
 	}
 }
 
