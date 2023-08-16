@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -13,6 +14,7 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondaryInfo } from '../SecondaryInfo/SecondaryInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
+
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
@@ -41,10 +43,24 @@ export function App() {
 								? styles.favoritesShowOnMobile
 								: styles.favoritesHideOnMobile
 							)}>
-								<FavoritesBar
-									favoriteCities={favoriteCities}
-									toggleShow={setIsFavMobileOpen}
-								/>
+								{isMobile ? (
+									<FavoritesBar
+										favoriteCities={favoriteCities}
+										toggleShow={setIsFavMobileOpen}
+									/>
+								) : (
+									<motion.div
+										initial={{ scaleX: 0, opacity: 0 }}
+										animate={{ scaleX: 1, opacity: 1 }}
+										exit={{ scaleX: 0, opacity: 0 }}
+										transition={{ type: "spring", stiffness: 900, damping: 40 }}
+									>
+										<FavoritesBar
+											favoriteCities={favoriteCities}
+											toggleShow={setIsFavMobileOpen}
+										/>
+									</motion.div>
+								)}
 							</div>
 							<FavoritesStar
 								show={isFavMobileOpen}

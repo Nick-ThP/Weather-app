@@ -1,7 +1,8 @@
-import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
-import { useWeatherContext } from '../../contexts/useWeatherContext';
-import { Button } from '../reuseables/Button/Button';
-import styles from './favorites-bar.module.scss';
+import classNames from 'classnames'
+import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
+import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { Button } from '../reuseables/Button/Button'
+import styles from './favorites-bar.module.scss'
 
 type Props = {
 	favoriteCities: string[]
@@ -9,8 +10,8 @@ type Props = {
 }
 
 export function FavoritesBar(props: Props) {
-	const { city, setCity } = useWeatherContext()
-	const isPresent = useIsPresent();
+	const { city, futureTime, isLoading, setCity } = useWeatherContext()
+	const isPresent = useIsPresent()
 
 	function clickHandler(city: string) {
 		setCity(city)
@@ -29,7 +30,7 @@ export function FavoritesBar(props: Props) {
 	}
 
 	return (
-		<ul>
+		<ul className={classNames(!isLoading && futureTime && styles.orange)}>
 			<AnimatePresence custom={props.favoriteCities}>
 				{props.favoriteCities.map((favCity, idx) => (
 					<motion.li
