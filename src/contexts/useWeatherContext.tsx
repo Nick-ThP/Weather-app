@@ -1,20 +1,22 @@
 import axios from "axios"
-import { ReactNode, createContext, useCallback, useContext, useLayoutEffect, useState } from "react"
+import { ReactNode, createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from "react"
 import { City } from "../data/city-types"
 import cityData from '../data/cityData.json'
 import { useLocalStorage } from "../hooks/useLocalStorage"
-import { IWeatherContext, IWeatherData } from "./weather-data-types"
+import { IWeatherContext, IWeatherData, TimeInfo } from "./weather-data-types"
 
 const WeatherContext = createContext<IWeatherContext>({
-	weatherData: null,
+	allWeatherData: null,
+	weatherSource: null,
 	city: '',
+	futureTime: null,
 	isLoading: false,
 	error: null,
-	setError() { },
 	setCity() { },
- 	refresh() { }
+	setFutureTime() { },
+	setError() { },
+	refresh() { }
 })
-
 
 export function useWeatherContext() {
 	let context = useContext(WeatherContext)
@@ -28,13 +30,33 @@ export function useWeatherContext() {
 
 export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [city, _setCity] = useLocalStorage<string>('city', 'Aalborg')
-	const [weatherData, setWeatherData] = useState<IWeatherData | null>(null)
+	const [allWeatherData, setAllWeatherData] = useState<IWeatherData | null>(null)
+	const [futureTime, _setFutureTime] = useState<TimeInfo | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	function setCity(city: string) {
 		_setCity(city)
 		setError(null)
+	}
+
+	function setFutureTime(date: TimeInfo | null) {
+		setIsLoading(true)
+		const loadTimeout = setTimeout(() => {
+			setIsLoading(false)
+		}, 300)
+
+
+		if (date?.dt === allWeatherData?.current.dt) {
+			_setFutureTime(null)
+
+			return loadTimeout
+		}
+
+		window.scrollTo(0, 0)
+		_setFutureTime(date)
+
+		return loadTimeout
 	}
 
 	const executeApiRequest = useCallback(async () => {
@@ -53,12 +75,13 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 			throw Error('Something is wrong with the provided city data')
 		}
 
+		_setFutureTime(null)
 		setError(null)
 		setIsLoading(true)
 
 		try {
 			const bulkRes = await axios.get(createBulkDataURL())
-			setWeatherData(bulkRes.data)
+			setAllWeatherData(bulkRes.data)
 		}
 
 		catch (err) {
@@ -71,22 +94,38 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 				setIsLoading(false)
 			}, 300)
 		}
+
 	}, [city])
 
 	useLayoutEffect(() => {
 		executeApiRequest()
 	}, [executeApiRequest])
 
+	const weatherSource = useMemo(() => {
+		if (futureTime) {
+			if (futureTime.type === 'hour') {
+				return allWeatherData?.hourly.find(hour => hour.dt === futureTime.dt) || null
+			} else if (futureTime.type === 'date') {
+				return allWeatherData?.daily.find(date => date.dt === futureTime.dt) || null
+			}
+		}
+
+		return allWeatherData?.current || null
+	}, [allWeatherData, futureTime])
+
 	const refresh = executeApiRequest
 
 	const contextData: IWeatherContext = {
-		weatherData,
+		allWeatherData,
+		weatherSource,
 		city,
+		futureTime,
 		isLoading,
 		error,
-		setError,
 		setCity,
-		refresh
+		setFutureTime,
+		setError,
+		refresh,
 	}
 
 	return (

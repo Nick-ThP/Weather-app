@@ -7,7 +7,6 @@ type Props = {
 	midnightSplit?: boolean
 }
 
-
 export function Line({midnightSplit = false, horizontalOnDesktop = false, ...props}: Props) {
 	return (
 		<div

@@ -1,10 +1,13 @@
 export interface IWeatherContext {
-	weatherData: IWeatherData | null
+	allWeatherData: IWeatherData | null
+	weatherSource: Current | Daily | null
 	city: string
+	futureTime: TimeInfo | null
 	isLoading: boolean
 	error: string | null
-	setError: (value: string | null) => void
-	setCity: (value: string) => void
+	setCity: (val: string) => void
+	setFutureTime: (val: TimeInfo | null) => void
+	setError: (val: string | null) => void
 	refresh: () => void
 }
 
@@ -104,4 +107,9 @@ export interface Temp {
 export interface Minutely {
 	dt: number;
 	precipitation: number;
+}
+
+export type TimeInfo = {
+	type: 'hour' | 'date',
+	dt: number
 }

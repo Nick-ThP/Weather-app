@@ -3,7 +3,6 @@ import { useLayoutEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useWeatherContext } from "../../contexts/useWeatherContext"
-import { Current, Daily } from "../../contexts/weather-data-types"
 import { useMediaQuery } from "../../hooks/useMediaQuery"
 import rain from '../../images/rain.png'
 import sun from '../../images/sun.png'
@@ -12,13 +11,10 @@ import sunset from '../../images/sunset.png'
 import wind from '../../images/wind.png'
 import { createDateInfo } from "../../utils/date-formatting"
 import { createTempOrTemps } from "../../utils/temperature-formatting"
-import { TimeInfo } from "../App/App"
 import { Line } from "../reuseables/Line/Line"
 import styles from './main-info.module.scss'
 
 interface Props {
-	weatherSource: Current | Daily | null
-	futureTimeInterval: TimeInfo | null
 	favoriteCities: string[]
 	setFavoriteCities: (arr: string[]) => void
 }
@@ -26,7 +22,7 @@ interface Props {
 export function MainInfo(props: Props) {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { city, isLoading, weatherData, refresh } = useWeatherContext()
+	const { allWeatherData, weatherSource, city, futureTime, isLoading, refresh } = useWeatherContext()
 
 	useLayoutEffect(() => {
 		if (props.favoriteCities.find(favCity => favCity === city)) {
@@ -45,7 +41,7 @@ export function MainInfo(props: Props) {
 	}
 
 	function createRainInfo(rain: number | { '1h': number }) {
-		if (props.futureTimeInterval?.type === 'date' && typeof rain === 'number') {
+		if (futureTime?.type === 'date' && typeof rain === 'number') {
 			return Math.round(rain * 10) / 10
 		} else if (typeof rain === 'object' && rain['1h']) {
 			return Math.round(rain['1h'] * 10) / 10
@@ -69,9 +65,9 @@ export function MainInfo(props: Props) {
 	}
 
 	function createSunInfo(hourDateStamp: number, sunInfo: 'sunrise' | 'sunset') {
-		if (props.futureTimeInterval?.type === 'hour') {
+		if (futureTime?.type === 'hour') {
 			const intervalDate = new Date(hourDateStamp * 1000).getDate()
-			const correspondingDate = weatherData?.daily.find(date => new Date(date.dt * 1000).getDate() === intervalDate)
+			const correspondingDate = allWeatherData?.daily.find(date => new Date(date.dt * 1000).getDate() === intervalDate)
 
 			if (correspondingDate) {
 				return createDateInfo(correspondingDate[sunInfo]).preciseTime
@@ -102,22 +98,22 @@ export function MainInfo(props: Props) {
 							</svg>
 						</div>
 						<div className={styles.row}>
-							{props.weatherSource?.dt && (
+							{weatherSource?.dt && (
 								<div className={classNames(styles.currentDate)}>
 									<div>
-										{createDateInfo(props.weatherSource?.dt).dateFull}
+										{createDateInfo(weatherSource?.dt).dateFull}
 									</div>
 									<div className={styles.refreshSpan}>
-										{props.futureTimeInterval?.type !== 'date' ? (
+										{futureTime?.type !== 'date' ? (
 											<>
-												{createDateInfo(props.weatherSource?.dt).preciseTime}
+												{createDateInfo(weatherSource?.dt).preciseTime}
 											</>
 										) : (
 											<>
 												Full day
 											</>
 										)}
-										{!isMobile && (
+										{!isMobile && !futureTime && (
 											<svg
 												className={styles.refreshIcon}
 												viewBox="0 0 24 24"
@@ -133,19 +129,19 @@ export function MainInfo(props: Props) {
 						</div>
 						<div className={styles.row}>
 							<div className={styles.currentWeather}>
-								{props.weatherSource?.weather[0].description.split('').map((letter, idx) => idx === 0 ? letter.toUpperCase() : letter).join('')}
+								{weatherSource?.weather[0].description.split('').map((letter, idx) => idx === 0 ? letter.toUpperCase() : letter).join('')}
 							</div>
 						</div>
 						<div className={styles.row}>
-							{props.weatherSource?.temp && (
-								<div className={classNames(styles.temp, typeof props.weatherSource?.temp === 'object' && styles.tempTwo)}>
-									{createTempOrTemps(props.weatherSource?.temp)}
+							{weatherSource?.temp && (
+								<div className={classNames(styles.temp, typeof weatherSource?.temp === 'object' && styles.tempTwo)}>
+									{createTempOrTemps(weatherSource?.temp)}
 								</div>
 							)}
-							{props.weatherSource?.weather[0].icon && (
+							{weatherSource?.weather[0].icon && (
 								<img
 									className={styles.dynamicIcon}
-									src={`https://openweathermap.org/img/wn/${props.weatherSource?.weather[0].icon}@2x.png`}
+									src={`https://openweathermap.org/img/wn/${weatherSource?.weather[0].icon}@2x.png`}
 									alt="current weather depiction"
 								/>
 							)}
@@ -166,11 +162,11 @@ export function MainInfo(props: Props) {
 									UV index
 								</div>
 								<div>
-									{createUvInfo(props.weatherSource?.uvi || 0)}
+									{createUvInfo(weatherSource?.uvi || 0)}
 								</div>
 							</div>
 						</div>
-						{props.weatherSource?.wind_speed && (
+						{weatherSource?.wind_speed && (
 							<div className={styles.row}>
 								<img className={styles.staticIcon} src={wind} alt="Wind" />
 								<div className={styles.description}>
@@ -178,7 +174,7 @@ export function MainInfo(props: Props) {
 										Wind speed
 									</div>
 									<div>
-										{Math.round(props.weatherSource?.wind_speed * 10) / 10} m/s
+										{Math.round(weatherSource?.wind_speed * 10) / 10} m/s
 									</div>
 								</div>
 							</div>
@@ -187,10 +183,10 @@ export function MainInfo(props: Props) {
 							<img className={styles.staticIcon} src={rain} alt="Rainfall" />
 							<div className={styles.description}>
 								<div>
-									{props.futureTimeInterval?.type === 'date' ? 'Rainfall' : 'Rain this hour'}
+									{futureTime?.type === 'date' ? 'Daily rainfall' : 'Rain this hour'}
 								</div>
 								<div>
-									{props.weatherSource?.rain ? createRainInfo(props.weatherSource?.rain) : 0} mm
+									{weatherSource?.rain ? createRainInfo(weatherSource?.rain) : 0} mm
 								</div>
 							</div>
 						</div>
@@ -198,15 +194,15 @@ export function MainInfo(props: Props) {
 						<div className={styles.sunRow}>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunrise} alt="sunrise" />
-								{props.weatherSource?.dt && (
+								{weatherSource?.dt && (
 									<>
-										{props.weatherSource.sunrise ? (
+										{weatherSource.sunrise ? (
 											<>
-												{createDateInfo(props.weatherSource?.sunrise).preciseTime}
+												{createDateInfo(weatherSource?.sunrise).preciseTime}
 											</>
 										) : (
 											<>
-												{createSunInfo(props.weatherSource?.dt, 'sunrise')}
+												{createSunInfo(weatherSource?.dt, 'sunrise')}
 											</>
 										)}
 									</>
@@ -214,15 +210,15 @@ export function MainInfo(props: Props) {
 							</div>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunset} alt="sunset" />
-								{props.weatherSource?.dt && (
+								{weatherSource?.dt && (
 									<>
-										{props.weatherSource.sunset ? (
+										{weatherSource.sunset ? (
 											<>
-												{createDateInfo(props.weatherSource?.sunset).preciseTime}
+												{createDateInfo(weatherSource?.sunset).preciseTime}
 											</>
 										) : (
 											<>
-												{createSunInfo(props.weatherSource?.dt, 'sunset')}
+												{createSunInfo(weatherSource?.dt, 'sunset')}
 											</>
 										)}
 									</>

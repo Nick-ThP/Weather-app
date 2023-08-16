@@ -10,12 +10,15 @@ export function SearchBar() {
 	const [input, setInput] = useState('')
 	const { city, setCity, setError } = useWeatherContext()
 	const inputRef = useRef<HTMLInputElement>(null)
+	const cityRef = useRef<string>(city)
 
 	useEffect(() => {
-		if (city !== input) {
-			setInput('')
+		if (cityRef.current !== city && input !== city) {
+			setInput(city)
 		}
-	}, [city]);
+
+		cityRef.current = city
+	}, [city, input]);
 
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => {

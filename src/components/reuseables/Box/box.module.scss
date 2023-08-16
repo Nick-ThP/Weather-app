@@ -6,6 +6,10 @@
 	height: 100%;
 	border-radius: $border-radius;
 	padding: 1rem 1.5rem;
+
+	&Orange {
+		box-shadow: 0 0 .25rem $accent-color;
+	}
 }
 
 .error {

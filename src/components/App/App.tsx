@@ -1,7 +1,6 @@
 import classNames from 'classnames'
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
-import { Current, Daily } from '../../contexts/weather-data-types'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
@@ -15,50 +14,11 @@ import { SecondaryInfo } from '../SecondaryInfo/SecondaryInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
 
-export type TimeInfo = {
-	type: 'hour' | 'date',
-	dt: number
-}
-
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
-	const [futureTimeInterval, setFutureTimeInterval] = useState<TimeInfo | null>(null)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { error, isLoading, weatherData } = useWeatherContext()
-
-	function futureTimeHandler(date: TimeInfo | null) {
-		if (date?.dt === weatherData?.current.dt) {
-			setFutureTimeInterval(null)
-
-			return
-		}
-
-		window.scrollTo(0, 0)
-		setFutureTimeInterval(date)
-	}
-
-	useLayoutEffect(() => {
-		if (isLoading && futureTimeInterval) {
-			setFutureTimeInterval(null)
-		}
-	}, [isLoading, futureTimeInterval])
-
-	const weatherSource: Current | Daily | null = useMemo(() => {
-		if (futureTimeInterval) {
-			if (futureTimeInterval.type === 'hour') {
-				return weatherData?.hourly.find(hour => hour.dt === futureTimeInterval.dt) || null
-			} else if (futureTimeInterval.type === 'date') {
-				return weatherData?.daily.find(date => date.dt === futureTimeInterval.dt) || null
-			}
-		}
-
-		if (weatherData?.current) {
-			return weatherData?.current
-		}
-
-		return null
-	}, [weatherData, futureTimeInterval])
+	const { error, futureTime, isLoading } = useWeatherContext()
 
 	return (
 		<>
@@ -92,7 +52,7 @@ export function App() {
 							/>
 						</>
 					)}
-					{isMobile && (futureTimeInterval || error) && (
+					{isMobile && (futureTime || error) && (
 						<MobileReturn />
 					)}
 					{error ? (
@@ -106,8 +66,6 @@ export function App() {
 							<div className={styles.mainInfo}>
 								<Box>
 									<MainInfo
-										weatherSource={weatherSource}
-										futureTimeInterval={futureTimeInterval}
 										favoriteCities={favoriteCities}
 										setFavoriteCities={setFavoriteCities}
 									/>
@@ -115,18 +73,12 @@ export function App() {
 							</div>
 							<div className={styles.secondaryInfo}>
 								<Box>
-									<SecondaryInfo
-										weatherSource={weatherSource}
-										futureTimeInterval={futureTimeInterval}
-										setFutureTimeInterval={futureTimeHandler}
-									/>
+									<SecondaryInfo />
 								</Box>
 							</div>
 							<div className={styles.forecast}>
 								<Box forecast>
-									<Forecast
-										futureTimeInterval={futureTimeInterval}
-										setFutureTimeInterval={futureTimeHandler} />
+									<Forecast />
 								</Box>
 							</div>
 						</>

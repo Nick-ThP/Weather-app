@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .wrapper {
-	@include box-wrapper
+	@include box-wrapper;
 }
 
 .column {
@@ -22,7 +22,7 @@
 }
 
 .skeleton {
-	@include box-skeleton
+	@include box-skeleton;
 }
 
 h2 {
