@@ -1,9 +1,9 @@
-import Fuse from 'fuse.js';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useWeatherContext } from '../../contexts/useWeatherContext';
-import { City } from '../../data/city-types';
-import cityData from '../../data/cityData.json';
-import styles from './search-bar.module.scss';
+import Fuse from 'fuse.js'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { City } from '../../data/city-types'
+import cityData from '../../data/cityData.json'
+import styles from './search-bar.module.scss'
 
 export function SearchBar() {
 	const [fuseQuery, setFuseQuery] = useState('')

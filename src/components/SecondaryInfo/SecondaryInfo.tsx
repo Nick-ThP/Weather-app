@@ -16,8 +16,7 @@ import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { createDateInfo } from "../../utils/date-formatting"
 import { convertMinutesToChunks } from '../../utils/minutes-to-chunks'
-import { createTempOrTemps } from "../../utils/temperature-formatting"
-import { createWindInfo } from "../../utils/wind-formatting"
+import { createTempInfo, createWindInfo } from '../../utils/weather-formatting'
 import { Button } from '../reuseables/Button/Button'
 import { Line } from "../reuseables/Line/Line"
 import styles from './secondary-info.module.scss'
@@ -35,13 +34,11 @@ export function SecondaryInfo() {
 		Legend
 	)
 
-	const chartBarAmount = 6
-
 	const chartValues = useMemo(() => {
 		if (allWeatherData?.minutely) {
 			return convertMinutesToChunks(allWeatherData?.minutely
 				.map(minute => minute.precipitation)
-				.filter((_, idx) => idx < 60), chartBarAmount)
+				.filter((_, idx) => idx < 60), 6)
 		}
 
 		// Showcasing purposes
@@ -201,7 +198,7 @@ export function SecondaryInfo() {
 								<div>
 									Feels like
 								</div>
-								{weatherSource?.feels_like ? `${createTempOrTemps(weatherSource?.feels_like)} ${typeof weatherSource?.feels_like === 'number' ? 'C' : ''}` : 'Unavailable'}
+								{weatherSource?.feels_like ? `${createTempInfo(weatherSource?.feels_like)} ${typeof weatherSource?.feels_like === 'number' ? 'C' : ''}` : 'Unavailable'}
 							</div>
 						</div>
 						<div className={styles.row}>

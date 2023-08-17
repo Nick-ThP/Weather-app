@@ -108,8 +108,8 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background-size: auto 6000px;
-		background-position: 10% 0%;
+		background: center repeat url(../../images/mobile-background.jpg);
+		background-size: 600px;
 		position: absolute;
 		height: auto;
 		display: grid;
