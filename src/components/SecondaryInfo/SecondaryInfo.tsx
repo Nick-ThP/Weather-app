@@ -56,7 +56,7 @@ export function SecondaryInfo() {
 		}
 
 		// Showcasing purposes
-		return ['No', 'Rain', 'So', 'Just', 'Show', 'Casing']
+		return ['API', 'Problems', 'So', 'Just', 'Show', 'Casing']
 	}, [allWeatherData])
 
 	return (
@@ -196,28 +196,24 @@ export function SecondaryInfo() {
 					<Skeleton count={3.5} className={styles.skeleton} />
 				) : (
 					<>
-						{weatherSource?.feels_like && (
-							<div className={styles.row}>
-								<div className={styles.information}>
-									<div>
-										Feels like
-									</div>
-									{`${createTempOrTemps(weatherSource?.feels_like)} ${typeof weatherSource?.feels_like === 'number' ? 'C' : ''}`}
+						<div className={styles.row}>
+							<div className={styles.information}>
+								<div>
+									Feels like
+								</div>
+								{weatherSource?.feels_like ? `${createTempOrTemps(weatherSource?.feels_like)} ${typeof weatherSource?.feels_like === 'number' ? 'C' : ''}` : 'Unavailable'}
+							</div>
+						</div>
+						<div className={styles.row}>
+							<div className={styles.information}>
+								<div>
+									Wind direction
+								</div>
+								<div>
+									{weatherSource?.wind_deg ? createWindInfo(weatherSource?.wind_deg) : 'Unavailable'}
 								</div>
 							</div>
-						)}
-						{weatherSource?.wind_deg && (
-							<div className={styles.row}>
-								<div className={styles.information}>
-									<div>
-										Wind direction
-									</div>
-									<div>
-										{createWindInfo(weatherSource?.wind_deg)}
-									</div>
-								</div>
-							</div>
-						)}
+						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
@@ -234,7 +230,7 @@ export function SecondaryInfo() {
 									Cloud cover
 								</div>
 								<div>
-									{`${weatherSource?.clouds} %`}
+									{weatherSource?.clouds ? `${weatherSource?.clouds} %` : 'Unavailable'}
 								</div>
 							</div>
 						</div>
@@ -244,29 +240,27 @@ export function SecondaryInfo() {
 									Humidity
 								</div>
 								<div>
-									{`${weatherSource?.humidity} %`}
+									{weatherSource?.humidity ? `${weatherSource?.humidity} %` : 'Unavailable'}
 								</div>
 							</div>
 						</div>
-						{weatherSource?.dew_point && (
-							<div className={styles.row}>
-								<div className={styles.information}>
-									<div>
-										Dew point
-									</div>
-									<div>
-										{`${Math.round(weatherSource?.dew_point * 10) / 10}° C`}
-									</div>
+						<div className={styles.row}>
+							<div className={styles.information}>
+								<div>
+									Dew point
+								</div>
+								<div>
+									{weatherSource?.dew_point ? `${Math.round(weatherSource?.dew_point * 10) / 10}° C` : 'Unavailable'}
 								</div>
 							</div>
-						)}
+						</div>
 						<div className={styles.row}>
 							<div className={styles.information}>
 								<div>
 									Pressure
 								</div>
 								<div>
-									{`${weatherSource?.pressure} mb`}
+									{weatherSource?.pressure ? `${weatherSource?.pressure} mb` : 'Unavailable'}
 								</div>
 							</div>
 						</div>

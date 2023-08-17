@@ -51,9 +51,7 @@ export function MainInfo(props: Props) {
 	function createUvInfo(uv: number) {
 		let scoreString = ''
 
-		if (uv === 0) {
-			scoreString = '(none)'
-		} else if (uv < 6) {
+		if (uv < 6) {
 			scoreString = '(low)'
 		} else if (uv < 8) {
 			scoreString = '(high)'
@@ -98,46 +96,50 @@ export function MainInfo(props: Props) {
 							</svg>
 						</div>
 						<div className={styles.row}>
-							{weatherSource?.dt && (
-								<div className={classNames(styles.currentDate)}>
+							<div className={classNames(styles.currentDate)}>
+								{weatherSource?.dt ? (
+									<>
+										<div>
+											{createDateInfo(weatherSource?.dt).dateFull}
+										</div>
+										<div className={styles.refreshSpan}>
+											{futureTime?.type !== 'date' ? (
+												<>
+													{createDateInfo(weatherSource?.dt).preciseTime}
+												</>
+											) : (
+												<>
+													Full day
+												</>
+											)}
+											{!isMobile && !futureTime && (
+												<svg
+													className={styles.refreshIcon}
+													viewBox="0 0 24 24"
+													width="24"
+													height="24"
+													onClick={refresh}>
+													<path d="M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z" />
+												</svg>
+											)}
+										</div>
+									</>
+								) : (
 									<div>
-										{createDateInfo(weatherSource?.dt).dateFull}
+										Unavailable
 									</div>
-									<div className={styles.refreshSpan}>
-										{futureTime?.type !== 'date' ? (
-											<>
-												{createDateInfo(weatherSource?.dt).preciseTime}
-											</>
-										) : (
-											<>
-												Full day
-											</>
-										)}
-										{!isMobile && !futureTime && (
-											<svg
-												className={styles.refreshIcon}
-												viewBox="0 0 24 24"
-												width="24"
-												height="24"
-												onClick={refresh}>
-												<path d="M9 12l-4.463 4.969-4.537-4.969h3c0-4.97 4.03-9 9-9 2.395 0 4.565.942 6.179 2.468l-2.004 2.231c-1.081-1.05-2.553-1.699-4.175-1.699-3.309 0-6 2.691-6 6h3zm10.463-4.969l-4.463 4.969h3c0 3.309-2.691 6-6 6-1.623 0-3.094-.65-4.175-1.699l-2.004 2.231c1.613 1.526 3.784 2.468 6.179 2.468 4.97 0 9-4.03 9-9h3l-4.537-4.969z" />
-											</svg>
-										)}
-									</div>
-								</div>
-							)}
-						</div>
-						<div className={styles.row}>
-							<div className={styles.currentWeather}>
-								{weatherSource?.weather[0].description.split('').map((letter, idx) => idx === 0 ? letter.toUpperCase() : letter).join('')}
+								)}
 							</div>
 						</div>
 						<div className={styles.row}>
-							{weatherSource?.temp && (
-								<div className={classNames(styles.temp, typeof weatherSource?.temp === 'object' && styles.tempTwo)}>
-									{createTempOrTemps(weatherSource?.temp)}
-								</div>
-							)}
+							<div className={styles.currentWeather}>
+								{weatherSource?.weather[0].description.split('').map((letter, idx) => idx === 0 ? letter.toUpperCase() : letter).join('') || 'Unavailable'}
+							</div>
+						</div>
+						<div className={styles.row}>
+							<div className={classNames(styles.temp, !weatherSource?.temp && styles.tempNone, typeof weatherSource?.temp === 'object' && styles.tempTwo)}>
+								{weatherSource?.temp ? createTempOrTemps(weatherSource?.temp) : 'Unavailable'}
+							</div>
 							{weatherSource?.weather[0].icon && (
 								<img
 									className={styles.dynamicIcon}
@@ -166,19 +168,17 @@ export function MainInfo(props: Props) {
 								</div>
 							</div>
 						</div>
-						{weatherSource?.wind_speed && (
-							<div className={styles.row}>
-								<img className={styles.staticIcon} src={wind} alt="Wind" />
-								<div className={styles.description}>
-									<div>
-										Wind speed
-									</div>
-									<div>
-										{Math.round(weatherSource?.wind_speed * 10) / 10} m/s
-									</div>
+						<div className={styles.row}>
+							<img className={styles.staticIcon} src={wind} alt="Wind" />
+							<div className={styles.description}>
+								<div>
+									Wind speed
+								</div>
+								<div>
+									{weatherSource?.wind_speed ? Math.round(weatherSource?.wind_speed * 10) / 10 : 0} m/s
 								</div>
 							</div>
-						)}
+						</div>
 						<div className={styles.row}>
 							<img className={styles.staticIcon} src={rain} alt="Rainfall" />
 							<div className={styles.description}>
@@ -194,7 +194,7 @@ export function MainInfo(props: Props) {
 						<div className={styles.sunRow}>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunrise} alt="sunrise" />
-								{weatherSource?.dt && (
+								{weatherSource?.dt ? (
 									<>
 										{weatherSource.sunrise ? (
 											<>
@@ -206,11 +206,11 @@ export function MainInfo(props: Props) {
 											</>
 										)}
 									</>
-								)}
+								) : 'Unavailable'}
 							</div>
 							<div className={styles.sunInfo}>
 								<img className={styles.staticIcon} src={sunset} alt="sunset" />
-								{weatherSource?.dt && (
+								{weatherSource?.dt ? (
 									<>
 										{weatherSource.sunset ? (
 											<>
@@ -222,7 +222,7 @@ export function MainInfo(props: Props) {
 											</>
 										)}
 									</>
-								)}
+								) : 'Unavailable'}
 							</div>
 						</div>
 					</>

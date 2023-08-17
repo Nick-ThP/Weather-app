@@ -21,11 +21,10 @@ export function FavoritesBar(props: Props) {
 
 	function createAbb(city: string) {
 		if (city.split(' ').length === 1) {
-			// One word
+
 			return city.substring(0, 3).toUpperCase()
 		}
 
-		// Multiple words
 		return city.split(' ').map(word => word.substring(0, 1)).join('').substring(0, 3).toUpperCase()
 	}
 

@@ -63,6 +63,7 @@
 	justify-content: flex-end;
 	flex-direction: column;
 	text-align: center;
+	white-space: nowrap;
 
 	h1 {
 		font-family: $serif-font;
@@ -141,7 +142,7 @@
 		justify-content: center;
 
 		h1 {
-			font-size: 3.2rem;
+			font-size: 3.75rem;
 			padding: 1.5rem;
 		}
 	}
@@ -171,15 +172,15 @@
 	.mainInfo,
 	.forecast,
 	.error {
-		padding: 1.5rem;
+		padding: 1.25rem;
 	}
 
 	.secondaryInfo {
-		padding: 0 1.5rem;
+		padding: 0 1.25rem;
 	}
 
 	.forecast,
 	.error {
-		padding-bottom: 2.5rem;
+		padding-bottom: 2rem;
 	}
 }

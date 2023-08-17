@@ -44,7 +44,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		setIsLoading(true)
 		const loadTimeout = setTimeout(() => {
 			setIsLoading(false)
-		}, 300)
+		}, 225)
 
 
 		if (date?.dt === allWeatherData?.current.dt) {
@@ -85,14 +85,14 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		}
 
 		catch (err) {
-			setError('Something went wrong. \n Check your internet connection and/or refresh the page.')
+			setError('Something went wrong. \n Check your connection and/or try again with another search term.')
 			console.error(err)
 		}
 
 		finally {
 			setTimeout(() => {
 				setIsLoading(false)
-			}, 300)
+			}, 250)
 		}
 
 	}, [city])

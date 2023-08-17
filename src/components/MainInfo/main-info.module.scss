@@ -43,12 +43,18 @@ h2 {
 	letter-spacing: .2rem;
 	text-align: justify;
 
+	&None {
+		font-size: 1rem;
+		font-family: $sans-serif-font;
+	}
+
 	&Two {
 		margin-bottom: -.5rem;
 		font-size: 2rem;
 		font-weight: bold;
 		text-align: start;
 	}
+
 }
 
 .star {
@@ -197,6 +203,6 @@ h2 {
 
 	.dynamicIcon {
 		height: 7.5rem;
-		margin: .25rem -1.7rem -.5rem 0;
+		margin: .25rem -1.35rem -.5rem 0;
 	}
 }

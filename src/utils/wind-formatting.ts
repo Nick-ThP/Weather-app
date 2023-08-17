@@ -18,13 +18,13 @@ export function createWindInfo(degrees: number): string {
 		{ name: "W-NW", min: 281.25, max: 303.75 },
 		{ name: "Northwest", min: 303.75, max: 326.25 },
 		{ name: "N-NW", min: 326.25, max: 348.75 }
-	];
+	]
 
 	for (const direction of directions) {
 		if (degrees >= direction.min && degrees < direction.max) {
-			return direction.name;
+			return direction.name
 		}
 	}
 
-	return "Unknown";
+	return "Unknown"
 }

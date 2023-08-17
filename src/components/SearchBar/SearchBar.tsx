@@ -71,7 +71,7 @@ export function SearchBar() {
 				onChange={(e) => setInput(e.target.value)}
 				onKeyUp={(e) => handleChooseCity(e)}
 			/>
-			<datalist id="fuzzyList">
+			<datalist id="fuzzyList" data-testid="datalist">
 				{results.map((cityObj, idx) => (
 					<option key={idx} value={cityObj.city} />
 				))}

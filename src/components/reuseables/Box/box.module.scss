@@ -8,7 +8,7 @@
 	padding: 1rem 1.5rem;
 
 	&Orange {
-		box-shadow: 0 0 .25rem $accent-color;
+		box-shadow: 0 0 .5rem $accent-color;
 	}
 }
 
@@ -17,7 +17,7 @@
 	@include flex-centering;
 	flex-direction: column;
 	gap: 2rem;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	text-align: center;
 	white-space: pre-line;
 }
