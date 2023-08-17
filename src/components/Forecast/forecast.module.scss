@@ -7,7 +7,7 @@
 	justify-content: flex-start;
 	width: 100%;
 	align-items: center;
-	gap: 1.75rem;
+	gap: 1.55rem;
 	padding: 0 .8rem 0 .8rem;
 }
 
@@ -33,7 +33,6 @@
 	gap: 1rem;
 	height: 100%;
 }
-
 
 .hours,
 .dates {
@@ -85,19 +84,24 @@
 	flex-direction: column;
 	font-size: 1rem;
 	cursor: pointer;
-	padding-top: .2rem;
-	opacity: .9;
 
 	&:hover {
 		opacity: .5;
 	}
 
 	&Selected {
-		opacity: 1;
 		padding-top: 0;
-		border-top: .25rem solid $accent-color;
+		border-top: .35rem solid $accent-color;
 		border-radius: $border-radius;
 	}
+}
+
+.hour {
+	width: 4rem;
+}
+
+.date {
+	width: 4.5rem;
 }
 
 .rain {
@@ -144,6 +148,7 @@
 
 	.hour,
 	.date {
+		width: auto;
 		border-top: none;
 		flex-direction: row;
 		justify-content: space-around;
@@ -160,8 +165,9 @@
 		}
 
 		&Selected {
-			padding-right: .5rem;
+			padding-inline: .5rem;
 			border-right: .5rem solid $accent-color;
+			border-left: .5rem solid $accent-color;
 		}
 	}
 
@@ -170,7 +176,6 @@
 	}
 
 	.rain {
-		font-size: .75rem;
 		margin: 0;
 	}
 

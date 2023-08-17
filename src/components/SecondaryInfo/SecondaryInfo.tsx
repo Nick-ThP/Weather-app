@@ -37,7 +37,7 @@ export function SecondaryInfo() {
 	const chartValues = useMemo(() => {
 		if (allWeatherData?.minutely) {
 			return convertMinutesToChunks(allWeatherData?.minutely
-				.map(minute => minute.precipitation)
+				.map(minute => minute.precipitation / 10)
 				.filter((_, idx) => idx < 60), 6)
 		}
 
@@ -150,7 +150,7 @@ export function SecondaryInfo() {
 														},
 														callbacks: {
 															label: (item) => {
-																return `${item.formattedValue} mm`
+																return `${Math.round(Number(item.formattedValue) * 10) / 10} mm`
 															}
 														}
 													},
@@ -217,7 +217,7 @@ export function SecondaryInfo() {
 									Wind gusts
 								</div>
 								<div>
-									{weatherSource?.wind_gust ? `${weatherSource?.wind_gust.toString().split('.')[0]} km/h` : 'None'}
+									{weatherSource?.wind_gust ? `${weatherSource?.wind_gust.toString().split('.')[0]} km/h` : 'Unavailable'}
 								</div>
 							</div>
 						</div>

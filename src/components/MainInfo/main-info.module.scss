@@ -36,7 +36,7 @@ h2 {
 }
 
 .temp {
-	margin-bottom: -1rem;
+	margin-bottom: -.75rem;
 	font-size: 4rem;
 	font-weight: bold;
 	font-family: $serif-font;
@@ -50,11 +50,10 @@ h2 {
 
 	&Two {
 		margin-bottom: -.5rem;
-		font-size: 2rem;
+		font-size: 3rem;
 		font-weight: bold;
 		text-align: start;
 	}
-
 }
 
 .star {
@@ -63,7 +62,6 @@ h2 {
 	margin-bottom: 1.1rem;
 	transition: .3s;
 	cursor: pointer;
-
 
 	&Favorite {
 		fill: $accent-color;
@@ -121,7 +119,6 @@ h2 {
 	justify-content: space-between;
 	flex: 1;
 	font-size: 1rem;
-	font-weight: bold;
 }
 
 .sunRow {
@@ -134,7 +131,6 @@ h2 {
 	gap: .5rem;
 	flex-direction: row;
 	font-size: 1rem;
-	font-weight: bold;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -195,9 +191,7 @@ h2 {
 
 		&Two {
 			margin-bottom: -.5rem;
-			font-size: 4.5rem;
-			font-weight: bold;
-			text-align: start;
+			font-size: 4rem;
 		}
 	}
 

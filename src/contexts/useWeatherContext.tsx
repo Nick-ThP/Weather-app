@@ -104,8 +104,10 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 	const weatherSource = useMemo(() => {
 		if (futureTime) {
 			if (futureTime.type === 'hour') {
+
 				return allWeatherData?.hourly.find(hour => hour.dt === futureTime.dt) || null
 			} else if (futureTime.type === 'date') {
+
 				return allWeatherData?.daily.find(date => date.dt === futureTime.dt) || null
 			}
 		}

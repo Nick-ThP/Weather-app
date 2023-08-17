@@ -54,7 +54,7 @@ export function Forecast() {
 									{idx > 0 && (
 										<Line type="date" midnightSplit={createDateInfo(hour.dt).time === '0:00'} />
 									)}
-									<div className={classNames(styles.hour, futureTime?.dt === hour.dt && styles.hourSelected)} onClick={() => setFutureTime(futureTime?.dt === hour.dt ? null : { type: 'hour', dt: hour.dt })}>
+									<div className={classNames(styles.hour, futureTime?.type === 'hour' && futureTime?.dt === hour.dt && styles.hourSelected)} onClick={() => setFutureTime(futureTime?.dt === hour.dt ? null : { type: 'hour', dt: hour.dt })}>
 										<div>{createDateInfo(hour.dt).time}</div>
 										<img
 											src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
@@ -77,7 +77,7 @@ export function Forecast() {
 									{idx > 0 && (
 										<Line type="date" />
 									)}
-									<div className={classNames(styles.date, futureTime?.dt === date.dt && styles.hourSelected)} onClick={() => setFutureTime(futureTime?.dt === date.dt ? null : { type: 'date', dt: date.dt })}>
+									<div className={classNames(styles.date, futureTime?.type === 'date' && futureTime?.dt === date.dt && styles.dateSelected)} onClick={() => setFutureTime(futureTime?.dt === date.dt ? null : { type: 'date', dt: date.dt })}>
 										<div>{createDateInfo(date.dt).dateShort}</div>
 										<img
 											src={`https://openweathermap.org/img/wn/${date.weather[0].icon}.png`}

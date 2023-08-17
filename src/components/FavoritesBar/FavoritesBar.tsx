@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { Button } from '../reuseables/Button/Button'
 import styles from './favorites-bar.module.scss'
+import { createAbb } from '../../utils/abbreviation-formatting'
 
 type Props = {
 	favoriteCities: string[]
@@ -17,15 +18,6 @@ export function FavoritesBar(props: Props) {
 		setCity(city)
 		props.toggleShow(false)
 		window.scrollTo(0, 0)
-	}
-
-	function createAbb(city: string) {
-		if (city.split(' ').length === 1) {
-
-			return city.substring(0, 3).toUpperCase()
-		}
-
-		return city.split(' ').map(word => word.substring(0, 1)).join('').substring(0, 3).toUpperCase()
 	}
 
 	return (
