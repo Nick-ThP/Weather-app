@@ -25,3 +25,10 @@ li {
 .absolute {
 	position: absolute
 }
+
+@media only screen and (max-width: 1000px) {
+
+	.orange {
+			box-shadow: 0 0 1rem $accent-color;
+	}
+}
