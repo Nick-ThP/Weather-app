@@ -117,7 +117,7 @@
 		grid-template-columns:
 			100%;
 		grid-template-rows:
-			$title-height-mobile $search-height repeat(3, auto);
+			$title-height-mobile $search-height-mobile repeat(3, auto);
 		grid-template-areas:
 			"title"
 			"search"
@@ -131,7 +131,7 @@
 		grid-template-columns:
 			100%;
 		grid-template-rows:
-			$title-height-mobile $search-height auto;
+			$title-height-mobile $search-height-mobile auto;
 		grid-template-areas:
 			"title"
 			"search"
@@ -145,7 +145,6 @@
 		h1 {
 			width: 100%;
 			font-size: 12vw;
-			padding: 2rem 0;
 		}
 	}
 

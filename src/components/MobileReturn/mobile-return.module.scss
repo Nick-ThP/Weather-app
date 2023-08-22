@@ -21,6 +21,10 @@
 		background-color: black;
 		opacity: .3;
 		fill: $accent-color;
+
+		&:active {
+			opacity: 1;
+		}
 	}
 
 }

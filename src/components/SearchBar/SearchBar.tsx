@@ -23,13 +23,14 @@ export function SearchBar() {
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => {
 			setFuseQuery(input.charAt(0).toUpperCase() + input.slice(1))
-		}, 150);
+		}, 100);
 
 		return () => clearTimeout(searchTimeout);
 	}, [input])
 
 	const results = useMemo(() => {
 		const fuse = new Fuse(cityData as City[], {
+			threshold: 0.1,
 			keys: ['city']
 		})
 
