@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { getWeatherToDisplay } from '../../utils/display-weather'
 import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
 import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
 import { Forecast } from '../Forecast/Forecast'
@@ -14,19 +15,37 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondaryInfo } from '../SecondaryInfo/SecondaryInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
+import './background.scss'
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { error, futureTime, isLoading } = useWeatherContext()
+	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
+	const [weather, setWeather] = useState('03d.png')
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (weather === '03d.png') {
+				setWeather('03n.png')
+			}
+
+			if (weather === '03n.png') {
+				setWeather('03d.png')
+			}
+		}, 10000)
+
+		return () => {
+			clearInterval(interval)
+		}
+	}, [weather])
 
 	return (
 		<>
 			{isLoading && isMobile ? (
 				<MobileLoader />
 			) : (
-				<div className={classNames(styles.container, error && styles.errorOccured, favoriteCities.length === 0 && styles.containerWithoutFavorites, error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites)}>
+				<div className={classNames(styles.container, error && styles.errorOccured, favoriteCities.length === 0 && styles.containerWithoutFavorites, error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites)} data-weather={!isMobile && getWeatherToDisplay(weather)}>
 					<div className={styles.title}>
 						<h1>Simple Weather</h1>
 						{!isMobile && (

@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .container {
-	background: center / cover no-repeat url(../../images/background.jpg);
+	transition: background-image 1s ease-in-out;
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -108,7 +108,7 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background: center repeat url(../../images/mobile-background.jpg);
+		background: center repeat url(../../images/mobile-background.jpg) fixed;
 		background-size: 600px;
 		position: absolute;
 		height: auto;
