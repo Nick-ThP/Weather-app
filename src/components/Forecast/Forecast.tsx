@@ -4,15 +4,26 @@ import Skeleton from 'react-loading-skeleton'
 import { useWeatherContext } from "../../contexts/useWeatherContext"
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll'
 import { createDateInfo } from '../../utils/date-formatting'
+import { formatTemperature } from '../../utils/weather-formatting'
 import { Button } from "../reuseables/Button/Button"
 import { Line } from '../reuseables/Line/Line'
 import styles from './forecast.module.scss'
-import { formatTemperature } from '../../utils/weather-formatting'
 
 export function Forecast() {
 	const [isForecastToggle, setIsForecastToggle] = useState<boolean>(true)
+	const [isToggleClicked, setToggleClicked] = useState<boolean>(true)
+	const [contentOpacity, setContentOpacity] = useState<number>(1)
 	const { allWeatherData, futureTime, isLoading, setFutureTime } = useWeatherContext()
 	const scrollRef = useHorizontalScroll()
+
+	const toggleHandler = () => {
+		setToggleClicked(!isToggleClicked)
+		setContentOpacity(0)
+		setTimeout(() => {
+			setIsForecastToggle(!isForecastToggle)
+			setContentOpacity(1)
+		}, 200)
+	}
 
 	return (
 		<div className={classNames(styles.wrapper, isLoading && styles.skeletonWrapper)}>
@@ -29,8 +40,8 @@ export function Forecast() {
 				<>
 					<div className={styles.buttons}>
 						<Button
-							isClicked={isForecastToggle}
-							onClick={() => setIsForecastToggle(!isForecastToggle)}
+							isClicked={isToggleClicked}
+							onClick={toggleHandler}
 							type="toggle"
 							width="10.5rem"
 							mobileWidth="50%"
@@ -38,8 +49,8 @@ export function Forecast() {
 							Next 48 hours
 						</Button>
 						<Button
-							isClicked={!isForecastToggle}
-							onClick={() => setIsForecastToggle(!isForecastToggle)}
+							isClicked={!isToggleClicked}
+							onClick={toggleHandler}
 							type="toggle"
 							width="10.5rem"
 							mobileWidth="50%"
@@ -48,7 +59,7 @@ export function Forecast() {
 						</Button>
 					</div>
 					{isForecastToggle ? (
-						<div className={styles.hours} ref={scrollRef}>
+						<div className={styles.hours} style={{ opacity: contentOpacity }} ref={scrollRef}>
 							{allWeatherData?.hourly.filter((_, idx) => idx !== 0).map((hour, idx) => (
 								<div className={styles.hourWithLine} key={idx}>
 									{idx > 0 && (
@@ -71,7 +82,7 @@ export function Forecast() {
 							))}
 						</div>
 					) : (
-						<div className={styles.dates}>
+						<div className={styles.dates} style={{ opacity: contentOpacity }}>
 							{allWeatherData?.daily.map((date, idx) => (
 								<div className={styles.dateWithLine} key={idx}>
 									{idx > 0 && (
