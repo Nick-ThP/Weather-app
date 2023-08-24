@@ -1,71 +1,35 @@
-// [data-weather="clear-sky-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/clear-sky-day.jpg);
-// }
+[data-weather="clear-sky-day"],
+[data-weather="few-clouds-day"],
+[data-weather="scattered-clouds-day"],
+[data-weather="broken-clouds-day"] {
+	background-image: url(../../images/desktop-backgrounds/day.jpg);
+}
 
-// [data-weather="clear-sky-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/clear-sky-night.jpg);
-// }
+[data-weather="clear-sky-night"],
+[data-weather="few-clouds-night"],
+[data-weather="scattered-clouds-night"],
+[data-weather="broken-clouds-night"] {
+	background-image: url(../../images/desktop-backgrounds/night.jpg);
+}
 
-// [data-weather="few-clouds-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/few-clouds-day.jpg);
-// }
+[data-weather="shower-rain-day"],
+[data-weather="rain-day"],
+[data-weather="shower-rain-night"],
+[data-weather="rain-night"] {
+	background-image: url(../../images/desktop-backgrounds/rain.jpg);
+}
 
-// [data-weather="few-clouds-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/few-clouds-night.jpg);
-// }
+[data-weather="thunderstorm-day"],
+[data-weather="thunderstorm-night"] {
+	background-image: url(../../images/desktop-backgrounds/thunderstorm.jpg);
+}
 
-// [data-weather="scattered-clouds-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/scattered-clouds-day.jpg);
-// }
+[data-weather="snow-day"],
+[data-weather="snow-night"] {
+	background-image: url(../../images/desktop-backgrounds/snow.jpg);
+}
 
-// [data-weather="scattered-clouds-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/scattered-clouds-night.jpg);
-// }
-
-// [data-weather="broken-clouds-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/broken-clouds-day.jpg);
-// }
-
-// [data-weather="broken-clouds-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/broken-clouds-night.jpg);
-// }
-
-// [data-weather="shower-rain-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/shower-rain-day.jpg);
-// }
-
-// [data-weather="shower-rain-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/shower-rain-night.jpg);
-// }
-
-// [data-weather="rain-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/rain-day.jpg);
-// }
-
-// [data-weather="rain-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/rain-night.jpg);
-// }
-
-// [data-weather="thunderstorm-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/thunderstorm-day.jpg);
-// }
-
-// [data-weather="thunderstorm-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/thunderstorm-night.jpg);
-// }
-
-// [data-weather="snow-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/snow-day.jpg);
-// }
-
-// [data-weather="snow-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/snow-night.jpg);
-// }
-
-// [data-weather="mist-day"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/mist-day.jpg);
-// }
-
-// [data-weather="mist-night"] {
-// 	background: center / cover no-repeat url(../../images/desktop-backgrounds/mist-night.jpg);
-// }
+[data-weather="mist-day"],
+[data-weather="mist-night"] {
+	background-image: url(../../images/desktop-backgrounds/mist.jpg);
+}

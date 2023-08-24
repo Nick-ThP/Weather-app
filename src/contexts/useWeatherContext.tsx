@@ -44,7 +44,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		setIsLoading(true)
 		const loadTimeout = setTimeout(() => {
 			setIsLoading(false)
-		}, 225)
+		}, 500)
 
 
 		if (date?.dt === allWeatherData?.current.dt) {
@@ -92,7 +92,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		finally {
 			setTimeout(() => {
 				setIsLoading(false)
-			}, 250)
+			}, 500)
 		}
 
 	}, [city])

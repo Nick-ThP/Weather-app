@@ -22,7 +22,7 @@ export function Forecast() {
 		setTimeout(() => {
 			setIsForecastToggle(!isForecastToggle)
 			setContentOpacity(1)
-		}, 200)
+		}, 150)
 	}
 
 	return (

@@ -108,7 +108,7 @@ export function SecondaryInfo() {
 												scales: {
 													y: {
 														suggestedMin: 0,
-														suggestedMax: 5,
+														suggestedMax: .5,
 														grid: {
 															color: 'rgba(0, 0, 0, .3)',
 														},

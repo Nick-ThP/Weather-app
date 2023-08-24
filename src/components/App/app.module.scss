@@ -2,7 +2,7 @@
 
 .container {
 	transition: background-image 1s ease-in-out;
-	background: center / cover no-repeat url(../../images/background.jpg);
+	background: bottom / cover no-repeat url(../../images/desktop-backgrounds/day.jpg);
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -70,8 +70,8 @@
 		font-family: $serif-font;
 		font-size: 6.5rem;
 		margin: 0;
+		background: -webkit-linear-gradient(black, rgba(122, 94, 82, .35));
 		background-clip: text;
-		background: -webkit-linear-gradient(black, $background-color);
 		-webkit-text-fill-color: transparent;
 		-webkit-background-clip: text;
 	}
@@ -80,6 +80,7 @@
 		font-family: $cursive-font;
 		font-size: 2.25rem;
 		margin: .5rem 0 2rem 0;
+		color: black;
 	}
 }
 
@@ -109,7 +110,7 @@
 @media only screen and (max-width: 1000px) {
 
 	.container {
-		background: center repeat url(../../images/mobile-background.jpg) fixed;
+		background: top repeat url(../../images/mobile-background.jpg);
 		background-size: 600px;
 		position: absolute;
 		height: auto;

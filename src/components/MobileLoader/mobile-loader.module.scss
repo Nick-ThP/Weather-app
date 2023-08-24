@@ -6,7 +6,7 @@
 	left: 0;
 	width: 100vw;
 	height: 100dvh;
-	background: center / cover no-repeat url('../../images/mobile-background.jpg') fixed;
+	background: top repeat url('../../images/mobile-background.jpg');
 	background-size: 600px;
 	@include flex-centering;
 }

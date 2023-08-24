@@ -29,7 +29,7 @@ $border-radius: .666rem;
 
 @mixin frosted-glass($error: false) {
 	@if $error {
-		background: rgba(255, 0, 0, .35)
+		background: rgba(136, 4, 4, 0.35)
 	}
 
 	@else {
@@ -37,7 +37,7 @@ $border-radius: .666rem;
 	}
 
 	box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
-	backdrop-filter: blur(8px);
+	backdrop-filter: blur(10px);
 
 	@media only screen and (max-width: 1000px) {
 		backdrop-filter: blur(20px);

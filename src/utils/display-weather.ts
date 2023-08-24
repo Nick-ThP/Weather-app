@@ -1,30 +1,30 @@
-const weatherData: Record<string, string> = {
-	'01d.png': 'clear-sky-day',
-	'01n.png': 'clear-sky-night',
-	'02d.png': 'few-clouds-day',
-	'02n.png': 'few-clouds-night',
-	'03d.png': 'scattered-clouds-day',
-	'03n.png': 'scattered-clouds-night',
-	'04d.png': 'broken-clouds-day',
-	'04n.png': 'broken-clouds-night',
-	'09d.png': 'shower-rain-day',
-	'09n.png': 'shower-rain-night',
-	'10d.png': 'rain-day',
-	'10n.png': 'rain-night',
-	'11d.png': 'thunderstorm-day',
-	'11n.png': 'thunderstorm-night',
-	'13d.png': 'snow-day',
-	'13n.png': 'snow-night',
-	'50d.png': 'mist-day',
-	'50n.png': 'mist-night',
+const correspondingWeather: Record<string, string> = {
+	'01d': 'clear-sky-day',
+	'01n': 'clear-sky-night',
+	'02d': 'few-clouds-day',
+	'02n': 'few-clouds-night',
+	'03d': 'scattered-clouds-day',
+	'03n': 'scattered-clouds-night',
+	'04d': 'broken-clouds-day',
+	'04n': 'broken-clouds-night',
+	'09d': 'shower-rain-day',
+	'09n': 'shower-rain-night',
+	'10d': 'rain-day',
+	'10n': 'rain-night',
+	'11d': 'thunderstorm-day',
+	'11n': 'thunderstorm-night',
+	'13d': 'snow-day',
+	'13n': 'snow-night',
+	'50d': 'mist-day',
+	'50n': 'mist-night',
 }
 
 export function getWeatherToDisplay(icon: string | undefined): string {
 	if (icon) {
-		return weatherData[icon]
+		return correspondingWeather[icon]
 	}
 
-	return 'scattered-clouds-day'
+	return 'clouds-day'
 }
 
 

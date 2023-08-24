@@ -10,10 +10,10 @@ interface Props {
 }
 
 export function Box({ error = false, forecast = false, ...props }: Props) {
-	const { futureTime, isLoading } = useWeatherContext()
+	const { futureTime } = useWeatherContext()
 
 	return (
-		<div className={classNames(styles.box, error && styles.error, forecast && styles.forecast, !isLoading && futureTime && styles.boxOrange)}>
+		<div className={classNames(styles.box, error && styles.error, forecast && styles.forecast, futureTime && styles.border)}>
 			{props.children}
 		</div>
 	)

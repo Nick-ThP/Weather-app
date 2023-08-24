@@ -11,7 +11,7 @@ type Props = {
 }
 
 export function FavoritesBar(props: Props) {
-	const { city, futureTime, isLoading, setCity } = useWeatherContext()
+	const { city, futureTime, setCity } = useWeatherContext()
 	const isPresent = useIsPresent()
 
 	function clickHandler(city: string) {
@@ -21,7 +21,7 @@ export function FavoritesBar(props: Props) {
 	}
 
 	return (
-		<ul className={classNames(!isLoading && futureTime && styles.orange)}>
+		<ul className={classNames(futureTime && styles.border)}>
 			<AnimatePresence custom={props.favoriteCities}>
 				{props.favoriteCities.map((favCity, idx) => (
 					<motion.li
