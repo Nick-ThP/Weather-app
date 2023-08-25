@@ -1,15 +1,75 @@
-[data-weather="clear-sky-day"],
+@import '../../utils/variables.scss';
+
+[data-weather="clear-sky-day"] {
+	background-image: url(../../images/desktop-backgrounds/clear-day.jpg);
+}
+
+[data-weather="clear-sky-night"] {
+	background-image: url(../../images/desktop-backgrounds/clear-night.jpg);
+
+	h1,
+	p,
+	input,
+	input::placeholder {
+		color: $basis-color;
+	}
+
+	h1 {
+		background: -webkit-linear-gradient($basis-color, rgba(122, 94, 82, .35));
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+	}
+
+	input {
+		border: .125rem solid rgba(243, 168, 147, .5);
+
+		&:focus {
+			border: .125rem solid $accent-color;
+		}
+
+		&::placeholder {
+			opacity: .5;
+		}
+	}
+}
+
 [data-weather="few-clouds-day"],
 [data-weather="scattered-clouds-day"],
 [data-weather="broken-clouds-day"] {
-	background-image: url(../../images/desktop-backgrounds/day.jpg);
+	background-image: url(../../images/desktop-backgrounds/clouds-day.jpg);
 }
 
-[data-weather="clear-sky-night"],
 [data-weather="few-clouds-night"],
 [data-weather="scattered-clouds-night"],
 [data-weather="broken-clouds-night"] {
-	background-image: url(../../images/desktop-backgrounds/night.jpg);
+	background-image: url(../../images/desktop-backgrounds/clouds-night.jpg);
+
+	h1,
+	p,
+	input,
+	input::placeholder {
+		color: $basis-color;
+	}
+
+	h1 {
+		background: -webkit-linear-gradient($basis-color, rgba(122, 94, 82, .35));
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+	}
+
+	input {
+		border: .125rem solid rgba(243, 168, 147, .5);
+
+		&:focus {
+			border: .125rem solid $accent-color;
+		}
+
+		&::placeholder {
+			opacity: .5;
+		}
+	}
 }
 
 [data-weather="shower-rain-day"],
