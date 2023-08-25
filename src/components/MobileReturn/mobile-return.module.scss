@@ -5,26 +5,24 @@
 }
 
 @media only screen and (max-width: 1000px) {
-
 	.icon {
 		display: block;
 		position: fixed;
 		z-index: 2;
-		bottom: .8rem;
-		right: .8rem;
+		bottom: 0.8rem;
+		right: 0.8rem;
 		width: 19.5vw;
 		max-width: 97.5px;
 		aspect-ratio: 1 / 1;
-		transition: .3s;
+		transition: 0.3s;
 		border-radius: 50%;
-		padding: .85rem;
+		padding: 0.85rem;
 		background-color: black;
-		opacity: .3;
+		opacity: 0.3;
 		fill: $accent-color;
 
 		&:active {
 			opacity: 1;
 		}
 	}
-
 }

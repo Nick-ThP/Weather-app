@@ -3,7 +3,7 @@
 button {
 	@include flex-centering;
 	cursor: pointer;
-	box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 	color: $basis-color;
 	opacity: 1;
 	background-color: black;
@@ -12,7 +12,7 @@ button {
 	font-family: $serif-font;
 
 	&:hover {
-		opacity: .7;
+		opacity: 0.7;
 	}
 }
 
@@ -30,18 +30,17 @@ button {
 	cursor: auto;
 	box-shadow: none;
 	color: $accent-color;
-	opacity: .7;
+	opacity: 0.7;
 	pointer-events: none;
 }
 
 @media only screen and (max-width: 1000px) {
-
 	.rectangular {
-		border-radius: .666rem 0 0 0;
+		border-radius: 0.666rem 0 0 0;
 		padding: 1rem;
 
 		&:last-child {
-			border-radius: 0 .666rem 0 0;
+			border-radius: 0 0.666rem 0 0;
 		}
 	}
 }

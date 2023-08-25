@@ -19,12 +19,11 @@ li {
 }
 
 .absolute {
-	position: absolute
+	position: absolute;
 }
 
 @media only screen and (max-width: 1000px) {
-
 	.border {
-			box-shadow: 0 0 1rem $basis-color;
+		box-shadow: 0 0 1rem $basis-color;
 	}
 }

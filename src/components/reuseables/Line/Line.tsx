@@ -7,17 +7,19 @@ type Props = {
 	midnightSplit?: boolean
 }
 
-export function Line({midnightSplit = false, horizontalOnDesktop = false, ...props}: Props) {
+export function Line({
+	midnightSplit = false,
+	horizontalOnDesktop = false,
+	...props
+}: Props) {
 	return (
 		<div
-			className={
-				classNames(
-					styles.basis,
-					styles[props.type],
-					midnightSplit && styles.dateMidnightSplit,
-					horizontalOnDesktop && styles.horizontalOnDesktop
-				)
-			}
+			className={classNames(
+				styles.basis,
+				styles[props.type],
+				midnightSplit && styles.dateMidnightSplit,
+				horizontalOnDesktop && styles.horizontalOnDesktop
+			)}
 		/>
 	)
 }

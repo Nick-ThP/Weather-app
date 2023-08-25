@@ -2,7 +2,7 @@ import {
 	FeelsLike,
 	IWeatherData,
 	Temp,
-	TimeInfo,
+	TimeInfo
 } from '../contexts/weather-data-types'
 import { createDateInfo } from './date-formatting'
 
@@ -90,7 +90,7 @@ export function createWindInfo(degrees: number): string {
 		{ name: 'West', min: 258.75, max: 281.25 },
 		{ name: 'W-NW', min: 281.25, max: 303.75 },
 		{ name: 'Northwest', min: 303.75, max: 326.25 },
-		{ name: 'N-NW', min: 326.25, max: 348.75 },
+		{ name: 'N-NW', min: 326.25, max: 348.75 }
 	]
 
 	for (const direction of directions) {

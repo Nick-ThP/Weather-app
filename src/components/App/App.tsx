@@ -18,7 +18,10 @@ import styles from './app.module.scss'
 import './background.scss'
 
 export function App() {
-	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
+	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>(
+		'favoriteCities',
+		[]
+	)
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
@@ -28,22 +31,36 @@ export function App() {
 			{isLoading && isMobile ? (
 				<MobileLoader />
 			) : (
-				<div className={classNames(styles.container, error && styles.errorOccured, favoriteCities.length === 0 && styles.containerWithoutFavorites, error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites)} data-weather={!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)}>
+				<div
+					className={classNames(
+						styles.container,
+						error && styles.errorOccured,
+						favoriteCities.length === 0 && styles.containerWithoutFavorites,
+						error &&
+							favoriteCities.length === 0 &&
+							styles.errorOccuredWithoutFavorites
+					)}
+					data-weather={
+						!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)
+					}
+				>
 					<div className={styles.title}>
 						<h1>Simple Weather</h1>
-						{!isMobile && (
-							<p>A Simplified Source for Weather Information</p>
-						)}
+						{!isMobile && <p>A Simplified Source for Weather Information</p>}
 					</div>
 					<div className={styles.search}>
 						<SearchBar />
 					</div>
-					{(favoriteCities.length > 0) && (
+					{favoriteCities.length > 0 && (
 						<>
-							<div className={classNames(styles.favorites, isFavMobileOpen
-								? styles.favoritesShowOnMobile
-								: styles.favoritesHideOnMobile
-							)}>
+							<div
+								className={classNames(
+									styles.favorites,
+									isFavMobileOpen
+										? styles.favoritesShowOnMobile
+										: styles.favoritesHideOnMobile
+								)}
+							>
 								{isMobile ? (
 									<FavoritesBar
 										favoriteCities={favoriteCities}
@@ -54,7 +71,7 @@ export function App() {
 										initial={{ scaleX: 0, opacity: 0 }}
 										animate={{ scaleX: 1, opacity: 1 }}
 										exit={{ scaleX: 0, opacity: 0 }}
-										transition={{ type: "spring", stiffness: 900, damping: 40 }}
+										transition={{ type: 'spring', stiffness: 900, damping: 40 }}
 									>
 										<FavoritesBar
 											favoriteCities={favoriteCities}
@@ -69,14 +86,10 @@ export function App() {
 							/>
 						</>
 					)}
-					{isMobile && (futureTime || error) && (
-						<MobileReturn />
-					)}
+					{isMobile && (futureTime || error) && <MobileReturn />}
 					{error ? (
 						<div className={styles.error}>
-							<Box error={true}>
-								{error}
-							</Box>
+							<Box error={true}>{error}</Box>
 						</div>
 					) : (
 						<>

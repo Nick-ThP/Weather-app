@@ -11,9 +11,18 @@ export function createDateInfo(timeStamp: number) {
 	]
 
 	return {
-		dateShort: `${weekDays[fullDate.getDay()].substring(0, 3)}. ${fullDate.getDate()}/${fullDate.getMonth() + 1}`,
-		dateFull: `${weekDays[fullDate.getDay()]} ${fullDate.getDate() }/${fullDate.getMonth() + 1}`,
+		dateShort: `${weekDays[fullDate.getDay()].substring(
+			0,
+			3
+		)}. ${fullDate.getDate()}/${fullDate.getMonth() + 1}`,
+		dateFull: `${weekDays[fullDate.getDay()]} ${fullDate.getDate()}/${
+			fullDate.getMonth() + 1
+		}`,
 		time: `${fullDate.getHours()}:00`,
-		preciseTime: `${fullDate.getHours()}:${fullDate.getMinutes().toString().split('')[1] ? fullDate.getMinutes() : '0' + fullDate.getMinutes().toString()}`
+		preciseTime: `${fullDate.getHours()}:${
+			fullDate.getMinutes().toString().split('')[1]
+				? fullDate.getMinutes()
+				: '0' + fullDate.getMinutes().toString()
+		}`
 	}
 }

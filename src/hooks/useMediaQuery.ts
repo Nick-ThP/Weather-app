@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 
 export function useMediaQuery(initalQuery: string) {
-	const [query, setQuery] = useState(initalQuery);
-	const [matches, setMatches] = useState(false);
+	const [query, setQuery] = useState(initalQuery)
+	const [matches, setMatches] = useState(false)
 
 	useEffect(() => {
 		if (!query) return
 
 		const _onChange = (mql: MediaQueryListEvent) => {
-			setMatches(mql.matches);
+			setMatches(mql.matches)
 		}
 
 		const mql = window.matchMedia(query)
@@ -16,14 +16,14 @@ export function useMediaQuery(initalQuery: string) {
 		setMatches(mql.matches)
 
 		try {
-			mql.addEventListener("change", _onChange)
+			mql.addEventListener('change', _onChange)
 		} catch {
 			mql.addListener(_onChange)
 		}
 
 		return () => {
 			try {
-				mql.removeEventListener("change", _onChange)
+				mql.removeEventListener('change', _onChange)
 			} catch {
 				mql.removeListener(_onChange)
 			}

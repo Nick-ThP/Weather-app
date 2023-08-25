@@ -4,22 +4,22 @@
 }
 
 .box {
-	border-left: .1rem solid rgb(0, 0, 0, .1);
+	border-left: 0.1rem solid rgb(0, 0, 0, 0.1);
 }
 
 .horizontalOnDesktop {
 	height: 0;
 	border-left: none;
 	width: 100%;
-	border-bottom: .1rem solid rgb(0, 0, 0, .1);
+	border-bottom: 0.1rem solid rgb(0, 0, 0, 0.1);
 }
 
 .date {
 	height: 75%;
-	border-left: .1rem solid rgb(0, 0, 0, .1);
+	border-left: 0.1rem solid rgb(0, 0, 0, 0.1);
 
 	&MidnightSplit {
-		border-left: .12rem solid rgb(0, 0, 0, .5);
+		border-left: 0.12rem solid rgb(0, 0, 0, 0.5);
 	}
 }
 
@@ -31,14 +31,14 @@
 	}
 
 	.box {
-		border-bottom: .1rem solid rgb(0, 0, 0, .1);
+		border-bottom: 0.1rem solid rgb(0, 0, 0, 0.1);
 	}
 
 	.date {
-		border-bottom: .1rem solid rgb(0, 0, 0, .1);
+		border-bottom: 0.1rem solid rgb(0, 0, 0, 0.1);
 
 		&MidnightSplit {
-			border-bottom: .12rem solid rgb(0, 0, 0, .5);
+			border-bottom: 0.12rem solid rgb(0, 0, 0, 0.5);
 		}
 	}
 }

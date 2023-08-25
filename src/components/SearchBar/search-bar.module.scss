@@ -7,17 +7,17 @@
 }
 
 input {
-	padding: .5rem 1rem;
+	padding: 0.5rem 1rem;
 	border-radius: $border-radius;
 	font-size: 1.5rem;
 	border: none;
 	outline: none;
 	background: none;
-	border: .125rem solid rgb(0, 0, 0, .5);
+	border: 0.125rem solid rgb(0, 0, 0, 0.5);
 	caret-color: $accent-color;
 
 	&::placeholder {
-		color: rgb(0, 0, 0, .5);
+		color: rgb(0, 0, 0, 0.5);
 		font-family: $sans-serif-font;
 	}
 
@@ -30,17 +30,15 @@ input {
 	}
 
 	&:focus {
-		border: .125rem solid $accent-color;
+		border: 0.125rem solid $accent-color;
 	}
 
 	&:focus::placeholder {
 		opacity: 0;
 	}
-
 }
 
 @media only screen and (max-width: 1000px) {
-
 	input {
 		height: 85%;
 		width: 100%;

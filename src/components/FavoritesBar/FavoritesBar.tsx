@@ -29,22 +29,22 @@ export function FavoritesBar(props: Props) {
 						initial={{ scale: 0, opacity: 0 }}
 						animate={{ scale: 1, opacity: 1 }}
 						exit={{ scale: 0, opacity: 0 }}
-						transition={{ type: "spring", stiffness: 900, damping: 40 }}
+						transition={{ type: 'spring', stiffness: 900, damping: 40 }}
 						className={!isPresent ? styles.absolute : undefined}
 						layout
 					>
 						<Button
 							onClick={() => clickHandler(favCity)}
 							isClicked={favCity === city}
-							type="toggle"
-							shape="round"
-							width="70%"
+							type='toggle'
+							shape='round'
+							width='70%'
 						>
 							{createAbb(favCity)}
 						</Button>
 					</motion.li>
 				))}
 			</AnimatePresence>
-		</ul >
+		</ul>
 	)
 }

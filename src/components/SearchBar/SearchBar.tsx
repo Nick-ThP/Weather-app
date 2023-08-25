@@ -18,14 +18,14 @@ export function SearchBar() {
 		}
 
 		cityRef.current = city
-	}, [city, input]);
+	}, [city, input])
 
 	useEffect(() => {
 		const searchTimeout = setTimeout(() => {
 			setFuseQuery(input.charAt(0).toUpperCase() + input.slice(1))
-		}, 100);
+		}, 100)
 
-		return () => clearTimeout(searchTimeout);
+		return () => clearTimeout(searchTimeout)
 	}, [input])
 
 	const results = useMemo(() => {
@@ -49,7 +49,9 @@ export function SearchBar() {
 				inputRef.current.blur()
 			} else {
 				setCity('')
-				setError('Sorry, this city does not exist in the data. \n Please adjust your search term to include a larger Danish city.')
+				setError(
+					'Sorry, this city does not exist in the data. \n Please adjust your search term to include a larger Danish city.'
+				)
 			}
 		}
 
@@ -64,15 +66,15 @@ export function SearchBar() {
 		<div className={styles.container}>
 			<input
 				ref={inputRef}
-				id="inputField"
-				type="search"
+				id='inputField'
+				type='search'
 				value={input}
-				placeholder="Search for a city..."
-				list="fuzzyList"
+				placeholder='Search for a city...'
+				list='fuzzyList'
 				onChange={(e) => setInput(e.target.value)}
 				onKeyUp={(e) => handleChooseCity(e)}
 			/>
-			<datalist id="fuzzyList" data-testid="datalist">
+			<datalist id='fuzzyList' data-testid='datalist'>
 				{results.map((cityObj, idx) => (
 					<option key={idx} value={cityObj.city} />
 				))}

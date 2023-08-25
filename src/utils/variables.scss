@@ -6,7 +6,7 @@ $sans-serif-font: 'Cabin', sans-serif;
 $cursive-font: 'Reenie Beanie', cursive;
 
 // Colors
-$background-color: rgba(122, 94, 82, .35);
+$background-color: rgba(122, 94, 82, 0.35);
 $basis-color: #f3a893;
 $accent-color: #ec6e4c;
 
@@ -18,7 +18,7 @@ $search-height: 5vh;
 $search-height-mobile: 4rem;
 $forecast-height: 20vh;
 $info-box-height: 25vh;
-$border-radius: .666rem;
+$border-radius: 0.666rem;
 
 // Mixins
 @mixin flex-centering {
@@ -29,14 +29,12 @@ $border-radius: .666rem;
 
 @mixin frosted-glass($error: false) {
 	@if $error {
-		background: rgba(136, 4, 4, 0.35)
-	}
-
-	@else {
+		background: rgba(136, 4, 4, 0.35);
+	} @else {
 		background: $background-color;
 	}
 
-	box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(10px);
 
 	@media only screen and (max-width: 1000px) {
@@ -56,7 +54,7 @@ $border-radius: .666rem;
 	flex-direction: column;
 	justify-content: space-between;
 	flex: 1;
-	gap: .5rem;
+	gap: 0.5rem;
 	padding: 1rem;
 
 	@media only screen and (max-width: 1000px) {
@@ -72,5 +70,5 @@ $border-radius: .666rem;
 @mixin box-skeleton {
 	display: flex;
 	justify-content: space-between;
-	margin-top: .5rem;
+	margin-top: 0.5rem;
 }
