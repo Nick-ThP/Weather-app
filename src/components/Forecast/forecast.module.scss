@@ -81,7 +81,6 @@
 
 .hour,
 .date {
-	margin-inline: 0.5rem;
 	@include flex-centering;
 	box-sizing: revert;
 	flex-direction: column;
@@ -154,6 +153,7 @@
 		border-top: none;
 		flex-direction: row;
 		justify-content: space-around;
+		margin-inline: 0.5rem;
 		padding: 0 1rem;
 		gap: 1rem;
 		justify-content: start;
