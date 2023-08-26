@@ -81,6 +81,7 @@
 
 .hour,
 .date {
+	margin-inline: 0.5rem;
 	@include flex-centering;
 	box-sizing: revert;
 	flex-direction: column;

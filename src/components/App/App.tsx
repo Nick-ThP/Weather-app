@@ -27,8 +27,6 @@ export function App() {
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
 
-	console.log(navigator.userAgent)
-
 	return (
 		<>
 			{isLoading && isMobile ? (
