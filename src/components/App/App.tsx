@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { isMobileSafari } from 'react-device-detect'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
@@ -26,6 +27,8 @@ export function App() {
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
 
+	console.log(navigator.userAgent)
+
 	return (
 		<>
 			{isLoading && isMobile ? (
@@ -45,7 +48,9 @@ export function App() {
 					}
 				>
 					<div className={styles.title}>
-						<h1>Simple Weather</h1>
+						<h1 className={classNames(isMobileSafari && styles.safari)}>
+							Simple Weather
+						</h1>
 						{!isMobile && <p>A Simplified Source for Weather Information</p>}
 					</div>
 					<div className={styles.search}>

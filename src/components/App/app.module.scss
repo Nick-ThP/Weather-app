@@ -134,11 +134,16 @@
 	.title {
 		justify-content: center;
 		width: 100%;
+		letter-spacing: -0rem;
 
 		h1 {
 			width: 100%;
 			font-size: 12vw;
 		}
+	}
+
+	.safari {
+		letter-spacing: -.2rem;
 	}
 
 	.favorites {
