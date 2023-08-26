@@ -19,10 +19,7 @@ import styles from './app.module.scss'
 import './background.scss'
 
 export function App() {
-	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>(
-		'favoriteCities',
-		[]
-	)
+	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
@@ -37,18 +34,12 @@ export function App() {
 						styles.container,
 						error && styles.errorOccured,
 						favoriteCities.length === 0 && styles.containerWithoutFavorites,
-						error &&
-							favoriteCities.length === 0 &&
-							styles.errorOccuredWithoutFavorites
+						error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites
 					)}
-					data-weather={
-						!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)
-					}
+					data-weather={!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)}
 				>
 					<div className={styles.title}>
-						<h1 className={classNames(isMobileSafari && styles.safari)}>
-							Simple Weather
-						</h1>
+						<h1 className={classNames(isMobileSafari && styles.safari)}>Simple Weather</h1>
 						{!isMobile && <p>A Simplified Source for Weather Information</p>}
 					</div>
 					<div className={styles.search}>
@@ -56,19 +47,9 @@ export function App() {
 					</div>
 					{favoriteCities.length > 0 && (
 						<>
-							<div
-								className={classNames(
-									styles.favorites,
-									isFavMobileOpen
-										? styles.favoritesShowOnMobile
-										: styles.favoritesHideOnMobile
-								)}
-							>
+							<div className={classNames(styles.favorites, isFavMobileOpen ? styles.favoritesShowOnMobile : styles.favoritesHideOnMobile)}>
 								{isMobile ? (
-									<FavoritesBar
-										favoriteCities={favoriteCities}
-										toggleShow={setIsFavMobileOpen}
-									/>
+									<FavoritesBar favoriteCities={favoriteCities} toggleShow={setIsFavMobileOpen} />
 								) : (
 									<motion.div
 										initial={{ scaleX: 0, opacity: 0 }}
@@ -76,17 +57,11 @@ export function App() {
 										exit={{ scaleX: 0, opacity: 0 }}
 										transition={{ type: 'spring', stiffness: 900, damping: 40 }}
 									>
-										<FavoritesBar
-											favoriteCities={favoriteCities}
-											toggleShow={setIsFavMobileOpen}
-										/>
+										<FavoritesBar favoriteCities={favoriteCities} toggleShow={setIsFavMobileOpen} />
 									</motion.div>
 								)}
 							</div>
-							<FavoritesStar
-								show={isFavMobileOpen}
-								toggleShow={setIsFavMobileOpen}
-							/>
+							<FavoritesStar show={isFavMobileOpen} toggleShow={setIsFavMobileOpen} />
 						</>
 					)}
 					{isMobile && (futureTime || error) && <MobileReturn />}
@@ -98,10 +73,7 @@ export function App() {
 						<>
 							<div className={styles.mainInfo}>
 								<Box>
-									<MainInfo
-										favoriteCities={favoriteCities}
-										setFavoriteCities={setFavoriteCities}
-									/>
+									<MainInfo favoriteCities={favoriteCities} setFavoriteCities={setFavoriteCities} />
 								</Box>
 							</div>
 							<div className={styles.secondaryInfo}>

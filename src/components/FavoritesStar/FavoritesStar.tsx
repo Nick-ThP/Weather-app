@@ -9,10 +9,7 @@ type Props = {
 export function FavoritesStar(props: Props) {
 	return (
 		<svg
-			className={classNames(
-				styles.star,
-				props.show ? styles.starShow : styles.starHide
-			)}
+			className={classNames(styles.star, props.show ? styles.starShow : styles.starHide)}
 			onClick={() => props.toggleShow(!props.show)}
 			viewBox='0 0 576 536'
 		>

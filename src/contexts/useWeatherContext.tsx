@@ -1,13 +1,5 @@
 import axios from 'axios'
-import {
-	ReactNode,
-	createContext,
-	useCallback,
-	useContext,
-	useLayoutEffect,
-	useMemo,
-	useState
-} from 'react'
+import { ReactNode, createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react'
 import { City } from '../data/city-types'
 import cityData from '../data/cityData.json'
 import { useLocalStorage } from '../hooks/useLocalStorage'
@@ -38,9 +30,7 @@ export function useWeatherContext() {
 
 export function WeatherContextProvider(props: { children: ReactNode }) {
 	const [city, _setCity] = useLocalStorage<string>('city', 'Aalborg')
-	const [allWeatherData, setAllWeatherData] = useState<IWeatherData | null>(
-		null
-	)
+	const [allWeatherData, setAllWeatherData] = useState<IWeatherData | null>(null)
 	const [futureTime, _setFutureTime] = useState<TimeInfo | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -92,9 +82,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 			const bulkRes = await axios.get(createBulkDataURL())
 			setAllWeatherData(bulkRes.data)
 		} catch (err) {
-			setError(
-				'Something went wrong. \n Check your connection and/or try again with another search term.'
-			)
+			setError('Something went wrong. \n Check your connection and/or try again with another search term.')
 			console.error(err)
 		} finally {
 			setTimeout(() => {
@@ -110,15 +98,9 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 	const weatherSource = useMemo(() => {
 		if (futureTime) {
 			if (futureTime.type === 'hour') {
-				return (
-					allWeatherData?.hourly.find((hour) => hour.dt === futureTime.dt) ||
-					null
-				)
+				return allWeatherData?.hourly.find((hour) => hour.dt === futureTime.dt) || null
 			} else if (futureTime.type === 'date') {
-				return (
-					allWeatherData?.daily.find((date) => date.dt === futureTime.dt) ||
-					null
-				)
+				return allWeatherData?.daily.find((date) => date.dt === futureTime.dt) || null
 			}
 		}
 
@@ -140,9 +122,5 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		refresh
 	}
 
-	return (
-		<WeatherContext.Provider value={contextData}>
-			{props.children}
-		</WeatherContext.Provider>
-	)
+	return <WeatherContext.Provider value={contextData}>{props.children}</WeatherContext.Provider>
 }

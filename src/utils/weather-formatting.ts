@@ -1,9 +1,4 @@
-import {
-	FeelsLike,
-	IWeatherData,
-	Temp,
-	TimeInfo
-} from '../contexts/weather-data-types'
+import { FeelsLike, IWeatherData, Temp, TimeInfo } from '../contexts/weather-data-types'
 import { createDateInfo } from './date-formatting'
 
 export function formatTemperature(date: number) {
@@ -26,10 +21,7 @@ export function createTempInfo<T extends Temp | FeelsLike>(temp: number | T) {
 	return `${formatTemperature(temp.day)}° / ${formatTemperature(temp.night)}°`
 }
 
-export function createRainInfo(
-	rain: number | { '1h': number },
-	futureTime: TimeInfo | null
-) {
+export function createRainInfo(rain: number | { '1h': number }, futureTime: TimeInfo | null) {
 	if (futureTime?.type === 'date' && typeof rain === 'number') {
 		return Math.round(rain * 10) / 10
 	} else if (typeof rain === 'object' && rain['1h']) {
@@ -59,9 +51,7 @@ export function createSunInfo(
 ) {
 	if (futureTime?.type === 'hour') {
 		const intervalDate = new Date(hourDateStamp * 1000).getDate()
-		const correspondingDate = weatherData?.daily.find(
-			(date) => new Date(date.dt * 1000).getDate() === intervalDate
-		)
+		const correspondingDate = weatherData?.daily.find((date) => new Date(date.dt * 1000).getDate() === intervalDate)
 
 		if (correspondingDate) {
 			return createDateInfo(correspondingDate[sunInfo]).preciseTime

@@ -13,14 +13,7 @@ export function Box({ error = false, forecast = false, ...props }: Props) {
 	const { futureTime } = useWeatherContext()
 
 	return (
-		<div
-			className={classNames(
-				styles.box,
-				error && styles.error,
-				forecast && styles.forecast,
-				futureTime && styles.border
-			)}
-		>
+		<div className={classNames(styles.box, error && styles.error, forecast && styles.forecast, futureTime && styles.border)}>
 			{props.children}
 		</div>
 	)

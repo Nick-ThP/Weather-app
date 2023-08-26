@@ -91,12 +91,7 @@ describe('Button component', () => {
 
 	it('renders different width for round button based on media query', () => {
 		render(
-			<Button
-				onClick={jest.fn()}
-				shape='round'
-				width='100px'
-				mobileWidth='50px'
-			>
+			<Button onClick={jest.fn()} shape='round' width='100px' mobileWidth='50px'>
 				Round Width Test
 			</Button>
 		)

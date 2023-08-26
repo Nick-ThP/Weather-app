@@ -7,11 +7,7 @@ type Props = {
 	midnightSplit?: boolean
 }
 
-export function Line({
-	midnightSplit = false,
-	horizontalOnDesktop = false,
-	...props
-}: Props) {
+export function Line({ midnightSplit = false, horizontalOnDesktop = false, ...props }: Props) {
 	return (
 		<div
 			className={classNames(

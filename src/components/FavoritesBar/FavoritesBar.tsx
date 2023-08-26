@@ -33,13 +33,7 @@ export function FavoritesBar(props: Props) {
 						className={!isPresent ? styles.absolute : undefined}
 						layout
 					>
-						<Button
-							onClick={() => clickHandler(favCity)}
-							isClicked={favCity === city}
-							type='toggle'
-							shape='round'
-							width='70%'
-						>
+						<Button onClick={() => clickHandler(favCity)} isClicked={favCity === city} type='toggle' shape='round' width='70%'>
 							{createAbb(favCity)}
 						</Button>
 					</motion.li>

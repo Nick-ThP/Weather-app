@@ -13,13 +13,7 @@ export type Props = {
 	shape?: 'rectangular' | 'round'
 }
 
-export function Button({
-	type = 'standard',
-	width = 'auto',
-	mobileWidth = width,
-	shape = 'rectangular',
-	...props
-}: Props) {
+export function Button({ type = 'standard', width = 'auto', mobileWidth = width, shape = 'rectangular', ...props }: Props) {
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 
 	function createClick() {

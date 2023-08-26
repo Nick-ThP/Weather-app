@@ -49,9 +49,7 @@ export function SearchBar() {
 				inputRef.current.blur()
 			} else {
 				setCity('')
-				setError(
-					'Sorry, this city does not exist in the data. \n Please adjust your search term to include a larger Danish city.'
-				)
+				setError('Sorry, this city does not exist in the data. \n Please adjust your search term to include a larger Danish city.')
 			}
 		}
 
