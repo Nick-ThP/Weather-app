@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { useLayoutEffect, useState } from 'react'
+import { useState } from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
