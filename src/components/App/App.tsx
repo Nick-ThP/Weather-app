@@ -22,7 +22,7 @@ export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
-	const { error, futureTime, isLoading, weatherSource } = useWeatherContext()
+	const { error, futureTime, isLoading, weatherSource, refresh } = useWeatherContext()
 
 	return (
 		<>
@@ -39,7 +39,9 @@ export function App() {
 					data-weather={!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)}
 				>
 					<div className={styles.title}>
-						<h1 className={classNames(isMobileSafari && styles.safari)}>Simple Weather</h1>
+						<h1 className={classNames(isMobileSafari && styles.safari)} onClick={refresh}>
+							Simple Weather
+						</h1>
 						{!isMobile && <p>A Simplified Source for Weather Information</p>}
 					</div>
 					<div className={styles.search}>
