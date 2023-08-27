@@ -24,26 +24,6 @@ export function App() {
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource, refresh } = useWeatherContext()
 
-	// Caching for image transitions
-	useLayoutEffect(() => {
-		let images: HTMLImageElement[] = []
-		const imageUrls = [
-			'../../images/desktop-backgrounds/clear-day.jpg',
-			'../../images/desktop-backgrounds/clear-night.jpg',
-			'../../images/desktop-backgrounds/clouds-day.jpg',
-			'../../images/desktop-backgrounds/clouds-night.jpg',
-			'../../images/desktop-backgrounds/rain.jpg',
-			'../../images/desktop-backgrounds/thunderstorm.jpg',
-			'../../images/desktop-backgrounds/snow.jpg',
-			'../../images/desktop-backgrounds/mist.jpg'
-		]
-
-		imageUrls.forEach((image, idx) => {
-			images.push(new Image())
-			images[idx].src = image
-		})
-	}, [])
-
 	return (
 		<>
 			{isLoading && isMobile ? (
