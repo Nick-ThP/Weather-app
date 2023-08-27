@@ -38,7 +38,7 @@ export function SearchBar() {
 			return fuse.search(fuseQuery).map((city) => city.item)
 		}
 
-		return cityData
+		return cityData.filter((_, idx) => idx < 10)
 	}, [fuseQuery])
 
 	function handleChooseCity(e: React.KeyboardEvent<HTMLInputElement>) {
