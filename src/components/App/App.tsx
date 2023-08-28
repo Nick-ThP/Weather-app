@@ -1,11 +1,19 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
-import { getWeatherToDisplay } from '../../utils/display-weather'
+import url1 from '../../images/desktop-backgrounds/clear-day.jpg'
+import url2 from '../../images/desktop-backgrounds/clear-night.jpg'
+import url3 from '../../images/desktop-backgrounds/clouds-day.jpg'
+import url4 from '../../images/desktop-backgrounds/clouds-night.jpg'
+import url8 from '../../images/desktop-backgrounds/mist.jpg'
+import url5 from '../../images/desktop-backgrounds/rain.jpg'
+import url7 from '../../images/desktop-backgrounds/snow.jpg'
+import url6 from '../../images/desktop-backgrounds/thunderstorm.jpg'
+import { convertWeatherStringToImageIndex, getWeatherString } from '../../utils/display-background'
 import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
 import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
 import { Forecast } from '../Forecast/Forecast'
@@ -16,13 +24,34 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { SecondaryInfo } from '../SecondaryInfo/SecondaryInfo'
 import { Box } from '../reuseables/Box/Box'
 import styles from './app.module.scss'
-import './background.scss'
 
 export function App() {
 	const [favoriteCities, setFavoriteCities] = useLocalStorage<string[]>('favoriteCities', [])
 	const [isFavMobileOpen, setIsFavMobileOpen] = useState<boolean>(false)
+	const [backgroundImages, setBackgroundImages] = useState<HTMLImageElement[]>([])
 	const [isMobile] = useMediaQuery('only screen and (max-width: 1000px)')
 	const { error, futureTime, isLoading, weatherSource, refresh } = useWeatherContext()
+	const backgroundRef = useRef<HTMLDivElement>(null)
+
+	useLayoutEffect(() => {
+		let images: HTMLImageElement[] = []
+		const imageUrls = [url1, url2, url3, url4, url5, url6, url7, url8]
+
+		imageUrls.forEach((url, idx) => {
+			images.push(new Image())
+			images[idx].src = url
+		})
+
+		setBackgroundImages(images)
+	}, [])
+
+	useEffect(() => {
+		if (backgroundRef.current && backgroundImages.length > 0 && !isMobile) {
+			backgroundRef.current.style.backgroundImage = `url(
+				${backgroundImages?.[convertWeatherStringToImageIndex(getWeatherString(weatherSource?.weather[0].icon))]?.src}
+			)`
+		}
+	}, [weatherSource, backgroundImages, isMobile])
 
 	return (
 		<>
@@ -36,7 +65,8 @@ export function App() {
 						favoriteCities.length === 0 && styles.containerWithoutFavorites,
 						error && favoriteCities.length === 0 && styles.errorOccuredWithoutFavorites
 					)}
-					data-weather={!isMobile && getWeatherToDisplay(weatherSource?.weather[0].icon)}
+					data-weather={!isMobile && getWeatherString(weatherSource?.weather[0].icon)}
+					ref={backgroundRef}
 				>
 					<div className={styles.title}>
 						<h1 className={classNames(isMobileSafari && styles.safari)} onClick={refresh}>

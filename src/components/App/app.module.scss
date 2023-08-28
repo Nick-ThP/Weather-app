@@ -1,8 +1,10 @@
 @import '../../utils/variables.scss';
 
 .container {
-	transition: background-image 1s ease-in-out;
-	background: center / cover no-repeat url(../../images/desktop-backgrounds/clouds-day.jpg);
+	transition: background-image 0.5s ease-in-out;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
@@ -99,6 +101,37 @@
 .forecast {
 	grid-area: box-3;
 	padding: 0 8rem 4rem 8rem;
+}
+
+[data-weather='clear-sky-night'],
+[data-weather='few-clouds-night'],
+[data-weather='scattered-clouds-night'],
+[data-weather='broken-clouds-night'] {
+	h1,
+	p,
+	input,
+	input::placeholder {
+		color: $basis-color;
+	}
+
+	h1 {
+		background: -webkit-linear-gradient($basis-color, rgba(122, 94, 82, 0.35));
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+	}
+
+	input {
+		border: 0.125rem solid rgba(243, 168, 147, 0.5);
+
+		&:focus {
+			border: 0.125rem solid $accent-color;
+		}
+
+		&::placeholder {
+			opacity: 0.5;
+		}
+	}
 }
 
 @media only screen and (max-width: 1000px) {
