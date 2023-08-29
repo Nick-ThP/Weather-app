@@ -2,17 +2,18 @@ import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { isMobileSafari } from 'react-device-detect'
-import { useWeatherContext } from '../../context/useWeatherContext'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
 import url1 from '../../assets/images/backgrounds/clear-day.jpg'
 import url2 from '../../assets/images/backgrounds/clear-night.jpg'
 import url3 from '../../assets/images/backgrounds/clouds-day.jpg'
 import url4 from '../../assets/images/backgrounds/clouds-night.jpg'
 import url8 from '../../assets/images/backgrounds/mist.jpg'
+import url9 from '../../assets/images/backgrounds/mobile-background.jpg'
 import url5 from '../../assets/images/backgrounds/rain.jpg'
 import url7 from '../../assets/images/backgrounds/snow.jpg'
 import url6 from '../../assets/images/backgrounds/thunderstorm.jpg'
+import { useWeatherContext } from '../../context/useWeatherContext'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { convertWeatherStringToImageIndex, getWeatherString } from '../../utils/display-background'
 import { FavoritesBar } from '../FavoritesBar/FavoritesBar'
 import { FavoritesStar } from '../FavoritesStar/FavoritesStar'
@@ -35,7 +36,7 @@ export function App() {
 
 	useLayoutEffect(() => {
 		let images: HTMLImageElement[] = []
-		const imageUrls = [url1, url2, url3, url4, url5, url6, url7, url8]
+		const imageUrls = [url1, url2, url3, url4, url5, url6, url7, url8, url9]
 
 		imageUrls.forEach((url, idx) => {
 			images.push(new Image())
@@ -46,10 +47,16 @@ export function App() {
 	}, [])
 
 	useLayoutEffect(() => {
-		if (backgroundRef.current && backgroundImages.length > 0 && !isMobile) {
-			backgroundRef.current.style.backgroundImage = `url(
-				${backgroundImages?.[convertWeatherStringToImageIndex(getWeatherString(weatherSource?.weather[0].icon))]?.src}
-			)`
+		if (backgroundRef.current && backgroundImages.length > 0) {
+			if (isMobile) {
+				backgroundRef.current.style.backgroundImage = `url(
+					${backgroundImages?.[8].src}
+				)`
+			} else if (!isMobile) {
+				backgroundRef.current.style.backgroundImage = `url(
+					${backgroundImages?.[convertWeatherStringToImageIndex(getWeatherString(weatherSource?.weather[0].icon))]?.src}
+				)`
+			}
 		}
 	}, [weatherSource, backgroundImages, isMobile])
 
