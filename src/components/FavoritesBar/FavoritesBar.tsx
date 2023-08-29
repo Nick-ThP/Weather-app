@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
-import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { useWeatherContext } from '../../context/useWeatherContext'
+import { createAbb } from '../../utils/abbreviation-formatting'
 import { Button } from '../reuseables/Button/Button'
 import styles from './favorites-bar.module.scss'
-import { createAbb } from '../../utils/abbreviation-formatting'
 
 type Props = {
 	favoriteCities: string[]

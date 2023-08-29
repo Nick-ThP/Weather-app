@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import { useWeatherContext } from '../../../contexts/useWeatherContext'
+import { useWeatherContext } from '../../../context/useWeatherContext'
 import styles from './box.module.scss'
 
 interface Props {

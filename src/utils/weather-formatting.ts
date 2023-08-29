@@ -1,4 +1,4 @@
-import { FeelsLike, IWeatherData, Temp, TimeInfo } from '../contexts/weather-data-types'
+import { FeelsLike, IWeatherData, Temp, TimeInfo } from '../context/weather-data-types'
 import { createDateInfo } from './date-formatting'
 
 export function formatTemperature(date: number) {

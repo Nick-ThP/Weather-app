@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { City } from '../data/city-types'
+import { City } from '../data/city-data-types'
 import cityData from '../data/cityData.json'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { IWeatherContext, IWeatherData, TimeInfo } from './weather-data-types'

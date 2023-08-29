@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useWeatherContext } from '../../contexts/useWeatherContext'
-import { City } from '../../data/city-types'
+import { useWeatherContext } from '../../context/useWeatherContext'
+import { City } from '../../data/city-data-types'
 import cityData from '../../data/cityData.json'
 import styles from './search-bar.module.scss'
 
@@ -14,18 +14,18 @@ export function SearchBar() {
 
 	useEffect(() => {
 		if (cityRef.current !== city && input !== city) {
-			setInput(city)
+			setInput('')
 		}
 
 		cityRef.current = city
 	}, [city, input])
 
 	useEffect(() => {
-		const searchTimeout = setTimeout(() => {
+		const debounce = setTimeout(() => {
 			setFuseQuery(input.charAt(0).toUpperCase() + input.slice(1))
 		}, 100)
 
-		return () => clearTimeout(searchTimeout)
+		return () => clearTimeout(debounce)
 	}, [input])
 
 	const results = useMemo(() => {

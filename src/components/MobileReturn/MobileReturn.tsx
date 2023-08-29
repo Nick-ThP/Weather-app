@@ -1,4 +1,4 @@
-import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { useWeatherContext } from '../../context/useWeatherContext'
 import styles from './mobile-return.module.scss'
 
 export function MobileReturn() {

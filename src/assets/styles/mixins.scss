@@ -1,26 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,700;1,400&family=Reenie+Beanie&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&family=Suez+One&display=swap');
+@import '../../assets/styles/variables.scss';
 
-// Fonts
-$serif-font: 'Suez One', serif;
-$sans-serif-font: 'Cabin', sans-serif;
-$cursive-font: 'Reenie Beanie', cursive;
-
-// Colors
-$background-color: rgba(122, 94, 82, 0.35);
-$basis-color: #f3a893;
-$accent-color: #ec6e4c;
-
-// Measurements
-$favorites-width: 5vw;
-$title-height: 30vh;
-$title-height-mobile: 7.5rem;
-$search-height: 5vh;
-$search-height-mobile: 4rem;
-$forecast-height: 20vh;
-$info-box-height: 25vh;
-$border-radius: 0.666rem;
-
-// Mixins
 @mixin flex-centering {
 	display: flex;
 	justify-content: center;

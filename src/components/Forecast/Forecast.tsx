@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useWeatherContext } from '../../contexts/useWeatherContext'
+import { useWeatherContext } from '../../context/useWeatherContext'
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll'
 import { createDateInfo } from '../../utils/date-formatting'
 import { formatTemperature } from '../../utils/weather-formatting'

@@ -1,43 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-export function useLocalStorage<T>(key: string, defaultValue: T): [T, (value: T) => void] {
-	const [value, setValue] = useState(defaultValue)
+type ValueSetter<T> = (value: T) => void
 
-	useEffect(() => {
-		const item = localStorage.getItem(key)
+export function useLocalStorage<T>(key: string, initialValue: T): [T, ValueSetter<T>] {
+	const storedValue = localStorage.getItem(key)
+	const initial = storedValue ? JSON.parse(storedValue) : initialValue
 
-		if (!item) {
-			localStorage.setItem(key, JSON.stringify(defaultValue))
-		}
+	const [value, setValue] = useState<T>(initial)
 
-		setValue(item ? JSON.parse(item) : defaultValue)
-
-		function handler(e: StorageEvent) {
-			if (e.key !== key) return
-
-			const lsi = localStorage.getItem(key)
-			setValue(JSON.parse(lsi ?? ''))
-		}
-
-		window.addEventListener('storage', handler)
-
-		return () => {
-			window.removeEventListener('storage', handler)
-		}
-	}, [])
-
-	const setValueWrap = (value: T) => {
-		try {
-			setValue(value)
-
-			localStorage.setItem(key, JSON.stringify(value))
-			if (typeof window !== 'undefined') {
-				window.dispatchEvent(new StorageEvent('storage', { key }))
-			}
-		} catch (e) {
-			console.error(e)
-		}
+	const updateValue: ValueSetter<T> = (newValue) => {
+		setValue(newValue)
+		localStorage.setItem(key, JSON.stringify(newValue))
 	}
 
-	return [value, setValueWrap]
+	return [value, updateValue]
 }
