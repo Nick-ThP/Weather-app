@@ -48,15 +48,17 @@ export function App() {
 
 	useLayoutEffect(() => {
 		if (backgroundRef.current && backgroundImages.length > 0) {
-			if (isMobile) {
-				backgroundRef.current.style.backgroundImage = `url(
-					${backgroundImages?.[8].src}
-				)`
-			} else if (!isMobile) {
+			if (!isMobile) {
 				backgroundRef.current.style.backgroundImage = `url(
 					${backgroundImages?.[convertWeatherStringToImageIndex(getWeatherString(weatherSource?.weather[0].icon))]?.src}
 				)`
+
+				return
 			}
+
+			backgroundRef.current.style.backgroundImage = `url(
+				${backgroundImages?.[8].src}
+			)`
 		}
 	}, [weatherSource, backgroundImages, isMobile])
 

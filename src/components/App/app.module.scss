@@ -137,8 +137,7 @@
 
 @media only screen and (max-width: 1000px) {
 	.container {
-		background-position: top;
-		background-repeat: repeat;
+		background: top repeat url(../../assets/images/backgrounds/mobile-background.jpg);
 		background-size: 600px;
 		position: absolute;
 		height: auto;
