@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ReactNode, createContext, useCallback, useContext, useLayoutEffect, useMemo, useState } from 'react'
+import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { City } from '../data/city-types'
 import cityData from '../data/cityData.json'
 import { useLocalStorage } from '../hooks/useLocalStorage'
@@ -91,7 +91,7 @@ export function WeatherContextProvider(props: { children: ReactNode }) {
 		}
 	}, [city])
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		executeApiRequest()
 	}, [executeApiRequest])
 

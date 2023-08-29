@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { useWeatherContext } from '../../contexts/useWeatherContext'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -45,7 +45,7 @@ export function App() {
 		setBackgroundImages(images)
 	}, [])
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (backgroundRef.current && backgroundImages.length > 0 && !isMobile) {
 			backgroundRef.current.style.backgroundImage = `url(
 				${backgroundImages?.[convertWeatherStringToImageIndex(getWeatherString(weatherSource?.weather[0].icon))]?.src}

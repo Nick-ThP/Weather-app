@@ -60,7 +60,7 @@
 }
 
 .hours {
-	justify-content: start;
+	justify-content: flex-start;
 	gap: 1.5rem;
 }
 
@@ -164,7 +164,7 @@
 		margin-inline: 0.5rem;
 		padding: 0 1rem;
 		gap: 1rem;
-		justify-content: start;
+		justify-content: flex-start;
 		display: grid;
 		text-align: center;
 		grid-template-columns: 25% repeat(2, 1fr) 15%;
