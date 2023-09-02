@@ -94,6 +94,7 @@
 		padding-top: 0;
 		border-top: 0.35rem solid rgba(0, 0, 0, 0.2);
 		border-radius: $border-radius;
+		transform: scale(1.01);
 	}
 
 	&Selected {
@@ -103,6 +104,7 @@
 
 		&:hover {
 			border-top: 0.35rem solid $accent-color;
+			transform: scale(1.01);
 		}
 	}
 }
@@ -172,6 +174,7 @@
 
 		&:hover {
 			border-top: none;
+			transform: none;
 		}
 
 		img {
@@ -186,6 +189,7 @@
 
 			&:hover {
 				border-top: none;
+				transform: none;
 			}
 		}
 	}
