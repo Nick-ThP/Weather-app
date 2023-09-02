@@ -178,6 +178,14 @@ h2 {
 
 	.star {
 		height: 2.75rem;
+
+		&Favorite:hover {
+			scale: none;
+		}
+
+		&NotFavorite:hover {
+			scale: none;
+		}
 	}
 
 	.currentWeather,
