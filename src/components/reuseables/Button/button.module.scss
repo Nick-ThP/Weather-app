@@ -11,10 +11,11 @@ button {
 	border: none;
 	font-size: 1.2rem;
 	font-family: $serif-font;
+	transition: 0.2s ease-in-out;
 
 	&:hover {
 		opacity: 0.7;
-		transform: scale(1.01);
+		transform: scale(1.05);
 	}
 }
 
