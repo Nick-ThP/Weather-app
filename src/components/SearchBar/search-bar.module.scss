@@ -7,8 +7,37 @@
 	align-items: flex-start;
 }
 
+.search {
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		height: 100%;
+		top: 0.6rem;
+		left: 0.7rem;
+		width: 1.75rem;
+		height: 1.75rem;
+		opacity: 0.6;
+		background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCI+CjxwYXRoIGQ9Ik0gMjEgMyBDIDExLjYwMTU2MyAzIDQgMTAuNjAxNTYzIDQgMjAgQyA0IDI5LjM5ODQzOCAxMS42MDE1NjMgMzcgMjEgMzcgQyAyNC4zNTU0NjkgMzcgMjcuNDYwOTM4IDM2LjAxNTYyNSAzMC4wOTM3NSAzNC4zNDM3NSBMIDQyLjM3NSA0Ni42MjUgTCA0Ni42MjUgNDIuMzc1IEwgMzQuNSAzMC4yODEyNSBDIDM2LjY3OTY4OCAyNy40MjE4NzUgMzggMjMuODc4OTA2IDM4IDIwIEMgMzggMTAuNjAxNTYzIDMwLjM5ODQzOCAzIDIxIDMgWiBNIDIxIDcgQyAyOC4xOTkyMTkgNyAzNCAxMi44MDA3ODEgMzQgMjAgQyAzNCAyNy4xOTkyMTkgMjguMTk5MjE5IDMzIDIxIDMzIEMgMTMuODAwNzgxIDMzIDggMjcuMTk5MjE5IDggMjAgQyA4IDEyLjgwMDc4MSAxMy44MDA3ODEgNyAyMSA3IFoiIGZpbGw9ImJsYWNrIj48L3BhdGg+Cjwvc3ZnPg==')
+			50% 50% no-repeat;
+		background-size: 100%;
+	}
+
+	&:focus-within::after {
+		background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCI+CjxwYXRoIGQ9Ik0gMjEgMyBDIDExLjYwMTU2MyAzIDQgMTAuNjAxNTYzIDQgMjAgQyA0IDI5LjM5ODQzOCAxMS42MDE1NjMgMzcgMjEgMzcgQyAyNC4zNTU0NjkgMzcgMjcuNDYwOTM4IDM2LjAxNTYyNSAzMC4wOTM3NSAzNC4zNDM3NSBMIDQyLjM3NSA0Ni42MjUgTCA0Ni42MjUgNDIuMzc1IEwgMzQuNSAzMC4yODEyNSBDIDM2LjY3OTY4OCAyNy40MjE4NzUgMzggMjMuODc4OTA2IDM4IDIwIEMgMzggMTAuNjAxNTYzIDMwLjM5ODQzOCAzIDIxIDMgWiBNIDIxIDcgQyAyOC4xOTkyMTkgNyAzNCAxMi44MDA3ODEgMzQgMjAgQyAzNCAyNy4xOTkyMTkgMjguMTk5MjE5IDMzIDIxIDMzIEMgMTMuODAwNzgxIDMzIDggMjcuMTk5MjE5IDggMjAgQyA4IDEyLjgwMDc4MSAxMy44MDA3ODEgNyAyMSA3IFoiIGZpbGw9IiNlYzZlNGMiPjwvcGF0aD4KPC9zdmc+')
+			50% 50% no-repeat;
+		background-size: 100%;
+	}
+
+	&:focus-within::after,
+	&[data-text='true']::after {
+		opacity: 1;
+	}
+}
+
 input {
-	padding: 0.5rem 1rem;
+	padding: 0.5rem 1rem 0.5rem 2.75rem;
 	border-radius: $border-radius;
 	font-size: 1.5rem;
 	border: none;
@@ -32,6 +61,8 @@ input {
 
 	&:focus {
 		border: 0.125rem solid $accent-color;
+		color: $accent-color;
+		opacity: 1;
 	}
 
 	&:focus::placeholder {
@@ -40,9 +71,13 @@ input {
 }
 
 @media only screen and (max-width: 1000px) {
+	.search {
+		width: 100%;
+		margin: 0 1.2rem;
+	}
+
 	input {
 		height: 85%;
 		width: 100%;
-		margin: 0 1.2rem;
 	}
 }

@@ -62,21 +62,24 @@ export function SearchBar() {
 
 	return (
 		<div className={styles.container}>
-			<input
-				ref={inputRef}
-				id='inputField'
-				type='search'
-				value={input}
-				placeholder='Search for a city...'
-				list='fuzzyList'
-				onChange={(e) => setInput(e.target.value)}
-				onKeyUp={(e) => handleChooseCity(e)}
-			/>
-			<datalist id='fuzzyList' data-testid='datalist'>
-				{results.map((cityObj, idx) => (
-					<option key={idx} value={cityObj.city} />
-				))}
-			</datalist>
+			<div className={styles.search} data-text={input !== '' ? true : false}>
+				<input
+					ref={inputRef}
+					id='inputField'
+					type='search'
+					value={input}
+					placeholder='Search for a city...'
+					list='fuzzyList'
+					autoComplete='off'
+					onChange={(e) => setInput(e.target.value)}
+					onKeyUp={(e) => handleChooseCity(e)}
+				/>
+				<datalist id='fuzzyList' data-testid='datalist'>
+					{results.map((cityObj, idx) => (
+						<option key={idx} value={cityObj.city} />
+					))}
+				</datalist>
+			</div>
 		</div>
 	)
 }
