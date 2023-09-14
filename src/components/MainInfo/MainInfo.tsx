@@ -128,7 +128,7 @@ export function MainInfo(props: Props) {
 						<div className={styles.row}>
 							<img className={styles.staticIcon} src={rain} alt='Rainfall' />
 							<div className={styles.description}>
-								<div>{futureTime?.type === 'date' ? 'Daily rainfall' : 'Rain this hour'}</div>
+								<div>{futureTime?.type === 'date' ? 'Daily rainfall' : 'Rain this hour (avg)'}</div>
 								<div>{weatherSource?.rain ? createRainInfo(weatherSource?.rain, futureTime) : 0} mm</div>
 							</div>
 						</div>
